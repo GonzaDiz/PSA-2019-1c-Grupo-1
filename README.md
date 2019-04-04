@@ -1,3 +1,3 @@
-# PSA-2019-1c-Grupo-1
+# PSA-2019-1c-Tribu-1
 
-health check url: http://localhost:8080/psa/health-check
+health check url: http://psa-management.herokuapp.com/psa/health-check
