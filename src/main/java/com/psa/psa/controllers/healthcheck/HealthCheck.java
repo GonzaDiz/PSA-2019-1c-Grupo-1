@@ -10,6 +10,6 @@ public class HealthCheck {
     @RequestMapping(value = "/health-check")
     @ResponseBody
     public String healthCheck() {
-        return "Ok!";
+        return "Hola Tribu 1!";
     }
 }
