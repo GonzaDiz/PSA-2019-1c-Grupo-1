@@ -1,8 +1,7 @@
-package com.psa.psa.model.core.ticket;
+package com.psa.psa.model.core.task.ticket;
 
 import com.psa.psa.model.core.resources.Resource;
 
-import java.time.Duration;
 import java.time.LocalDateTime;
 
 public class Ticket {

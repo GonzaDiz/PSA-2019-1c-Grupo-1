@@ -1,4 +1,4 @@
-package com.psa.psa.model.core.ticket;
+package com.psa.psa.model.core.task.ticket;
 
 import java.time.Duration;
 

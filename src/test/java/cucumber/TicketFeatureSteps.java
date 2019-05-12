@@ -1,8 +1,8 @@
 package cucumber;
 
 import com.psa.psa.model.core.resources.Resource;
-import com.psa.psa.model.core.ticket.Incident;
-import com.psa.psa.model.core.ticket.Ticket;
+import com.psa.psa.model.core.task.ticket.Incident;
+import com.psa.psa.model.core.task.ticket.Ticket;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;

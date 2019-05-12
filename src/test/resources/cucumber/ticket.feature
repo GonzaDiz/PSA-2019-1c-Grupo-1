@@ -11,6 +11,6 @@ Feature: Ticket
         Then I can see the developer is effectively assigned
 
     Scenario: Assign a new resource to a ticket
-            Given I have an open ticket with a resource assigned
-            When I assign a new developer to solve the ticket
-            Then I can see the new developer is effectively assigned
+        Given I have an open ticket with a resource assigned
+        When I assign a new developer to solve the ticket
+        Then I can see the new developer is effectively assigned
