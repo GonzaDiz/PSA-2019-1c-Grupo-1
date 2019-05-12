@@ -27,8 +27,7 @@ public class TicketFeatureSteps {
     private Ticket createTicket() {
         Incident incident = new Incident();
         incident.setDescription(INCIDENT_DESCRIPTION);
-        Ticket ticket = new Ticket();
-        ticket.setIncident(incident);
+        Ticket ticket = new Ticket(incident);
         return ticket;
     }
 

@@ -13,6 +13,11 @@ public class Ticket {
     private Incident incident;
     private Resource assignedResource;
 
+    public Ticket(Incident incident) {
+        this.incident = incident;
+        this.startDate = LocalDateTime.now();
+    }
+
     public Long getId() {
         return id;
     }
