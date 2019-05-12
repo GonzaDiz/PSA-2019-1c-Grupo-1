@@ -1,4 +1,4 @@
-package com.psa.psa.model;
+package com.psa.psa.model.core.risk;
 
 public class Risk {
 
