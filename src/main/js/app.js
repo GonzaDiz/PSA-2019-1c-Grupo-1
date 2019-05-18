@@ -1,37 +1,59 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
 //const client = require('./client');
-import Button from 'react-bootstrap/Button';
 import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
+import './sidenav.css';
+import style from 'bootstrap/dist/css/bootstrap.css';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col'
+import {Ticket} from './support/tickets/tickets.jsx';
 
 class App extends React.Component {
 
-	constructor(props) {
-		super(props);
-		this.state = {};
-	}
+    constructor(props) {
+        super(props);
+        this.state = {};
+    }
 
-	componentDidMount() {
+    componentDidMount() {
 
-	}
+    }
 
-	render() {
-		return (
-		    <SideNav
-                onSelect={(selected) => {
-                    // Add your code here
-                }}
+    render() {
+        return (
+            <Container>
+                <Row>
+                    <Col lg={3}>
+                <SideNav
+                
+                expanded={true}
             >
                 <SideNav.Toggle />
-                <SideNav.Nav defaultSelected="home">
-                    <NavItem eventKey="home">
+                <SideNav.Nav defaultSelected="soporte">
+                    <NavItem eventKey="soporte">
                         <NavIcon>
                             <i className="fa fa-fw fa-ticket" style={{ fontSize: '1.75em' }} />
                         </NavIcon>
                         <NavText>
-                            Home
+                            Soporte
                         </NavText>
+                        <NavItem eventKey="support/tickets">
+                            <NavText>
+                                Tickets
+                            </NavText>
+                        </NavItem>
+                        <NavItem eventKey="support/sla">
+                            <NavText>
+                                SLA
+                            </NavText>
+                        </NavItem>
+                        <NavItem eventKey="support/incidents">
+                            <NavText>
+                                Incidentes
+                            </NavText>
+                        </NavItem>
                     </NavItem>
                     <NavItem eventKey="charts">
                         <NavIcon>
@@ -40,24 +62,21 @@ class App extends React.Component {
                         <NavText>
                             Charts
                         </NavText>
-                        <NavItem eventKey="charts/linechart">
-                            <NavText>
-                                Line Chart
-                            </NavText>
-                        </NavItem>
-                        <NavItem eventKey="charts/barchart">
-                            <NavText>
-                                Bar Chart
-                            </NavText>
-                        </NavItem>
                     </NavItem>
                 </SideNav.Nav>
             </SideNav>
-		)
-	}
+            </Col>
+            
+            <Ticket></Ticket>
+        
+            </Row>
+            
+        </Container>
+        )
+    }
 }
 
 ReactDOM.render(
-	<App />,
-	document.getElementById('react')
+    <App />,
+    document.getElementById('react')
 )
