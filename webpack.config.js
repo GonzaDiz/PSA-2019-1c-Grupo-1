@@ -17,7 +17,7 @@ module.exports = {
     mode: 'development',
     output: {
         path: __dirname,
-        filename: './src/main/resources/built/bundle.js'
+        filename: './src/main/resources/static/bundle.js'
     },
     plugins: [
             new stylusLoader.OptionsPlugin({
