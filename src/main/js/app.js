@@ -8,70 +8,123 @@ import style from 'bootstrap/dist/css/bootstrap.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col'
-import {Ticket} from './support/tickets/tickets.jsx';
+import { TicketManagement } from './support/tickets/tickets.jsx';
+import { Incidents } from './support/incidents/incidents.jsx' 
+
+const psaModule = {
+    NONE: 'none',
+    TICKETS: 'tickets',
+    INCIDENTS: 'incidents'
+}
 
 class App extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = { selectedModule: psaModule.NONE };
     }
 
-    componentDidMount() {
+    changeSelected(selected) {
+        this.setState({ selectedModule: selected })
+    }
 
+    selectedModuleComponent() {
+        switch (this.state.selectedModule) {
+            case psaModule.NONE:
+                return <TicketManagement></TicketManagement>
+            case psaModule.TICKETS:
+                return <TicketManagement></TicketManagement>
+            case psaModule.INCIDENTS:
+                return <Incidents></Incidents>
+            default:
+                break;
+        }
     }
 
     render() {
         return (
-            <Container>
+            <Container fluid={true}>
                 <Row>
-                    <Col lg={3}>
-                <SideNav
-                
-                expanded={true}
-            >
-                <SideNav.Toggle />
-                <SideNav.Nav defaultSelected="soporte">
-                    <NavItem eventKey="soporte">
-                        <NavIcon>
-                            <i className="fa fa-fw fa-ticket" style={{ fontSize: '1.75em' }} />
-                        </NavIcon>
-                        <NavText>
-                            Soporte
+                    <Col lg={2}>
+                        <SideNav
+                            onSelect={(selected) => {
+                                this.changeSelected(selected)
+                            }}
+
+                            expanded={true}
+                        >
+                            <SideNav.Toggle />
+                            <SideNav.Nav  defaultSelected='soporte'>
+                                <NavItem  expanded={true}
+                                eventKey='soporte'>
+                                    <NavIcon>
+                                        <i className="fa fa-fw fa-ticket" style={{ fontSize: '1.75em' }} />
+                                    </NavIcon>
+                                    <NavText>
+                                        Soporte
                         </NavText>
-                        <NavItem eventKey="support/tickets">
-                            <NavText>
-                                Tickets
+                                    <NavItem eventKey={psaModule.TICKETS}>
+                                        <NavText>
+                                            Tickets
                             </NavText>
-                        </NavItem>
-                        <NavItem eventKey="support/sla">
-                            <NavText>
-                                SLA
+                                    </NavItem>
+                                    <NavItem eventKey={psaModule.SLA}>
+                                        <NavText>
+                                            SLA
                             </NavText>
-                        </NavItem>
-                        <NavItem eventKey="support/incidents">
-                            <NavText>
-                                Incidentes
+                                    </NavItem>
+                                    <NavItem eventKey={psaModule.INCIDENTS}>
+                                        <NavText>
+                                            Incidentes
                             </NavText>
-                        </NavItem>
-                    </NavItem>
-                    <NavItem eventKey="charts">
-                        <NavIcon>
-                            <i className="fa fa-fw fa-line-chart" style={{ fontSize: '1.75em' }} />
-                        </NavIcon>
-                        <NavText>
-                            Charts
-                        </NavText>
-                    </NavItem>
-                </SideNav.Nav>
-            </SideNav>
-            </Col>
-            
-            <Ticket></Ticket>
-        
-            </Row>
-            
-        </Container>
+                                    </NavItem>
+                                </NavItem>
+                                <NavItem eventKey="project">
+                                    <NavIcon>
+                                        <i className="fa fa-fw fa-folder-open" style={{ fontSize: '1.75em' }} />
+                                    </NavIcon>
+                                    <NavText>
+                                        Gestión de Proyecto
+                                    </NavText>
+                                </NavItem>
+                                <NavItem eventKey="product">
+                                    <NavIcon>
+                                        <i className="fa fa-fw fa-shopping-bag" style={{ fontSize: '1.75em' }} />
+                                    </NavIcon>
+                                    <NavText>
+                                        Gestión de Producto
+                                    </NavText>
+                                </NavItem>
+                                <NavItem eventKey="resources">
+                                    <NavIcon>
+                                        <i className="fa fa-fw fa-users" style={{ fontSize: '1.75em' }} />
+                                    </NavIcon>
+                                    <NavText>
+                                        Gestión de Recursos
+                                    </NavText>
+                                </NavItem>
+                                <NavItem eventKey="clients">
+                                    <NavIcon>
+                                        <i className="fa fa-fw fa-address-book-o" style={{ fontSize: '1.75em' }} />
+                                    </NavIcon>
+                                    <NavText>
+                                        Gestión de Clientes
+                                    </NavText>
+                                </NavItem>
+                                <NavItem eventKey="finances">
+                                    <NavIcon>
+                                        <i className="fa fa-fw fa-money" style={{ fontSize: '1.75em' }} />
+                                    </NavIcon>
+                                    <NavText>
+                                        Ventas y Finanzas
+                                    </NavText>
+                                </NavItem>
+                            </SideNav.Nav>
+                        </SideNav>
+                    </Col>
+                    {this.selectedModuleComponent()}
+                </Row>
+            </Container>
         )
     }
 }
