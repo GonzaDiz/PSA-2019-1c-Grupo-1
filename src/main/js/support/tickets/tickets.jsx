@@ -8,6 +8,7 @@ import Col from 'react-bootstrap/Col';
 import Modal from 'react-bootstrap/Modal'
 import Table from 'react-bootstrap/Table';
 import moment from 'moment';
+import { MDBDataTable } from 'mdbreact';
 
 class Ticket {
 	constructor(id, client, product, version, creationDate, deadlineDate, department, responsable) {
@@ -80,7 +81,7 @@ export class TicketManagement extends React.Component {
 			<>
 				<Col>
 					<Row><h1>Listado de tickets</h1></Row>
-					<Table striped bordered hover>
+					<Row><Table responsive="sm" striped bordered hover>
 						<thead>
 							<tr>
 								<th>ID TIC</th>
@@ -97,9 +98,10 @@ export class TicketManagement extends React.Component {
 							{this.renderTicketRows()}
 						</tbody>
 					</Table>
-					<Button variant="primary" type="submit" onClick={this.handleShowForm}>
+					</Row>
+					<Row><Button variant="primary" type="submit" onClick={this.handleShowForm}>
 						Crear ticket
-				</Button>
+				</Button></Row>
 				</Col>
 
 				<Modal show={this.state.showTicketForm} onHide={this.handleCloseForm}>
@@ -148,10 +150,10 @@ export class TicketManagement extends React.Component {
 					</Modal.Body>
 					<Modal.Footer>
 						<Button variant="secondary" onClick={this.handleCloseForm}>
-							Close
+							Cerrar
   					</Button>
 						<Button variant="primary" type="submit" onClick={this.handleSaveForm}>
-							Save Changes
+							Crear ticket
   					</Button>
 					</Modal.Footer>
 				</Modal>

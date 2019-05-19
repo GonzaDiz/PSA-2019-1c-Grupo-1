@@ -9,7 +9,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col'
 import { TicketManagement } from './support/tickets/tickets.jsx';
-import { Incidents } from './support/incidents/incidents.jsx' 
+import { Incidents } from './support/incidents/incidents.jsx'
 
 const psaModule = {
     NONE: 'none',
@@ -45,7 +45,7 @@ class App extends React.Component {
         return (
             <Container fluid={true}>
                 <Row>
-                    <Col lg={2}>
+                    <Col sm={3} md={3}lg={3} className="full-height">
                         <SideNav
                             onSelect={(selected) => {
                                 this.changeSelected(selected)
@@ -54,9 +54,9 @@ class App extends React.Component {
                             expanded={true}
                         >
                             <SideNav.Toggle />
-                            <SideNav.Nav  defaultSelected='soporte'>
-                                <NavItem  expanded={true}
-                                eventKey='soporte'>
+                            <SideNav.Nav defaultSelected='soporte'>
+                                <NavItem expanded={true}
+                                    eventKey='soporte'>
                                     <NavIcon>
                                         <i className="fa fa-fw fa-ticket" style={{ fontSize: '1.75em' }} />
                                     </NavIcon>
