@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 import moment from 'moment';
 
 class Ticket {
-	constructor(id, client, product, version, creationDate, deadlineDate, department, responsable) {
+	constructor(id, client, product, version, creationDate, deadlineDate, department, responsable, description) {
 		this.id = id;
 		this.client = client;
 		this.product = product;
@@ -13,7 +13,8 @@ class Ticket {
 		this.creationDate = creationDate;
 		this.deadlineDate = deadlineDate;
 		this.department = department;
-		this.responsable = responsable;
+        this.responsable = responsable;
+        this.description = description;
 	}
 }
 
@@ -36,7 +37,8 @@ export class TicketForm extends React.Component {
 			moment().format('l'),
 			this.state.deadlineDate,
 			this.state.department,
-			this.state.responsable)
+            this.state.responsable,
+            this.state.description)
 		this.props.onSave(newTicket)
 		this.props.onHide()
 	}

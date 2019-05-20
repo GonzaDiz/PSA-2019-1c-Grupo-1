@@ -2,29 +2,55 @@ const React = require('react');
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Table from 'react-bootstrap/Table';
 import { TicketForm } from './TicketForm';
+import Card from 'react-bootstrap/Card'
+import Ticket from './TicketForm';
 
 export class TicketManagement extends React.Component {
 
 	constructor(props) {
 		super(props);
 		this.state = { showTicketForm: false };
-		this.tickets = [];
+		var tickets = [{
+			id: "TIC-001",
+			client: "Toyota",
+			product: "CRM",
+			description: "Error al agregar un cliente"
+		},
+		{
+			id: "TIC-002",
+			client: "PEPSI",
+			product: "CRM",
+			description: "Error al agregar un cliente"
+		},
+		{
+			id: "TIC-003",
+			client: "MercadoLibre",
+			product: "CRM",
+			description: "Error al agregar un cliente"
+		},
+		{
+			id: "TIC-004",
+			client: "Disney",
+			product: "CRM",
+			description: "Error al agregar un cliente"
+		}]
+		this.tickets = tickets;
 	}
 
-	renderTicketRows() {
+	renderTickets() {
 		return this.tickets.map((ticket) => {
-			return <tr>
-				<td>{ticket.id}</td>
-				<td>{ticket.client}</td>
-				<td>{ticket.product}</td>
-				<td>{ticket.version}</td>
-				<td>{ticket.creationDate}</td>
-				<td>{ticket.deadlineDate}</td>
-				<td>{ticket.department}</td>
-				<td>{ticket.responsable}</td>
-			</tr>
+			return <Card style={{ width: '18rem' }}>
+			<Card.Body>
+			  <Card.Title>Ticket: {ticket.id}</Card.Title>
+			  <Card.Text>Producto: {ticket.product}</Card.Text>
+			  <Card.Text>Reportado por: {ticket.client}</Card.Text>
+			  <Card.Text>
+				Descripción: {ticket.description}
+			  </Card.Text>
+			  <Button variant="primary">Detalle</Button>
+			</Card.Body>
+		  </Card>
 		}
 		)
 	}
@@ -46,24 +72,9 @@ export class TicketManagement extends React.Component {
 		return (
 			<>
 				<Col>
-					<Row><h1>Listado de tickets</h1></Row>
-					<Row><Table responsive="sm" striped bordered hover>
-						<thead>
-							<tr>
-								<th>ID TIC</th>
-								<th>Cliente</th>
-								<th>Producto</th>
-								<th>Versión</th>
-								<th>Fecha Creación</th>
-								<th>Deadline</th>
-								<th>Área</th>
-								<th>Responsable</th>
-							</tr>
-						</thead>
-						<tbody>
-							{this.renderTicketRows()}
-						</tbody>
-					</Table>
+					<Row><h1>Tickets</h1></Row>
+					<Row>
+					{this.renderTickets()}
 					</Row>
 					<Row><Button variant="primary" type="submit" onClick={this.handleShowForm}>
 						Crear ticket
