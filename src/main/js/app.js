@@ -8,8 +8,8 @@ import style from 'bootstrap/dist/css/bootstrap.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col'
-import { TicketManagement } from './support/tickets/tickets.jsx';
-import { Incidents } from './support/incidents/incidents.jsx'
+import { TicketManagement } from './components/support/tickets/TicketManagement.jsx';
+import { IncidentManagement } from './components/support/incidents/IncidentManagement.jsx'
 
 const psaModule = {
     NONE: 'none',
@@ -35,7 +35,7 @@ class App extends React.Component {
             case psaModule.TICKETS:
                 return <TicketManagement></TicketManagement>
             case psaModule.INCIDENTS:
-                return <Incidents></Incidents>
+                return <IncidentManagement></IncidentManagement>
             default:
                 break;
         }

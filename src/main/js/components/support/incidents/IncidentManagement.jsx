@@ -5,7 +5,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col'
 
-export  class Incidents extends React.Component {
+export  class IncidentManagement extends React.Component {
     constructor(props) {
 		super(props);
 		this.state = {};
