@@ -1,6 +1,6 @@
 package com.psa.psa.controllers.healthcheck;
 
-import com.psa.psa.model.Project;
+import com.psa.psa.model.core.project.Project;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,6 +12,6 @@ public class HealthCheck {
     @RequestMapping(value = "/health-check", method = RequestMethod.GET)
     @ResponseBody
     public Project healthCheck() {
-        return new Project("ABM", "In Progress");
+        return new Project("ABM");
     }
 }
