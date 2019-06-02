@@ -35,6 +35,7 @@ $ brew install maven
 ## Correr el proyecto React en localhost:8080 :
 
 ```
+$ npm install
 $ npm run dev
 ```
 
