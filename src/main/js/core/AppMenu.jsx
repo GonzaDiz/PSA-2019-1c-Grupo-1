@@ -99,21 +99,29 @@ class AppMenu extends React.Component {
     this.state = {
       open: false,
       title: 'PSA Flex',
-      route: '/',
     }
+  }
+
+  pathnameToModule = (pathname) => {
+    if (pathname.indexOf('/proyectos') !== -1) return 'proyectos';
+    if (pathname.indexOf('/productos') !== -1) return 'productos';
+    if (pathname.indexOf('/soporte') !== -1) return 'soporte';
+    if (pathname.indexOf('/recursos') !== -1) return 'recursos';
+    if (pathname.indexOf('/ventas_y_finanzas') !== -1) return 'ventas_y_finanzas';
   }
 
   handleDrawerOpen = () => this.setState({ open: true });
   handleDrawerClose = () => this.setState({ open: false });
 
-  changeRoute = (route, routeTitle) => () => {
-    this.setState({ title: routeTitle, route: route });
+
+  changeRoute = (route, routeTitle, moduleSelected) => () => {
+    this.setState({ title: routeTitle, moduleSelected: moduleSelected });
     this.props.history.push(route);
   }
 
   render = () => {
     const { classes, children } = this.props;
-    const { open, title, route } = this.state;
+    const { open, title } = this.state;
 
     return (
       <div className={classes.root}>
@@ -157,7 +165,7 @@ class AppMenu extends React.Component {
           <List>
             <ModuleSubOptions 
               onSubModuleSelection={this.changeRoute}
-              route={route}
+              moduleSelected={this.pathnameToModule(this.props.location.pathname)}
             />
           </List>
         </Drawer>

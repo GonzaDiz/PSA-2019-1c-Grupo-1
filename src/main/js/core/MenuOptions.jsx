@@ -8,6 +8,7 @@ import HeadsetMicIcon from '@material-ui/icons/HeadsetMic';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import AssignmentIcon from '@material-ui/icons/Assignment';
+import GroupIcon from '@material-ui/icons/Group';
 
 class ModuleOptions extends React.Component {
   render = () => {
@@ -17,7 +18,7 @@ class ModuleOptions extends React.Component {
       <div>
         <ListItem 
           button 
-          onClick={onModuleSelection('/proyectos', 'Proyectos')}
+          onClick={onModuleSelection('/proyectos', 'Gestión de proyectos')}
         >
           <ListItemIcon>
             <BusinessIcon />
@@ -26,7 +27,7 @@ class ModuleOptions extends React.Component {
         </ListItem>
         <ListItem 
           button 
-          onClick={onModuleSelection('/productos', 'Productos')}
+          onClick={onModuleSelection('/productos', 'Gestión de productos')}
         >
           <ListItemIcon>
             <BusinessCenterIcon />
@@ -44,7 +45,7 @@ class ModuleOptions extends React.Component {
         </ListItem>
         <ListItem 
           button 
-          onClick={onModuleSelection('/recursos', 'Recursos')}
+          onClick={onModuleSelection('/recursos', 'Gestión de Recursos')}
         >
           <ListItemIcon>
             <AccountBoxIcon />
@@ -66,27 +67,64 @@ class ModuleOptions extends React.Component {
 }
 
 class ModuleSubOptions extends React.Component {
+  
+  // En esta funcion hay que agregar las sub opciones de cada modulo
+  getModuleSubOptions = (moduleSelected) => {
+    switch (moduleSelected) {
+      case 'proyectos': {
+        return (
+          <div>
+            Opciones en Proyectos
+          </div>
+        );
+      }
+
+      case 'productos': {
+        return (
+          <div>
+            Opciones en Productos
+          </div>
+        );
+      }
+
+      case 'soporte': {
+        return (
+          <div>
+            Opciones en Soporte
+          </div>
+        );
+      }
+
+      case 'recursos': {
+        return (
+          <div>
+            <ListItem button>
+              <ListItemIcon>
+                <GroupIcon />
+              </ListItemIcon>
+              <ListItemText primary="Recursos" />
+            </ListItem>
+          </div>
+        );
+      }
+
+      case 'ventas_y_finanzas': {
+        return (
+          <div>
+            Opciones en Ventas y Finanzas
+          </div>
+        );
+      }
+
+      default: return null;
+    }
+  }
   render = () => {
+    const { moduleSelected } = this.props;
+
     return (
       <div>
-        <ListItem button>
-          <ListItemIcon>
-            <AssignmentIcon />
-          </ListItemIcon>
-          <ListItemText primary="Current month" />
-        </ListItem>
-        <ListItem button>
-          <ListItemIcon>
-            <AssignmentIcon />
-          </ListItemIcon>
-          <ListItemText primary="Last quarter" />
-        </ListItem>
-        <ListItem button>
-          <ListItemIcon>
-            <AssignmentIcon />
-          </ListItemIcon>
-          <ListItemText primary="Year-end sale" />
-        </ListItem>
+        {this.getModuleSubOptions(moduleSelected)}
       </div>
     );
   }
