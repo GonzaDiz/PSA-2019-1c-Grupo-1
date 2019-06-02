@@ -3,9 +3,8 @@ import AppContext from './AppContext'
 import Routes from './routes';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import CustomSnackbar from '../utils/CustomSnackbar';
-import AppBar from '../core/AppBar';
 import { BrowserRouter as Router } from 'react-router-dom';
-import MenuSheet from '../core/MenuSheet';
+import AppMenu from '../core/AppMenu';
 
 // See https://material-ui.com/customization/themes/ to custom your theme
 const theme = createMuiTheme({
@@ -19,7 +18,6 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      appBarTitle: 'PSA Flex',
       menuOpen: false,
       snackbar: {
         open: false,
@@ -33,10 +31,6 @@ class App extends React.Component {
         }
       }
     }
-  }
-
-  changeAppBarTitle = (title) => {
-    this.setState({ appBarTitle: title });
   }
 
   showSnackbar = ({ 
@@ -75,7 +69,7 @@ class App extends React.Component {
   }
 
   render = () => {
-    const { snackbar, appBarTitle } = this.state;
+    const { snackbar } = this.state;
     const showSnackbar = this.showSnackbar
     const changeAppBarTitle = this.changeAppBarTitle;
 
@@ -88,12 +82,10 @@ class App extends React.Component {
               changeAppBarTitle: changeAppBarTitle,
             }}
           >
-            <AppBar 
-              onMenuClick={() => this.setState({ menuOpen: true })}
-              title={appBarTitle}
-            />
-            <MenuSheet open={this.state.menuOpen} onClose={() => this.setState({ menuOpen: false })} />
-            <Routes />
+            <AppMenu>
+              <Routes />
+            </AppMenu>
+            
             <CustomSnackbar 
               open={snackbar.open}
               anchorOrigin={snackbar.anchorOrigin}

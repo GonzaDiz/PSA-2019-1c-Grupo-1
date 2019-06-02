@@ -16,8 +16,12 @@ module.exports = {
     cache: true,
     mode: 'development',
     output: {
-        path: __dirname,
+        path: path.resolve(__dirname, 'dist'),
+        publicPath: '/',
         filename: './src/main/resources/static/bundle.js'
+    },
+    devServer: {
+        historyApiFallback: true,
     },
     plugins: [
             new stylusLoader.OptionsPlugin({
