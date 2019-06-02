@@ -1,3 +1,48 @@
 # PSA-2019-1c-Tribu-1
 
-health check url: http://psa-management.herokuapp.com/psa/health-check
+# Dependencias:
+
+## NPM
+
+Ubuntu
+
+```
+$ sudo apt install npm
+```
+
+MacOS
+
+```
+$ brew install npm
+```
+
+
+## Maven
+
+Ubuntu
+
+```
+$ sudo apt install maven
+```
+
+MacOS
+
+```
+$ brew install maven
+```
+
+### 
+
+# Correr el proyecto React en localhost:8080 :
+
+```
+$ npm run dev
+```
+
+# Levantar todo el proyecto en localhost:5000:
+
+```
+$ mvn clean package
+```
+
+Deploy: http://psa-management.herokuapp.com/
