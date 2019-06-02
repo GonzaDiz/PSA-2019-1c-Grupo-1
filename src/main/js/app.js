@@ -9,12 +9,14 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col'
 import { TicketManagement } from './components/support/tickets/TicketManagement.jsx';
-import { IncidentManagement } from './components/support/incidents/IncidentManagement.jsx'
+import { IncidentManagement } from './components/support/incidents/IncidentManagement.jsx';
+import { ProjectBriefCase } from './components/project/ProjectBriefCase';
 
 const psaModule = {
     NONE: 'none',
     TICKETS: 'tickets',
-    INCIDENTS: 'incidents'
+    INCIDENTS: 'incidents',
+    PROJECTS: 'projects'
 }
 
 class App extends React.Component {
@@ -36,6 +38,8 @@ class App extends React.Component {
                 return <TicketManagement></TicketManagement>
             case psaModule.INCIDENTS:
                 return <IncidentManagement></IncidentManagement>
+            case psaModule.PROJECTS:
+                return <ProjectsBriefCase></ProjectsBriefCase>
             default:
                 break;
         }
@@ -79,7 +83,7 @@ class App extends React.Component {
                             </NavText>
                                     </NavItem>
                                 </NavItem>
-                                <NavItem eventKey="project">
+                                <NavItem eventKey={psaModule.PROJECTS}>
                                     <NavIcon>
                                         <i className="fa fa-fw fa-folder-open" style={{ fontSize: '1.75em' }} />
                                     </NavIcon>
