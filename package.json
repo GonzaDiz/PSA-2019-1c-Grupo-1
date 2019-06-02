@@ -5,7 +5,8 @@
   "main": "webpack.config.js",
   "scripts": {
     "dev": "webpack-dev-server --hot",
-    "watch": "webpack --watch -d"
+    "watch": "webpack --watch -d",
+    "build": "webpack --mode production"
   },
   "repository": {
     "type": "git",
@@ -24,6 +25,7 @@
     "babel-core": "^6.26.3",
     "babel-preset-react": "^6.24.1",
     "bootstrap": "^4.3.1",
+    "clsx": "^1.0.4",
     "file-loader": "^3.0.1",
     "mdbreact": "^4.14.0",
     "moment": "^2.24.0",

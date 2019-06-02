@@ -16,7 +16,7 @@ module.exports = {
     cache: true,
     mode: 'development',
     output: {
-        path: path.resolve(__dirname, 'dist'),
+        path: path.resolve(__dirname),
         publicPath: '/',
         filename: './src/main/resources/static/bundle.js'
     },

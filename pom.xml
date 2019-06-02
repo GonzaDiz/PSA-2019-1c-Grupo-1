@@ -121,7 +121,7 @@
 						</configuration>
 					</execution>
 					<execution>
-						<id>webpack build</id>
+						<id>npm run build</id>
 						<goals>
 							<goal>webpack</goal>
 						</goals>
