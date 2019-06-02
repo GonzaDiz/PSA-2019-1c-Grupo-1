@@ -1,8 +1,8 @@
 # PSA-2019-1c-Tribu-1
 
-# Dependencias:
+## Dependencias:
 
-## NPM
+### NPM
 
 Ubuntu
 
@@ -17,7 +17,7 @@ $ brew install npm
 ```
 
 
-## Maven
+### Maven
 
 Ubuntu
 
@@ -31,15 +31,14 @@ MacOS
 $ brew install maven
 ```
 
-### 
 
-# Correr el proyecto React en localhost:8080 :
+## Correr el proyecto React en localhost:8080 :
 
 ```
 $ npm run dev
 ```
 
-# Levantar todo el proyecto en localhost:5000:
+## Levantar todo el proyecto en localhost:5000:
 
 ```
 $ mvn clean package
