@@ -11,7 +11,7 @@ var HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
 
 
 module.exports = {
-    entry: './src/main/js/app.js',
+    entry: './src/main/js/index.js',
     devtool: 'sourcemaps',
     cache: true,
     mode: 'development',
@@ -44,7 +44,7 @@ module.exports = {
             },
             {
                 test: /\.styl$/,
-                          use: [
+                        use: [
                                 'style-loader',
                                 'css-loader?camelCase&modules&importLoaders=1&localIdentName=[local]---[hash:base64:5]',
                                 'stylus-loader'
@@ -56,10 +56,10 @@ module.exports = {
                         }
         ]
     },
-       resolve: {
-            extensions: ['.js', '.jsx', '.css'],
-            modules: [
-              'node_modules'
-            ]
-        }
+    resolve: {
+        extensions: ['.js', '.jsx', '.css'],
+        modules: [
+            'node_modules'
+        ]
+    }
 };
