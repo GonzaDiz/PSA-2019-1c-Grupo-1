@@ -6,21 +6,30 @@ import java.time.LocalDateTime;
 
 public class Project {
 
-    private Double id;
+    private static Integer nextId = 0;
+    private Integer id;
     private String name;
     private LocalDateTime startDate;
-    private LocalDateTime endDate;
     private ProjectState projectState;
-    private String proyectType;
-    private Risk risk;
+    private String projectType;
+
+
 
     public Project(String name) {
+        this.id = nextId;
+        nextId+=1;
         this.name = name;
         this.startDate = LocalDateTime.now();
+        this.projectType = "Desarrollo";
+        this.projectState = ProjectState.INITIAL;
     }
 
     public String getName() {
         return name;
+    }
+
+    public Integer getId(){
+        return this.id;
     }
 
     public void setName(String name) {
@@ -31,32 +40,8 @@ public class Project {
         return startDate;
     }
 
-    public void setStartDate(LocalDateTime startDate) {
-        this.startDate = startDate;
-    }
-
-    public LocalDateTime getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(LocalDateTime endDate) {
-        this.endDate = endDate;
-    }
-
-    public ProjectState getProyectState() {
-        return projectState;
-    }
-
-    public void setProyectState(ProjectState projectState) {
-        this.projectState = projectState;
-    }
-
-    public String getProyectType() {
-        return proyectType;
-    }
-
-    public void setProyectType(String proyectType) {
-        this.proyectType = proyectType;
+    public String getProjectType() {
+        return projectType;
     }
 
     public ProjectState getProjectState() {
@@ -67,11 +52,4 @@ public class Project {
         this.projectState = projectState;
     }
 
-    public Risk getRisk() {
-        return risk;
-    }
-
-    public void setRisk(Risk risk) {
-        this.risk = risk;
-    }
 }
