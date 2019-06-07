@@ -5,6 +5,7 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import CustomSnackbar from '../utils/CustomSnackbar';
 import { BrowserRouter as Router } from 'react-router-dom';
 import AppMenu from '../core/AppMenu';
+import LoadingBar from '../utils/LoadingBar';
 
 // See https://material-ui.com/customization/themes/ to custom your theme
 const theme = createMuiTheme({
@@ -18,6 +19,7 @@ class App extends React.Component {
     super(props);
 
     this.state = {
+      loading: false,
       menuOpen: false,
       snackbar: {
         open: false,
@@ -32,6 +34,9 @@ class App extends React.Component {
       }
     }
   }
+
+  startLoading = () => this.setState({ loading: true });
+  finishLoading = () => this.setState({ loading: false });
 
   showSnackbar = ({ 
     variant, 
@@ -69,9 +74,11 @@ class App extends React.Component {
   }
 
   render = () => {
-    const { snackbar } = this.state;
+    const { snackbar, loading } = this.state;
     const showSnackbar = this.showSnackbar
     const changeAppBarTitle = this.changeAppBarTitle;
+    const startLoading = this.startLoading;
+    const finishLoading = this.finishLoading;
 
     return (
       <Router>
@@ -80,10 +87,13 @@ class App extends React.Component {
             value={{
               showAlert: showSnackbar,
               changeAppBarTitle: changeAppBarTitle,
+              startLoading,
+              finishLoading,
             }}
           >
             <AppMenu>
-              <Routes />
+              <LoadingBar loading={loading} />
+              <Routes loading={loading} />
             </AppMenu>
             
             <CustomSnackbar 
