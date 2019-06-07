@@ -73,6 +73,8 @@ class ModuleSubOptions extends React.Component {
   
   // En esta funcion hay que agregar las sub opciones de cada modulo
   getModuleSubOptions = (moduleSelected) => {
+    const { onSubModuleSelection } = this.props;
+    
     switch (moduleSelected) {
       case 'proyectos': {
         return (
@@ -101,7 +103,10 @@ class ModuleSubOptions extends React.Component {
       case 'recursos': {
         return (
           <div>
-            <ListItem button>
+            <ListItem 
+              button
+              onClick={onSubModuleSelection('/recursos', 'Gestión de Recursos')}
+            >
               <ListItemIcon>
                 <GroupIcon />
               </ListItemIcon>

@@ -42,7 +42,7 @@ const ResourcesTable = (props) => {
           {response.data.map(r => (
             <TableRow key={r.cuit}>
               <TableCell component="th" scope="row">
-                <Link>{r.cuit}</Link>
+                <Link to={`/recursos/${r.cuit}`} >{r.cuit}</Link>
               </TableCell>
               <TableCell align="left">{`${r.firstName} ${r.lastName}`}</TableCell>
               <TableCell align="left">{r.seniority}</TableCell>

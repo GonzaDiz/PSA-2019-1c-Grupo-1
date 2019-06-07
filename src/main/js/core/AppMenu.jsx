@@ -114,8 +114,8 @@ class AppMenu extends React.Component {
   handleDrawerClose = () => this.setState({ open: false });
 
 
-  changeRoute = (route, routeTitle, moduleSelected) => () => {
-    this.setState({ title: routeTitle, moduleSelected: moduleSelected });
+  changeRoute = (route, routeTitle) => () => {
+    this.setState({ title: routeTitle });
     this.props.history.push(route);
   }
 
