@@ -23,7 +23,7 @@ class ModuleOptions extends React.Component {
           <ListItemIcon>
             <BusinessIcon />
           </ListItemIcon>
-          <ListItemText primary="Proyectos" />
+          <ListItemText primary="Gestión de Proyectos" />
         </ListItem>
         <ListItem 
           button 
@@ -32,7 +32,7 @@ class ModuleOptions extends React.Component {
           <ListItemIcon>
             <BusinessCenterIcon />
           </ListItemIcon>
-          <ListItemText primary="Productos" />
+          <ListItemText primary="Gestión de Productos" />
         </ListItem>
         <ListItem 
           button 
@@ -50,7 +50,7 @@ class ModuleOptions extends React.Component {
           <ListItemIcon>
             <AccountBoxIcon />
           </ListItemIcon>
-          <ListItemText primary="Recursos" />
+          <ListItemText primary="Gestión de Recursos" />
         </ListItem>
         <ListItem 
           button 
@@ -66,6 +66,9 @@ class ModuleOptions extends React.Component {
   }
 }
 
+
+// Aca pueden ver que iconos pueden importar de @material-ui/icons
+// https://material.io/tools/icons/?style=baseline
 class ModuleSubOptions extends React.Component {
   
   // En esta funcion hay que agregar las sub opciones de cada modulo
