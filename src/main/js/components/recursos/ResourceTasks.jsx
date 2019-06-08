@@ -56,7 +56,7 @@ class ResourceTasks extends React.Component {
   }
 
   render = () => {
-    const { classes } = this.props;
+    const { classes, cuit } = this.props;
     const { fetching, resourceTasks } = this.state;
     const { renderLoading } = this.context;
 
@@ -98,6 +98,7 @@ class ResourceTasks extends React.Component {
                     <Button 
                       variant="text"
                       color="primary"
+                      onClick={() => this.props.history.push(`/recursos/${cuit}/tareas/${t.taskId}`)}
                     >
                       Cargar
                     </Button>

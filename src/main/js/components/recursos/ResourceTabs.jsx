@@ -11,17 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import ResourceProfile from './ResourceProfile';
 import ResourceTasks from './ResourceTasks';
 
-const TabContainer = (props) => {
-  return (
-    <Typography component="div" style={{ padding: 8 * 3 }}>
-      {props.children}
-    </Typography>
-  );
-}
-
-TabContainer.propTypes = {
-  children: PropTypes.node.isRequired,
-};
+let rememberTab = 0;
 
 const styles = theme => ({
   root: {
@@ -39,8 +29,12 @@ class ResourceTabs extends React.Component {
     super(props);
 
     this.state = {
-      value: 0,
+      value: rememberTab,
     }
+  }
+
+  componentWillUnmount = () => {
+    rememberTab = this.state.value;
   }
 
   handleChange = (event, newValue) => {
