@@ -8,6 +8,8 @@ import PersonIcon from '@material-ui/icons/Person';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import UpdateIcon from '@material-ui/icons/Update';
 import Typography from '@material-ui/core/Typography';
+import ResourceProfile from './ResourceProfile';
+import ResourceTasks from './ResourceTasks';
 
 const TabContainer = (props) => {
   return (
@@ -25,16 +27,19 @@ const styles = theme => ({
   root: {
     flexGrow: 1,
     width: '100%',
-    backgroundColor: theme.palette.background.paper,
   },
 });
+
+const TAB_PROFILE = 0;
+const TAB_TASKS = 1;
+const TAB_HISTORY = 2;
 
 class ResourceTabs extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      value: 0
+      value: 0,
     }
   }
 
@@ -43,7 +48,7 @@ class ResourceTabs extends React.Component {
   }
 
   render = () => {
-    const { classes } = this.props;
+    const { classes, cuit } = this.props;
     const { value } = this.state;
     return (
       <div className={classes.root}>
@@ -61,9 +66,8 @@ class ResourceTabs extends React.Component {
             <Tab label="Historial" icon={<UpdateIcon />} />
           </Tabs>
         </AppBar>
-        
-        
-        
+        {value === TAB_PROFILE && <ResourceProfile cuit={cuit} />}
+        {value === TAB_TASKS && <ResourceTasks cuit={cuit} />}
       </div>
     );
   }

@@ -38,6 +38,8 @@ class App extends React.Component {
   startLoading = () => this.setState({ loading: true });
   finishLoading = () => this.setState({ loading: false });
 
+  renderLoading = () => <LoadingBar loading={true} />
+
   showSnackbar = ({ 
     variant, 
     message, 
@@ -79,6 +81,7 @@ class App extends React.Component {
     const changeAppBarTitle = this.changeAppBarTitle;
     const startLoading = this.startLoading;
     const finishLoading = this.finishLoading;
+    const renderLoading = this.renderLoading;
 
     return (
       <Router>
@@ -89,6 +92,7 @@ class App extends React.Component {
               changeAppBarTitle: changeAppBarTitle,
               startLoading,
               finishLoading,
+              renderLoading,
             }}
           >
             <AppMenu>
