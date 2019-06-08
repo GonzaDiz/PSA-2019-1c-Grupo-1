@@ -1,8 +1,11 @@
 package com.psa.psa.model.core.project;
 
 import com.psa.psa.model.core.risk.Risk;
+import com.psa.psa.model.core.task.Task;
+import com.psa.psa.model.core.task.TaskManager;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 
 public class Project {
 
@@ -13,6 +16,7 @@ public class Project {
     private ProjectState projectState;
     private String projectType;
 
+    private TaskManager tasks;
 
 
     public Project(String name) {
@@ -22,6 +26,12 @@ public class Project {
         this.startDate = LocalDateTime.now();
         this.projectType = "Desarrollo";
         this.projectState = ProjectState.INITIAL;
+        this.tasks = new TaskManager();
+    }
+
+    public Task addTask(String title){
+        Task newTask = tasks.addTask(title);
+        return newTask;
     }
 
     public String getName() {
