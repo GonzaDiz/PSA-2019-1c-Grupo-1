@@ -14,6 +14,7 @@ public class ProjectDao {
     private static Map<String,Integer> idByName;
     static{
         projects = new HashMap<Integer,Project>();
+        idByName = new HashMap<String, Integer>();
         Project testProject = new Project("Proyecto de prueba");
         projects.put(testProject.getId(),testProject);
         idByName.put(testProject.getName(),testProject.getId());
