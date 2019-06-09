@@ -11,13 +11,17 @@ var HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
 
 
 module.exports = {
-    entry: './src/main/js/app.js',
+    entry: './src/main/js/index.js',
     devtool: 'sourcemaps',
     cache: true,
     mode: 'development',
     output: {
-        path: __dirname,
+        path: path.resolve(__dirname),
+        publicPath: '/',
         filename: './src/main/resources/static/bundle.js'
+    },
+    devServer: {
+        historyApiFallback: true,
     },
     plugins: [
             new stylusLoader.OptionsPlugin({
@@ -44,7 +48,7 @@ module.exports = {
             },
             {
                 test: /\.styl$/,
-                          use: [
+                        use: [
                                 'style-loader',
                                 'css-loader?camelCase&modules&importLoaders=1&localIdentName=[local]---[hash:base64:5]',
                                 'stylus-loader'
@@ -56,10 +60,10 @@ module.exports = {
                         }
         ]
     },
-       resolve: {
-            extensions: ['.js', '.jsx', '.css'],
-            modules: [
-              'node_modules'
-            ]
-        }
+    resolve: {
+        extensions: ['.js', '.jsx', '.css'],
+        modules: [
+            'node_modules'
+        ]
+    }
 };

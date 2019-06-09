@@ -3,3 +3,4 @@
 target/
 mvnw*
 package-lock.json
+node_modules/
