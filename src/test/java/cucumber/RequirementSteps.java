@@ -1,5 +1,6 @@
 package cucumber;
 
+import com.psa.psa.model.core.project.Project;
 import com.psa.psa.model.core.project.Requirement;
 import com.psa.psa.model.core.project.RequirementPriority;
 import cucumber.api.java.en.Given;
@@ -10,6 +11,7 @@ import org.junit.Assert;
 
 public class RequirementSteps {
 
+    Project myProject;
     Requirement myRequirement;
     String myName;
     String myDescription;
@@ -66,6 +68,7 @@ public class RequirementSteps {
         myRequirement = new Requirement("nombre","descripcion",RequirementPriority.MEDIUM);
     }
 
+
     @Then("la prioridad es media")
     public void tienePrioridadMedia(){
         Assert.assertEquals(myPriority,RequirementPriority.MEDIUM);
@@ -94,4 +97,5 @@ public class RequirementSteps {
     public void laPrioridadDelRequisitoEsLaQueAcaboDeEspecificar(){
         Assert.assertEquals(myPriority,RequirementPriority.HIGH);
     }
+
 }

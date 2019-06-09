@@ -1,6 +1,7 @@
 package com.psa.psa.model.core.project;
 
 import com.psa.psa.model.core.risk.Risk;
+import com.psa.psa.model.core.risk.RiskManager;
 import com.psa.psa.model.core.task.Task;
 import com.psa.psa.model.core.task.TaskManager;
 
@@ -17,7 +18,7 @@ public class Project {
     private String projectType;
 
     private TaskManager tasks;
-
+    private RiskManager risks;
 
     public Project(String name) {
         this.id = nextId;
@@ -27,6 +28,7 @@ public class Project {
         this.projectType = "Desarrollo";
         this.projectState = ProjectState.INITIAL;
         this.tasks = new TaskManager();
+        this.risks = new RiskManager();
     }
 
     public Task addTask(String title){
@@ -34,9 +36,15 @@ public class Project {
         return newTask;
     }
 
+    public Risk addRisk(String description, Double probability, Double impact){
+        return risks.addRisk(description,probability,impact);
+    }
+
     public String getName() {
         return name;
     }
+
+
 
     public Integer getId(){
         return this.id;

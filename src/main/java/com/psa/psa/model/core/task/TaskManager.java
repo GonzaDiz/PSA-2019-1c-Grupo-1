@@ -21,6 +21,7 @@ public class TaskManager {
         Task newTask = new Task(nextId, name);
         taskById.put(nextId,newTask);
         taskByName.put(name,newTask);
+        nextId+=1;
         return newTask;
     }
 }

@@ -2,35 +2,69 @@ package com.psa.psa.model.core.risk;
 
 public class Risk {
 
-    private Long id;
+    private Integer id;
     private String description;
-    private RiskLevel riskLevel;
     private Double impact;
-    private Double occurrenceProbability;
+    private Double probability;
     private Double exposure;
     private Integer priority;
+    private RiskLevel qualitativeProbability;
+    private RiskLevel qualitativeExposure;
+    private RiskLevel qualitativeImpact;
+    private boolean urgent;
 
-    public void setId(Long id) {this.id = id;}
+
+
     public void setDescription(String description) {this.description = description;}
-    public void setRiskLevel(RiskLevel riskLevel) {this.riskLevel = riskLevel;}
-    public void setImpact(Double impact) {this.impact = impact;}
-    public void setOccurrenceProbability(Double occurrenceProbability) {this.occurrenceProbability = occurrenceProbability;}
-    public void setExposure(Double exposure) {this.exposure = exposure;}
-    public void setPriority(Integer priority) {this.priority = priority;}
 
-    public Long getId() {return id;}
-    public String getDescription() {return description;}
-    public RiskLevel getRiskLevel() {return riskLevel;}
-    public Double getImpact() {return impact;}
-    public Double getOccurrenceProbability() {return occurrenceProbability;}
-    public Double getExposure() {return exposure;}
-    public Integer getPriority() {return priority;}
+    public Risk(Integer id, String description, Double probability, Double impact){
 
-    public void calculateExposure(){
-        this.exposure = Math.round((occurrenceProbability * impact)*100.0)/100.0;
-        if (exposure <= 0.33) setRiskLevel(riskLevel.LOW);                      //Despues estos 0.33 y 0.66 deben ser configurables
-        else if (exposure <= 0.66) setRiskLevel(riskLevel.MEDIUM);
-        else setRiskLevel(RiskLevel.HIGH);
+        if (probability<=0 || probability>=1 || impact <= 0 || impact >=1){
+            throw new RuntimeException("Valor invalido para riesgo");
+        }
+        this.description = description;
+        this.impact = impact;
+        this.exposure = probability*impact;
+        this.probability = probability;
+        this.id = id;
     }
 
+
+    public Integer getId() {return id;}
+    public String getDescription() {return description;}
+    public Double getImpact() {return impact;}
+    public Double getProbability() {return probability;}
+    public Double getExposure() {return exposure;}
+
+    public void setQualitativeExposure(RiskLevel qualitativeExposure) {
+        this.qualitativeExposure = qualitativeExposure;
+    }
+
+    public void setQualitativeImpact(RiskLevel qualitativeImpact) {
+        this.qualitativeImpact = qualitativeImpact;
+    }
+
+    public void setQualitativeProbability(RiskLevel qualitativeProbability) {
+        this.qualitativeProbability = qualitativeProbability;
+    }
+
+    public void setUrgent(boolean urgent) {
+        this.urgent = urgent;
+    }
+
+    public void setProbability(Double probability){
+        if (probability<=0 || probability >=1){
+            throw new RuntimeException("Probabilidad invalida para riesgo");
+        }
+        this.probability = probability;
+        this.exposure = this.probability*this.impact;
+    }
+
+    public void setImpact(Double impact){
+        if (impact <= 0 || impact>=1){
+            throw new RuntimeException("Impacto invalido para riesgo");
+        }
+        this.impact = impact;
+        this.exposure = this.impact*this.probability;
+    }
 }
