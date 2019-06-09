@@ -81,8 +81,6 @@ const styles = theme => ({
     flexGrow: 1,
     height: '100vh',
     overflow: 'auto',
-    paddingLeft: theme.spacing.unit * 2,
-    paddingRight: theme.spacing.unit * 2,
   },
   paper: {
     padding: theme.spacing.unit * (2),

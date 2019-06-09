@@ -1,5 +1,6 @@
 package cucumber;
 
+import com.psa.psa.model.core.project.Project;
 import com.psa.psa.model.core.project.Requirement;
 import com.psa.psa.model.core.project.RequirementPriority;
 import cucumber.api.java.en.Given;
@@ -8,16 +9,21 @@ import cucumber.api.java.en.When;
 import cucumber.api.java.en.And;
 import org.junit.Assert;
 
+import java.util.Collection;
+
 public class RequirementSteps {
 
+    Project myProject;
     Requirement myRequirement;
     String myName;
     String myDescription;
     RequirementPriority myPriority;
+    Collection<Requirement> requirements;
 
-    @Given("he creado un requisito con nombre {string} y descripcion {string}")
+    @Given("tengo un proyecto y he creado un requisito con nombre {string} y descripcion {string}")
     public void HeCreadoUnRequisitoConNombreYDescripcion(String name, String description){
-        myRequirement = new Requirement(name,description);
+        myProject = new Project ("myProject");
+        myRequirement = myProject.addRequirement(name,description);
     }
 
     @When("veo el nombre y la descripcion del requisito")
@@ -36,9 +42,10 @@ public class RequirementSteps {
         Assert.assertEquals(myDescription,description);
     }
 
-    @Given("he creado un requisito sin indicar prioridad")
+    @Given("tengo un proyecto y he creado un requisito sin indicar prioridad")
     public void heCreadoUnRequisitoSinAsignarPrioridad(){
-        myRequirement = new Requirement("nombre","descripcion");
+        myProject = new Project ("myProject");
+        myRequirement = myProject.addRequirement("nombre","descripcion");
     }
 
     @When("veo la prioridad del requisito")
@@ -51,9 +58,10 @@ public class RequirementSteps {
         Assert.assertEquals(myPriority,RequirementPriority.UNDEFINED);
     }
 
-    @Given("he creado un requisito con prioridad alta")
+    @Given("tengo un proyecto y he creado un requisito con prioridad alta")
     public void heCreadoUnRequisitoConPrioridadAlta(){
-        myRequirement = new Requirement("nombre","descripcion",RequirementPriority.HIGH);
+        myProject = new Project ("myProject");
+        myRequirement = myProject.addRequirement("nombre","descripcion",RequirementPriority.HIGH);
     }
     
     @Then("la prioridad es alta")
@@ -61,37 +69,103 @@ public class RequirementSteps {
         Assert.assertEquals(myPriority,RequirementPriority.HIGH);
     }
 
-    @Given("he creado un requisito con prioridad media")
+    @Given("tengo un proyecto y he creado un requisito con prioridad media")
     public void heCreadoUnRequisitoConPrioridadMedia(){
-        myRequirement = new Requirement("nombre","descripcion",RequirementPriority.MEDIUM);
+        myProject = new Project ("myProject");
+        myRequirement = myProject.addRequirement("nombre","descripcion",RequirementPriority.MEDIUM);
     }
+
 
     @Then("la prioridad es media")
     public void tienePrioridadMedia(){
         Assert.assertEquals(myPriority,RequirementPriority.MEDIUM);
     }
 
-    @Given("he creado un requisito con prioridad baja")
+    @Given("tengo un proyecto y he creado un requisito con prioridad baja")
     public void heCreadoUnRequisitoConPrioridadBaja(){
-        myRequirement = new Requirement("nombre","descripcion",RequirementPriority.LOW);
+        myProject = new Project ("myProject");
+        myRequirement = myProject.addRequirement("nombre","descripcion",RequirementPriority.LOW);
     }
     
-    @Then("la prioridad es baja")
+    @Then("su prioridad es baja")
     public void tienePrioridadBaja(){
         Assert.assertEquals(myPriority,RequirementPriority.LOW);
     }
 
-    @Given("que tengo un requisito")
+    @Given("tengo un proyecto y tengo un requisito")
     public void heCreadoUnRequisito(){
-        myRequirement = new Requirement("aName", "aDescription");
+        myProject = new Project ("myProject");
+        myRequirement = myProject.addRequirement("aName", "aDescription");
     }
     @When("le especifico una nueva prioridad")
     public void realizoUnCambioEnLaPrioridad(){
+
         myRequirement.setPriority(RequirementPriority.HIGH);
     }
 
     @Then ("la prioridad es la que le acabo de especificar")
     public void laPrioridadDelRequisitoEsLaQueAcaboDeEspecificar(){
         Assert.assertEquals(myPriority,RequirementPriority.HIGH);
+    }
+
+    @Given("tengo un proyecto con requisitos de distintas prioridades")
+    public void tengoUnProyectoConRequisitosDeDistintasPrioridades(){
+        myProject = new Project("Mi proyecto");
+        myProject.addRequirement("r1","r1",RequirementPriority.HIGH);
+        myProject.addRequirement("r2","r2",RequirementPriority.HIGH);
+        myProject.addRequirement("r3","r3",RequirementPriority.LOW);
+        myProject.addRequirement("r4","r4",RequirementPriority.LOW);
+        myProject.addRequirement("r5","r5",RequirementPriority.MEDIUM);
+        myProject.addRequirement("r6","r6",RequirementPriority.MEDIUM);
+        myProject.addRequirement("r7","r7",null);
+        myProject.addRequirement("r8","r8",RequirementPriority.UNDEFINED);
+    }
+
+    @When("veo los requisitos de prioridad alta")
+    public void veoLosRequisitosDePrioridadAlta(){
+        requirements = myProject.getRequirementsByPriority(RequirementPriority.HIGH);
+    }
+
+    @Then("todos los requisitos que veo tienen prioridad alta")
+    public void todosLosRequisitosQueVeoTienePrioridadAlta(){
+        for(Requirement req : requirements){
+            Assert.assertEquals(req.getPriority(),RequirementPriority.HIGH);
+        }
+    }
+
+    @When("veo los requisitos de prioridad media")
+    public void veoLosRequisitosDePrioridadMedia(){
+        requirements = myProject.getRequirementsByPriority(RequirementPriority.MEDIUM);
+    }
+
+    @Then("todos los requisitos que veo tienen prioridad media")
+    public void todosLosRequisitosQueVeoTienePrioridadMedia(){
+        for(Requirement req : requirements){
+            Assert.assertEquals(req.getPriority(),RequirementPriority.MEDIUM);
+        }
+    }
+
+    @When("veo los requisitos de prioridad baja")
+    public void veoLosRequisitosDePrioridadBaja(){
+        requirements = myProject.getRequirementsByPriority(RequirementPriority.LOW);
+    }
+
+    @Then("todos los requisitos que veo tienen prioridad baja")
+    public void todosLosRequisitosQueVeoTienePrioridadBaja(){
+        for(Requirement req : requirements){
+            Assert.assertEquals(req.getPriority(),RequirementPriority.LOW);
+        }
+    }
+
+    @When("veo los requisitos de prioridad indefinida")
+    public void veoLosRequisitosDePrioridadIndefinida(){
+        requirements = myProject.getRequirementsByPriority(RequirementPriority.UNDEFINED);
+    }
+
+    @Then("todos los requisitos que veo tienen prioridad indefinida")
+    public void todosLosRequisitosQueVeoTienePrioridadIndefinida(){
+        for(Requirement req : requirements){
+            Assert.assertEquals(req.getPriority(),RequirementPriority.UNDEFINED);
+        }
     }
 }

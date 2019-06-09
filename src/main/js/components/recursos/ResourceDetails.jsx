@@ -20,8 +20,7 @@ class ResourceDetails extends React.Component {
 
     return (
       <main className={classes.main}>
-        <ResourceTabs />
-        
+        <ResourceTabs cuit={cuit} />
       </main>
     )
   }

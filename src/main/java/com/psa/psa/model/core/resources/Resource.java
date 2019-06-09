@@ -11,6 +11,12 @@ public class Resource {
     private Duration weeklyHoursLimit;
     private Roles availableRoles;
 
+    public Resource(){}
+    public Resource(String name, Long cuit){
+        this.name = name;
+        this.cuit = cuit;
+    }
+
     public Long getCuit() {
         return cuit;
     }

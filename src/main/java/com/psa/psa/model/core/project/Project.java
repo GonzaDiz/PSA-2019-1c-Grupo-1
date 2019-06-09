@@ -1,8 +1,14 @@
 package com.psa.psa.model.core.project;
 
+import com.psa.psa.model.core.resources.Resource;
 import com.psa.psa.model.core.risk.Risk;
+import com.psa.psa.model.core.risk.RiskManager;
+import com.psa.psa.model.core.task.Task;
+import com.psa.psa.model.core.task.TaskManager;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.HashMap;
 
 public class Project {
 
@@ -13,6 +19,10 @@ public class Project {
     private ProjectState projectState;
     private String projectType;
 
+    private TaskManager tasks;
+    private RiskManager risks;
+    private RequirementManager requirements;
+    private HashMap<Long,Resource> resources;
 
 
     public Project(String name) {
@@ -22,10 +32,43 @@ public class Project {
         this.startDate = LocalDateTime.now();
         this.projectType = "Desarrollo";
         this.projectState = ProjectState.INITIAL;
+        this.tasks = new TaskManager();
+        this.risks = new RiskManager();
+        this.requirements = new RequirementManager();
+    }
+
+    public Task addTask(String title){
+        Task newTask = tasks.addTask(title);
+        return newTask;
+    }
+
+    public Risk addRisk(String description, Double probability, Double impact){
+        return risks.addRisk(description,probability,impact);
     }
 
     public String getName() {
         return name;
+    }
+
+    public Requirement addRequirement(String name, String description, RequirementPriority priority){
+       return requirements.addRequirement(name,description,priority);
+    }
+
+    public Requirement addRequirement(String name, String description){
+        return requirements.addRequirement(name,description, null);
+
+    }
+
+    public Requirement getRequirementByName(String name){
+        return requirements.getByName(name);
+    }
+
+    public Requirement getRequirementById(Integer id){
+        return requirements.getById(id);
+    }
+
+    public Collection<Requirement> getRequirementsByPriority(RequirementPriority priority){
+       return requirements.getByPriority(priority);
     }
 
     public Integer getId(){
@@ -50,6 +93,13 @@ public class Project {
 
     public void setProjectState(ProjectState projectState) {
         this.projectState = projectState;
+    }
+
+    public void assignTask(Task task, Resource resource){
+        if (!resources.containsKey(resource.getCuit())){
+            return;
+        }
+        task.assign(resource.getName());
     }
 
 }
