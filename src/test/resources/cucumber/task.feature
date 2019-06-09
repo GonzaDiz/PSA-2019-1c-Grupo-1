@@ -39,7 +39,7 @@ Scenario: no puedo asignar multiples recursos
 Scenario: desasignar una tarea
 	Given: tengo una tarea asignada
 	When: desasigno la tarea y veo si esta asignada
-	Then: la tarea no esta desasignada
+	Then: la tarea no esta asignada
 	
 Scenario Outline: creo tarea con un nombre
 	Given: he creado una tarea con un titulo "<titulo>"
@@ -63,8 +63,11 @@ Scenario Outline: dar descripcion a una tarea
 		|  una descripcion  |
 		|      A        |
 		
-	
-	
-	
+Scenario: asignar recurso que no pertenece al proyecto
+	Given: tengo un proyecto con una tarea y un recurso que no pertenece al proyecto
+	When: intento asignar a la tarea el recurso que no pertenece al proyecto
+	Then: la tarea no esta asignada
+
+
 	
 	

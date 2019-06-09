@@ -1,5 +1,6 @@
 package com.psa.psa.model.core.project;
 
+import com.psa.psa.model.core.resources.Resource;
 import com.psa.psa.model.core.risk.Risk;
 import com.psa.psa.model.core.risk.RiskManager;
 import com.psa.psa.model.core.task.Task;
@@ -21,6 +22,8 @@ public class Project {
     private TaskManager tasks;
     private RiskManager risks;
     private RequirementManager requirements;
+    private HashMap<Long,Resource> resources;
+
 
     public Project(String name) {
         this.id = nextId;
@@ -90,6 +93,13 @@ public class Project {
 
     public void setProjectState(ProjectState projectState) {
         this.projectState = projectState;
+    }
+
+    public void assignTask(Task task, Resource resource){
+        if (!resources.containsKey(resource.getCuit())){
+            return;
+        }
+        task.assign(resource.getName());
     }
 
 }
