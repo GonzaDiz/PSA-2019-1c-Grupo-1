@@ -4,20 +4,25 @@ import com.psa.psa.model.core.project.Requirement;
 
 public class Requirement{
 
-    String name;
-    String description;
-    RequirementPriority priority;
+    private String name;
+    private String description;
+    private RequirementPriority priority;
+    private Integer id;
 
-    public Requirement(String aName, String aDescription){
+
+    public Requirement(Integer id, String aName, String aDescription, RequirementPriority aPriority){
         this.name = aName;
         this.description = aDescription;
-        this.priority = RequirementPriority.UNDEFINED;
+        if (aPriority != null){
+            this.priority = aPriority;
+        } else {
+            this.priority = RequirementPriority.UNDEFINED;
+        }
+        this.id = id;
     }
 
-    public Requirement(String aName, String aDescription, RequirementPriority aPriority){
-        this.name = aName;
-        this.description = aDescription;
-        this.priority = aPriority;
+    public Integer getId(){
+        return this.id;
     }
 
     public String getName(){

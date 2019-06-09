@@ -6,6 +6,7 @@ import com.psa.psa.model.core.task.Task;
 import com.psa.psa.model.core.task.TaskManager;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.HashMap;
 
 public class Project {
@@ -19,6 +20,7 @@ public class Project {
 
     private TaskManager tasks;
     private RiskManager risks;
+    private RequirementManager requirements;
 
     public Project(String name) {
         this.id = nextId;
@@ -29,6 +31,7 @@ public class Project {
         this.projectState = ProjectState.INITIAL;
         this.tasks = new TaskManager();
         this.risks = new RiskManager();
+        this.requirements = new RequirementManager();
     }
 
     public Task addTask(String title){
@@ -44,7 +47,26 @@ public class Project {
         return name;
     }
 
+    public Requirement addRequirement(String name, String description, RequirementPriority priority){
+       return requirements.addRequirement(name,description,priority);
+    }
 
+    public Requirement addRequirement(String name, String description){
+        return requirements.addRequirement(name,description, null);
+
+    }
+
+    public Requirement getRequirementByName(String name){
+        return requirements.getByName(name);
+    }
+
+    public Requirement getRequirementById(Integer id){
+        return requirements.getById(id);
+    }
+
+    public Collection<Requirement> getRequirementsByPriority(RequirementPriority priority){
+       return requirements.getByPriority(priority);
+    }
 
     public Integer getId(){
         return this.id;

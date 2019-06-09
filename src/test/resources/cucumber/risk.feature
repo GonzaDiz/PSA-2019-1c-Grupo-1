@@ -1,7 +1,7 @@
 # new feature
 # Tags: optional
 
-Feature: Creación de un riesgo (RIE2)
+Feature: risk
 
   Scenario Outline: Crear riesgo y definir sus campos
     Given tengo un proyecto creado
@@ -27,7 +27,7 @@ Feature: Creación de un riesgo (RIE2)
 
       Examples:
                   | invalida |
-                  | 0        |
+                  | 0.0        |
                   | 1.0        |
                   | -0.0001  |
                   |1.000001  |
@@ -43,7 +43,7 @@ Feature: Creación de un riesgo (RIE2)
 
       Examples:
       | invalido |
-      | 0        |
+      | 0.0        |
       | 1.0        |
       | -0.0001  |
       |1.000001  |
