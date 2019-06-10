@@ -1,4 +1,4 @@
-package com.psa.psa.model.core.resources;
+package com.psa.psa.model.resources;
 
 public enum Seniority {
     TRAINEE,

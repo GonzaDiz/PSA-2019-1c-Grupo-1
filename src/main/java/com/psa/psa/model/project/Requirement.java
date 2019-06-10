@@ -1,6 +1,4 @@
-package com.psa.psa.model.core.project;
-
-import com.psa.psa.model.core.project.Requirement;
+package com.psa.psa.model.project;
 
 public class Requirement{
 

@@ -1,6 +1,6 @@
-package com.psa.psa.model.core.task.ticket;
+package com.psa.psa.model.task.ticket;
 
-import com.psa.psa.model.core.resources.Resource;
+import com.psa.psa.model.resources.Resource;
 
 import java.time.LocalDateTime;
 

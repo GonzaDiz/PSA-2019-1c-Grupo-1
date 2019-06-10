@@ -1,9 +1,8 @@
 package com.psa.psa.dao.project;
 
-import com.psa.psa.model.core.project.Project;
+import com.psa.psa.model.project.Project;
 import org.springframework.stereotype.Repository;
 
-import javax.print.DocFlavor;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;

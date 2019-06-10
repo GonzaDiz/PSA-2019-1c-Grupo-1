@@ -1,4 +1,4 @@
-package com.psa.psa.model.core.risk;
+package com.psa.psa.model.risk;
 
 import java.util.HashMap;
 

@@ -1,20 +1,28 @@
-package com.psa.psa.model.core.resources;
-
-import java.time.Duration;
+package com.psa.psa.model.resources;
 
 public class Resource {
 
+    private Long id;
     private Long cuit;
     private String name;
     private Long salary;
     private Seniority seniority;
-    private Duration weeklyHoursLimit;
-    private Roles availableRoles;
+    private Integer limWeekHours;
+    private Integer workload;
+    private Roles roles;
 
     public Resource(){}
     public Resource(String name, Long cuit){
         this.name = name;
         this.cuit = cuit;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Long getCuit() {
@@ -49,19 +57,27 @@ public class Resource {
         this.seniority = seniority;
     }
 
-    public Duration getWeeklyHoursLimit() {
-        return weeklyHoursLimit;
+    public Integer getLimWeekHours() {
+        return limWeekHours;
     }
 
-    public void setWeeklyHoursLimit(Duration weeklyHoursLimit) {
-        this.weeklyHoursLimit = weeklyHoursLimit;
+    public void setLimWeekHours(Integer limWeekHours) {
+        this.limWeekHours = limWeekHours;
     }
 
-    public Roles getAvailableRoles() {
-        return availableRoles;
+    public Integer getWorkload() {
+        return workload;
     }
 
-    public void setAvailableRoles(Roles availableRoles) {
-        this.availableRoles = availableRoles;
+    public void setWorkload(Integer workload) {
+        this.workload = workload;
+    }
+
+    public Roles getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Roles roles) {
+        this.roles = roles;
     }
 }

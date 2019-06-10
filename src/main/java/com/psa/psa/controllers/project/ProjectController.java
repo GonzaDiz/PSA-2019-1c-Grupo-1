@@ -1,7 +1,7 @@
 package com.psa.psa.controllers.project;
 
 
-import com.psa.psa.model.core.project.Project;
+import com.psa.psa.model.project.Project;
 import com.psa.psa.service.project.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;

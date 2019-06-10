@@ -1,8 +1,8 @@
 package cucumber;
 
-import com.psa.psa.model.core.project.Project;
-import com.psa.psa.model.core.project.Requirement;
-import com.psa.psa.model.core.project.RequirementPriority;
+import com.psa.psa.model.project.Project;
+import com.psa.psa.model.project.Requirement;
+import com.psa.psa.model.project.RequirementPriority;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;

@@ -1,10 +1,8 @@
-package com.psa.psa.model.core.project;
+package com.psa.psa.model.project;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 
 public class RequirementManager {
 

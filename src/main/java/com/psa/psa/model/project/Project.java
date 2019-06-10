@@ -1,10 +1,10 @@
-package com.psa.psa.model.core.project;
+package com.psa.psa.model.project;
 
-import com.psa.psa.model.core.resources.Resource;
-import com.psa.psa.model.core.risk.Risk;
-import com.psa.psa.model.core.risk.RiskManager;
-import com.psa.psa.model.core.task.Task;
-import com.psa.psa.model.core.task.TaskManager;
+import com.psa.psa.model.resources.Resource;
+import com.psa.psa.model.risk.Risk;
+import com.psa.psa.model.risk.RiskManager;
+import com.psa.psa.model.task.Task;
+import com.psa.psa.model.task.TaskManager;
 
 import java.time.LocalDateTime;
 import java.util.Collection;

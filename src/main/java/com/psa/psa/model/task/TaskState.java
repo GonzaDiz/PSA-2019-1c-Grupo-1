@@ -1,4 +1,4 @@
-package com.psa.psa.model.core.task;
+package com.psa.psa.model.task;
 
 public enum TaskState {
     IN_PROGRESS,

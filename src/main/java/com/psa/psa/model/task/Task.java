@@ -1,4 +1,4 @@
-package com.psa.psa.model.core.task;
+package com.psa.psa.model.task;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
