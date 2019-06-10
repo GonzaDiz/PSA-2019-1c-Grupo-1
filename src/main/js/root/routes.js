@@ -4,6 +4,7 @@ import ResourcesPage from '../components/recursos/ResourcesPage';
 import ResourceDetails from '../components/recursos/ResourceDetails';
 import {ProjectsBriefCase} from "../components/project/ProjectsBriefCase";
 import ResourceTaskLoads from '../components/recursos/ResourceTaskLoads';
+import {ClientsView} from '../components/clients/ClientsView';
 
 const Routes = ({ loading }) => {
   if (loading) return null;
@@ -16,6 +17,7 @@ const Routes = ({ loading }) => {
       <Route exact path='/recursos' component={() => <ResourcesPage />} />
       <Route exact path='/recursos/:cuit' component={() => <ResourceDetails />} />
       <Route exact path='/recursos/:cuit/tareas/:taskId' component={() => <ResourceTaskLoads />} />
+      <Route exact path='/clientes' component={() => <ClientsView />} />
       <Route exact path='/ventas_y_finanzas' component={() => <h1>Ventas y Finanzas</h1>} />
       <Redirect to="/" />
     </Switch>

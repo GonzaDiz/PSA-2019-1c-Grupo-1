@@ -105,6 +105,7 @@ class AppMenu extends React.Component {
     if (pathname.indexOf('/productos') !== -1) return 'productos';
     if (pathname.indexOf('/soporte') !== -1) return 'soporte';
     if (pathname.indexOf('/recursos') !== -1) return 'recursos';
+    if (pathname.indexOf('/clientes') !== -1) return 'clientes';
     if (pathname.indexOf('/ventas_y_finanzas') !== -1) return 'ventas_y_finanzas';
   }
 

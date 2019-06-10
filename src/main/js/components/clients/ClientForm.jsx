@@ -10,16 +10,6 @@ import {IncidentManagement} from "../support/incidents/IncidentManagement";
 import {ProjectsBriefCase} from "../project/ProjectsBriefCase";
 import {ClientsView} from "./ClientsView";
 
-class ProdForClient {
-	constructor(id, client, product, version) {
-	    this.data={clientId:"D007",clientName:"Disney",prodName:"ERP",prodVersion:"v1.0"};
-		this.clientId = id;
-		this.clientName = client;
-		this.prodName = product;
-		this.prodVersion = version;
-	}
-}
-
 export class ClientForm extends React.Component {
 
     constructor(props) {
@@ -33,7 +23,10 @@ export class ClientForm extends React.Component {
 
     handleSubmitForm = () => {
         const id = this.getClientID(this.state.clientName)
-		this.props.onSave({clientId: id, clientName:this.state.clientName,prodName:this.state.prodName,prodVersion:this.state.prodVersion})
+		this.props.onSave({clientId: id,
+            clientName:this.state.clientName,
+            prodName:this.state.prodName,
+            prodVersion:this.state.prodVersion})
 		this.props.onHide()
 	}
     

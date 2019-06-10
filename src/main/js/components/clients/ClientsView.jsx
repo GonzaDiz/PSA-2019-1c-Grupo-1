@@ -99,8 +99,7 @@ export class ClientsView extends React.Component{
             <Button variant="primary" type="submit" onClick={this.handleShowForm}>
                 Agregar Producto a Cliente
             </Button>
-            <ClientForm show={this.state.showClientForm} onHide={this.handleCloseForm}
-                        onSave={this.addPFC}></ClientForm>
+                <ClientForm show={this.state.showClientForm} onHide={this.handleCloseForm}  onSave={this.addPFC}></ClientForm>
         </div>
     }
 
