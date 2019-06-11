@@ -1,6 +1,7 @@
 package com.psa.psa.controllers.resources;
 
 import com.psa.psa.controllers.api.CreateResourceRequest;
+import com.psa.psa.model.resources.Resource;
 import com.psa.psa.service.resources.ResourcesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,8 +23,10 @@ public class ResourcesController {
 
     @RequestMapping(value = "/resources/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity getById(@PathVariable Long id) {
-        return new ResponseEntity(HttpStatus.OK);
+    public Resource getById(@PathVariable Long id) {
+        Resource resource = new Resource();
+        resource.setName("Hola gabi");
+        return resource;
     }
 
     @RequestMapping(value = "/resources", method = RequestMethod.GET)
