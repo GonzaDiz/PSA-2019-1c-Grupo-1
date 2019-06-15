@@ -3,9 +3,7 @@ package com.psa.psa.dao.resources;
 import com.psa.psa.model.resources.Resource;
 import org.springframework.stereotype.Repository;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Repository
 public class ResourcesDAO {
@@ -18,5 +16,9 @@ public class ResourcesDAO {
 
     public Optional<Resource> getById(Long id) {
         return Optional.ofNullable(this.resources.get(id));
+    }
+
+    public Collection<Resource> getAll() {
+        return this.resources.values();
     }
 }

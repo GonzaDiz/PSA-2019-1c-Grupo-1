@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
+
 @Controller
 public class ResourcesController {
 
@@ -31,7 +33,7 @@ public class ResourcesController {
 
     @RequestMapping(value = "/resources", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity getAllResources() {
-        return new ResponseEntity(HttpStatus.OK);
+    public Collection<Resource> getAllResources() {
+        return this.resourcesService.getAllResources();
     }
 }

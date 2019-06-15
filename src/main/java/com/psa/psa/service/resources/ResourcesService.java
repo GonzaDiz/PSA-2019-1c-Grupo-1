@@ -8,6 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 
+import java.util.Collection;
+import java.util.List;
+
 @Service
 public class ResourcesService {
 
@@ -22,4 +25,7 @@ public class ResourcesService {
         return this.resourcesDAO.getById(id).orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND));
     }
 
+    public Collection<Resource> getAllResources() {
+        return this.resourcesDAO.getAll();
+    }
 }
