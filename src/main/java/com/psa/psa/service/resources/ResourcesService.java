@@ -21,8 +21,8 @@ public class ResourcesService {
 
     }
 
-    public Resource getResourceById(Integer id) {
-        return this.resourcesDAO.getById(id).orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND));
+    public Resource getResourceByCuit(Long cuit) {
+        return this.resourcesDAO.getByCuit(cuit).orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND));
     }
 
     public void createNewResource(String name, Long cuit) {
