@@ -9,5 +9,6 @@ public enum Roles {
     SOFTWARE_ARCHITECT,
     DATA_SCIENTIST,
     PRODUCT_OWNER,
-    PRODUCT_LEADER
+    PRODUCT_LEADER,
+    TBD
 }

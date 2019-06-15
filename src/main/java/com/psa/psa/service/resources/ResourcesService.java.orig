@@ -25,11 +25,14 @@ public class ResourcesService {
         return this.resourcesDAO.getById(id).orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND));
     }
 
+<<<<<<< HEAD
+    public Collection<Resource> getAllResources() {
+        return this.resourcesDAO.getAll();
+    }
+=======
     public void createNewResource(String name, Long cuit) {
         this.resourcesDAO.createNewResource(name, cuit);
     }
 
-    public Collection<Resource> getAllResources() {
-        return this.resourcesDAO.getAll();
-    }
+>>>>>>> a519d7302a6f93e86489bf5a0fda5fb1b5d1f0b1
 }
