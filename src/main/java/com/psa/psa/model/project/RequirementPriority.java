@@ -1,4 +1,4 @@
-package com.psa.psa.model.core.project;
+package com.psa.psa.model.project;
 
 public enum RequirementPriority {
 	HIGH,

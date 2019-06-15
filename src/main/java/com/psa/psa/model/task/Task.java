@@ -1,11 +1,11 @@
-package com.psa.psa.model.core.task;
+package com.psa.psa.model.task;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
 
 public class Task {
 
-    private Long id;
+    private Integer id;
     private String name;
     private String title;
     private String description;
@@ -18,8 +18,9 @@ public class Task {
     
     
     
-    public Task(String name) {
-    		this.name = name;
+    public Task(Integer id, String name) {
+    	this.id = id;
+        this.name = name;
     }
     
     public Task() {
