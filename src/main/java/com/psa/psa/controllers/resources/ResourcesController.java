@@ -39,10 +39,10 @@ public class ResourcesController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/resources/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/resources/{cuit}", method = RequestMethod.GET)
     @ResponseBody
-    public Resource getById(@PathVariable Integer id) {
-        return resourcesService.getResourceById(id);
+    public Resource getByCuit(@PathVariable Long cuit) {
+        return resourcesService.getResourceByCuit(cuit);
     }
 
     @RequestMapping(value = "/resources", method = RequestMethod.GET)
