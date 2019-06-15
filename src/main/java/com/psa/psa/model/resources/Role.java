@@ -8,11 +8,13 @@ public enum Role {
     QA("QA"),
     AUTOMATION("Automatización"),
     CONSULTANT("Consultor"),
-    PROJECT_LEADER("Lider de proyecto"),
-    SOFTWARE_ARCHITECT("Arquitecto de Software"),
+    PROJECT_LEADER("Líder de proyecto"),
+    SOFTWARE_ARCHITECT("Arquitecto de software"),
     DATA_SCIENTIST("Data scientist"),
     PRODUCT_OWNER("Product owner"),
-    PRODUCT_LEADER("Lider de producto"),
+    FUNCTIONAL_ANALYST("Analista funcional"),
+    PRODUCT_LEADER("Líder de producto"),
+    DEVOPS("Devops"),
     TBD("A determinar");
 
     private String description;
