@@ -32,4 +32,8 @@ public class ProjectDao {
         idByName.put(newProject.getName(),newProject.getId());
         return newProject;
     }
+
+    public Project getProjectById(Integer projectId){
+        return projects.get(projectId);
+    }
 }

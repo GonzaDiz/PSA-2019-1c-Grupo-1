@@ -102,4 +102,8 @@ public class Project {
         task.assign(resource.getName());
     }
 
+    public Collection<Task> getAllTasks(){
+        return tasks.getAllTasks();
+    }
+
 }
