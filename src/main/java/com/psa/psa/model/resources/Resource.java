@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Resource {
 
+    private Integer id;
     private Long cuit;
     private String name;
     private Integer salary;
@@ -24,6 +25,14 @@ public class Resource {
         List<Role> roles = new ArrayList<>();
         roles.add(Role.TBD);
         this.roles = roles;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Long getCuit() {
@@ -80,11 +89,5 @@ public class Resource {
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
-    }
-
-    public void printDebug() {
-        System.out.println("Nombre: " + this.name + "\n" + "CUIT: " + this.cuit + "\n" + "Salario: " + this.salary + "\n" +
-                            "Seniority: " + this.seniority + "\n" + "Horas Semanales: " + this.limWeekHours + "\n" +
-                            "Carga Semanal: " + this.workload + "\n" + "Roles: " +  this.roles);
     }
 }

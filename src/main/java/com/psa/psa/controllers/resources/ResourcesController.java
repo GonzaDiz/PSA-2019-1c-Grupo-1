@@ -1,5 +1,6 @@
 package com.psa.psa.controllers.resources;
 
+import com.psa.psa.controllers.api.AssignResourceRequest;
 import com.psa.psa.controllers.api.CreateResourceRequest;
 import com.psa.psa.dao.resources.ResourcesDAO;
 import com.psa.psa.model.resources.Resource;
@@ -53,5 +54,11 @@ public class ResourcesController {
     @ResponseBody
     public Collection<Resource> getAllResources() {
         return this.resourcesService.getAllResources();
+    }
+
+    @RequestMapping(value = "/resources/assign", method = RequestMethod.POST)
+    @ResponseBody
+    public void assignResource(@RequestBody AssignResourceRequest request) {
+        return;
     }
 }

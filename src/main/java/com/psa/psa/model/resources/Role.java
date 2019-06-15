@@ -31,6 +31,6 @@ public enum Role {
         return Arrays.stream(Role.values())
                 .filter(role -> role.getDescription().equals(description))
                 .findFirst()
-                .orElseThrow(() -> new ValidationException("No roles matching description" + description));
+                .orElseThrow(() -> new ValidationException("No roles matching description " + description));
     }
 }
