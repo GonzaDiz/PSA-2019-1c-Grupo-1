@@ -6,6 +6,7 @@ import java.util.Arrays;
 public enum Seniority {
     TRAINEE("Trainee"),
     JUNIOR("Junior"),
+    JUNIOR_ADVANCE("Junior advance"),
     SEMI_SENIOR("Semi-Senior"),
     SENIOR("Senior"),
     TBD("A determinar");
