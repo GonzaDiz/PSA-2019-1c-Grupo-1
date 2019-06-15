@@ -10,13 +10,21 @@ import java.util.Optional;
 @Repository
 public class ResourcesDAO {
 
-    private Map<Long, Resource> resources = new HashMap();
+    private Map<Integer, Resource> resources = new HashMap();
 
     public void save(Resource resource) {
         this.resources.put(resource.getId(), resource);
     }
 
-    public Optional<Resource> getById(Long id) {
+    public Optional<Resource> getById(Integer id) {
         return Optional.ofNullable(this.resources.get(id));
+    }
+
+    public Resource createNewResource(String name, Long cuit){
+        Resource newResource = new Resource(name, cuit);
+        newResource.setId(resources.size());
+        resources.put(newResource.getId(), newResource);
+
+        return newResource;
     }
 }

@@ -2,10 +2,10 @@ package com.psa.psa.model.resources;
 
 public class Resource {
 
-    private Long id;
+    private Integer id;
     private Long cuit;
     private String name;
-    private Long salary;
+    private Integer salary;
     private Seniority seniority;
     private Integer limWeekHours;
     private Integer workload;
@@ -15,13 +15,18 @@ public class Resource {
     public Resource(String name, Long cuit){
         this.name = name;
         this.cuit = cuit;
+        this.salary = 0;
+        this.seniority = Seniority.TBD;
+        this.limWeekHours = 40;
+        this.workload = 0;
+        this.roles = Roles.TBD;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -41,11 +46,11 @@ public class Resource {
         this.name = name;
     }
 
-    public Long getSalary() {
+    public Integer getSalary() {
         return salary;
     }
 
-    public void setSalary(Long salary) {
+    public void setSalary(Integer salary) {
         this.salary = salary;
     }
 

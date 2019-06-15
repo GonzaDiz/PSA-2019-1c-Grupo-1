@@ -18,8 +18,12 @@ public class ResourcesService {
 
     }
 
-    public Resource getResourceById(Long id) {
+    public Resource getResourceById(Integer id) {
         return this.resourcesDAO.getById(id).orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND));
+    }
+
+    public void createNewResource(String name, Long cuit) {
+        this.resourcesDAO.createNewResource(name, cuit);
     }
 
 }
