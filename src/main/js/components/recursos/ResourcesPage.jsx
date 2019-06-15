@@ -4,6 +4,7 @@ import AppContext from '../../root/AppContext';
 import { Typography, withStyles, InputBase, Paper, IconButton, Button } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import AddIcon from '@material-ui/icons/Add';
+import ResourceNewModal from './ResourceNewModal';
 
 const styles = theme => ({
   main: {
@@ -37,7 +38,19 @@ const styles = theme => ({
 })
 
 class ResourcesPage extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      openModal: false,
+
+    }
+  }
   static contextType = AppContext;
+
+  handleCreateResource = (resource) => {
+    console.log('[handleCreateResource]', resource)
+  }
 
   render = () => {
     const { classes } = this.props;
@@ -57,7 +70,7 @@ class ResourcesPage extends React.Component {
           </Paper>
           <Button
             variant="contained"
-            onClick={() => {}}
+            onClick={() => this.setState({ openModal: true })}
             color="primary"
           >
             <AddIcon className={classes.buttonIcon} />
@@ -65,6 +78,11 @@ class ResourcesPage extends React.Component {
           </Button>
         </div>
         <ResourcesTable />
+        <ResourceNewModal
+          open={this.state.openModal}
+          onClose={() => this.setState({ openModal: false })}
+          onCreate={this.handleCreateResource}
+        />
       </main>
     )
   }
