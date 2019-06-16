@@ -27,7 +27,7 @@ public class ResourcesController {
     @ResponseBody
     public ResponseEntity createNewResource(@RequestBody CreateResourceRequest request) {
         if (request.getName().isEmpty() || request.getCuit() == 0) {
-            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Nombre y CUIT son campos obligatorios", HttpStatus.BAD_REQUEST);
         }
 
         List<Role> roles = new ArrayList<Role>();
@@ -41,7 +41,34 @@ public class ResourcesController {
 
         this.resourcesService.createNewResource(request.getName(), request.getCuit(), request.getSalary(), seniority,
                                                 request.getLimWeekHours(), request.getWorkload(), roles);
-        return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity<>("Usuario creado", HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/resources/{cuit}", method = RequestMethod.PUT)
+    @ResponseBody
+    public ResponseEntity modifyResource(@RequestBody CreateResourceRequest request, @PathVariable Long cuit) {
+        try {
+            resourcesService.getResourceByCuit(cuit);
+        } catch (HttpClientErrorException e) {
+            return new ResponseEntity<>("CUIT inexistente", HttpStatus.NOT_FOUND);
+        }
+
+        if (request.getName().isEmpty()) {
+            return new ResponseEntity<>("Nombre es campo obligatorio", HttpStatus.BAD_REQUEST);
+        }
+
+        List<Role> roles = new ArrayList<Role>();
+
+        Seniority seniority = Seniority.fromDescription(request.getSeniority());
+
+        Iterator iterator = request.getRoles().iterator();
+        while(iterator.hasNext()) {
+            roles.add(Role.fromDescription(iterator.next().toString()));
+        }
+
+        this.resourcesService.updateResource(request.getName(), cuit, request.getSalary(), seniority,
+                request.getLimWeekHours(), request.getWorkload(), roles);
+        return new ResponseEntity<>("Usuario modificado", HttpStatus.OK);
     }
 
     @RequestMapping(value = "/resources/{cuit}", method = RequestMethod.GET)

@@ -36,4 +36,16 @@ public class ResourcesDAO {
 
         return newResource;
     }
+
+    public Resource updateResource(String name, Long cuit, Integer salary, Seniority seniority, Integer limweekhours,
+                                      Integer workload, List<Role> roles) {
+        resources.get(cuit).setName(name);
+        resources.get(cuit).setSalary(salary);
+        resources.get(cuit).setSeniority(seniority);
+        resources.get(cuit).setLimWeekHours(limweekhours);
+        resources.get(cuit).setWorkload(workload);
+        resources.get(cuit).setRoles(roles);
+
+        return resources.get(cuit);
+    }
 }

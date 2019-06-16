@@ -32,6 +32,11 @@ public class ResourcesService {
         this.resourcesDAO.createNewResource(name, cuit, salary, seniority, limweekhours, workload, roles);
     }
 
+    public void updateResource(String name, Long cuit, Integer salary, Seniority seniority, Integer limweekhours,
+                                  Integer workload, List<Role> roles) {
+        this.resourcesDAO.updateResource(name, cuit, salary, seniority, limweekhours, workload, roles);
+    }
+
     public Collection<Resource> getAllResources() {
         return this.resourcesDAO.getAll();
     }
