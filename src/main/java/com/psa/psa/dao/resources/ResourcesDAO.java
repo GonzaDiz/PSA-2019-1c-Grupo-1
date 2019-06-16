@@ -34,8 +34,6 @@ public class ResourcesDAO {
         newResource.setRoles(roles);
         resources.put(cuit, newResource);
 
-        newResource.printDebug();
-
         return newResource;
     }
 }

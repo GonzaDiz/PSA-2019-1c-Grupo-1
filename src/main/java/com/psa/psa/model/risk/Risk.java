@@ -7,7 +7,6 @@ public class Risk {
     private Double impact;
     private Double probability;
     private Double exposure;
-    private Integer priority;
     private RiskLevel qualitativeProbability;
     private RiskLevel qualitativeExposure;
     private RiskLevel qualitativeImpact;
@@ -84,5 +83,9 @@ public class Risk {
         this.description = description;
         this.setProbability(prob);
         this.setImpact(impact);
+    }
+
+    public boolean isUrgent(){
+        return this.urgent;
     }
 }

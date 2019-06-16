@@ -2,6 +2,7 @@ package com.psa.psa.model.project;
 
 import com.psa.psa.model.resources.Resource;
 import com.psa.psa.model.risk.Risk;
+import com.psa.psa.model.risk.RiskConfig;
 import com.psa.psa.model.risk.RiskManager;
 import com.psa.psa.model.task.Task;
 import com.psa.psa.model.task.TaskManager;
@@ -135,5 +136,16 @@ public class Project {
 
     public Collection<Risk> getAllRisks(){
         return risks.getAllRisks();
+    }
+
+    public RiskConfig getRiskConfig(){
+        return risks.getConfig();
+    }
+
+    public RiskConfig updateRiskConfig(Double lowMedium,Double mediumHigh,Double exposureLimit){
+        risks.setExposureLimit(exposureLimit);
+        risks.setLowMediumLimit(lowMedium);
+        risks.setMediumHighLimit(mediumHigh);
+        return risks.getConfig();
     }
 }

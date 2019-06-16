@@ -4,6 +4,7 @@ package com.psa.psa.controllers.project;
 import com.psa.psa.model.project.Project;
 import com.psa.psa.model.resources.Resource;
 import com.psa.psa.model.risk.Risk;
+import com.psa.psa.model.risk.RiskConfig;
 import com.psa.psa.model.task.Task;
 import com.psa.psa.service.project.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,18 +64,18 @@ public class ProjectController {
             double impact = Double.parseDouble(payload.get("impact"));
             projectService.addRisk(Integer.valueOf(id),payload.get("description"),prob,impact);
         } catch (Exception e){
-
+            return;
         }
     }
 
     @RequestMapping(value="/{id}/riesgos/{riskId}",method=RequestMethod.POST)
-    public void addRisk(@PathVariable String id,@PathVariable String riskId, @RequestBody HashMap<String,String> payload){
+    public void updateRisk(@PathVariable String id,@PathVariable String riskId, @RequestBody HashMap<String,String> payload){
         try{
             double prob = Double.parseDouble(payload.get("probability"));
             double impact = Double.parseDouble(payload.get("impact"));
             projectService.updateRisk(Integer.valueOf(id),Integer.valueOf(riskId),payload.get("description"),prob,impact);
         } catch (Exception e){
-
+            return ;
         }
     }
 
@@ -83,5 +84,21 @@ public class ProjectController {
         return projectService.getRisks(Integer.valueOf(id));
     }
 
+    @RequestMapping(value="{id}/riesgos/config",method=RequestMethod.GET)
+    public RiskConfig getRiskConfig(@PathVariable String id){
+        return projectService.getRiskConfig(Integer.valueOf(id));
+    }
+
+    @RequestMapping(value="{id}/riesgos/config",method=RequestMethod.POST)
+    public RiskConfig updateRiskConfig(@PathVariable String id,@RequestBody HashMap<String,String> payload){
+        try{
+            double lowMed = Double.parseDouble(payload.get("lowMediumLimit"));
+            double medHigh = Double.parseDouble(payload.get("mediumHighLimit"));
+            double expLim = Double.parseDouble(payload.get("exposureLimit"));
+            return projectService.updateRiskConfig(Integer.valueOf(id),lowMed,medHigh,expLim);
+        } catch (Exception e){
+            return null;
+        }
+    }
 }
 

@@ -9,7 +9,6 @@ public class Task {
 
     private Integer id;
     private String name;
-    private String title;
     private String description;
     private TaskState taskState;
     private Duration estimatedTimeToComplete;
@@ -64,7 +63,7 @@ public class Task {
     public boolean isAssigned() {
         return (assignedTo != null);
     }
-    
+
     public String getAssignedResource() {
     		return this.assignedTo;
     }
