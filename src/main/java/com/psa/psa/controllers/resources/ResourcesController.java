@@ -1,8 +1,11 @@
 package com.psa.psa.controllers.resources;
 
+import com.psa.psa.controllers.api.AssignResourceRequest;
 import com.psa.psa.controllers.api.CreateResourceRequest;
 import com.psa.psa.dao.resources.ResourcesDAO;
 import com.psa.psa.model.resources.Resource;
+import com.psa.psa.model.resources.Role;
+import com.psa.psa.model.resources.Seniority;
 import com.psa.psa.service.resources.ResourcesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,9 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
 
 import javax.validation.constraints.Null;
-import java.util.Map;
-
-import java.util.Collection;
+import java.util.*;
 
 @Controller
 public class ResourcesController {
@@ -24,20 +25,22 @@ public class ResourcesController {
 
     @RequestMapping(value = "/resources", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity createNewResource(@RequestBody Map<String,String> payload) {
-        if (payload.get("name").isEmpty() || payload.get("cuit").isEmpty()) {
+    public ResponseEntity createNewResource(@RequestBody CreateResourceRequest request) {
+        if (request.getName().isEmpty() || request.getCuit() == 0) {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
 
-        Long cuit;
+        List<Role> roles = new ArrayList<Role>();
 
-        try {
-            cuit = Long.parseLong(payload.get("cuit"));
-        } catch ( NumberFormatException e) {
-            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        Seniority seniority = Seniority.fromDescription(request.getSeniority());
+
+        Iterator iterator = request.getRoles().iterator();
+        while(iterator.hasNext()) {
+            roles.add(Role.fromDescription(iterator.next().toString()));
         }
 
-        this.resourcesService.createNewResource(payload.get("name"), cuit);
+        this.resourcesService.createNewResource(request.getName(), request.getCuit(), request.getSalary(), seniority,
+                                                request.getLimWeekHours(), request.getWorkload(), roles);
         return new ResponseEntity(HttpStatus.OK);
     }
 
@@ -51,5 +54,11 @@ public class ResourcesController {
     @ResponseBody
     public Collection<Resource> getAllResources() {
         return this.resourcesService.getAllResources();
+    }
+
+    @RequestMapping(value = "/resources/assign", method = RequestMethod.POST)
+    @ResponseBody
+    public void assignResource(@RequestBody AssignResourceRequest request) {
+        return;
     }
 }

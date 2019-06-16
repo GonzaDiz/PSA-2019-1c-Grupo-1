@@ -21,7 +21,7 @@ public enum Seniority {
         return Arrays.stream(Seniority.values())
                 .filter(seniority -> seniority.getDescription().equals(description))
                 .findFirst()
-                .orElseThrow(() -> new ValidationException("No seniority matching description" + description));
+                .orElseThrow(() -> new ValidationException("No seniority matching description " + description));
     }
 
     public String getDescription() {
