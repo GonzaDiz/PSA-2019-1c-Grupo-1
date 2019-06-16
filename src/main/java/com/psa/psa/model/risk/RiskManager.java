@@ -1,5 +1,6 @@
 package com.psa.psa.model.risk;
 
+import java.util.Collection;
 import java.util.HashMap;
 
 public class RiskManager {
@@ -60,6 +61,14 @@ public class RiskManager {
         if (risk==null){
             return null;
         }
+        this.setRiskQualitative(risk);
+        return risk;
+    }
+
+    private void setRiskQualitative(Risk risk){
+        if (risk==null){
+            return;
+        }
         if (risk.getProbability() >= mediumHighLimit){
             risk.setQualitativeProbability(RiskLevel.HIGH);
         } else if (risk.getProbability() >= lowMediumLimit){
@@ -89,7 +98,17 @@ public class RiskManager {
         } else {
             risk.setUrgent(false);
         }
-        return risk;
+    }
+
+    public Risk getById(Integer riskId){
+        return risks.get(riskId);
+    }
+
+    public Collection<Risk> getAllRisks(){
+        for(Risk r : risks.values()){
+            this.setRiskQualitative(r);
+        }
+        return risks.values();
     }
 
 }

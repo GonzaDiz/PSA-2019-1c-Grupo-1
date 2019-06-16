@@ -13,6 +13,7 @@ import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import TextField from '@material-ui/core/TextField';
 import Modal from '@material-ui/core/Modal';
+import { Link } from "react-router-dom";
 
 export class ProjectsBriefCase extends React.Component{
 
@@ -41,7 +42,9 @@ export class ProjectsBriefCase extends React.Component{
                     <TableBody>
                         {this.state.projects.map(row => (
                             <TableRow key={row.name}>
-                                <TableCell align="right">{row.id}</TableCell>
+                                <TableCell align="right" component="th" scope="row">
+                                    <Link to={`/proyectos/${row.id}`}>{row.id}</Link>
+                                </TableCell>
                                 <TableCell align="right">{row.name}</TableCell>
                                 <TableCell align="right">{row.projectType}</TableCell>
                                 <TableCell align="right">{row.projectState}</TableCell>
@@ -54,7 +57,7 @@ export class ProjectsBriefCase extends React.Component{
         );
     }
 
-    loadProjects() {
+    loadProjects = () => {
         fetch("/proyectos")
             .then(response => response.json())
             .then(projects => {
@@ -84,8 +87,11 @@ export class ProjectsBriefCase extends React.Component{
         }).then(res => res.json())
             .catch(error => console.error('Error:', error))
             .then(response => {
-                console.log('Success:', response)
+                this.loadProjects();
+                console.log('Success:', response);
+                this.render();
             });
+
 
     }
 

@@ -29,4 +29,8 @@ public class TaskManager {
     public Collection<Task> getAllTasks(){
         return taskById.values();
     }
+
+    public Task getTaskById(Integer id){
+        return taskById.get(id);
+    }
 }

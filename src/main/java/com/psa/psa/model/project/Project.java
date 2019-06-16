@@ -35,6 +35,7 @@ public class Project {
         this.tasks = new TaskManager();
         this.risks = new RiskManager();
         this.requirements = new RequirementManager();
+        this.resources = new HashMap<Long,Resource>();
     }
 
     public Task addTask(String title){
@@ -102,8 +103,37 @@ public class Project {
         task.assign(resource.getName());
     }
 
+    public boolean assignTask(Integer taskId, Long cuit){
+        if (!resources.containsKey(cuit) || tasks.getTaskById(taskId) == null){
+            return false;
+        }
+        Task task  = tasks.getTaskById(taskId);
+        Resource resource = resources.get(cuit);
+        return task.assign(resource.getName());
+    }
+
+    public void unassignTask(Integer taskId){
+        tasks.getTaskById(taskId).unassign();
+    }
+
     public Collection<Task> getAllTasks(){
         return tasks.getAllTasks();
     }
 
+    public Collection<Resource> getResources(){
+        return this.resources.values();
+    }
+
+    public Resource assignResource(Resource resource){
+        this.resources.put(resource.getCuit(),resource);
+        return resource;
+    }
+
+    public void updateRisk(Integer riskId, String description,double prob, double impact){
+        this.risks.getById(riskId).update(description,prob,impact);
+    }
+
+    public Collection<Risk> getAllRisks(){
+        return risks.getAllRisks();
+    }
 }

@@ -1,5 +1,7 @@
 package com.psa.psa.model.task;
 
+import com.psa.psa.model.resources.Resource;
+
 import java.time.Duration;
 import java.time.LocalDateTime;
 
@@ -21,12 +23,20 @@ public class Task {
     public Task(Integer id, String name) {
     	this.id = id;
         this.name = name;
+        assignedTo=null;
     }
-    
+
+    //Solo para pruebas
     public Task() {
-    		this.name = "Untitled";
+        this.id = -1;
+        this.name = "Untitled";
     }
-    
+
+    public Integer getId(){
+        return this.id;
+    }
+
+
     public String getName() {
     		return this.name;
     }
@@ -35,18 +45,24 @@ public class Task {
     		this.name = name;
     }
     
-    public void assign(String resource) {
-    		if (!this.isAssigned()) {
-    			this.assignedTo = resource;
-    		}
+    public boolean assign(String resource) {
+        if (!this.isAssigned()) {
+            this.assignedTo = resource;
+            return true;
+        }
+        return false;
     }
-    
+
+
+    public void assign(Resource resource){
+        this.assignedTo = resource.getName();
+    }
     public void unassign() {
     		this.assignedTo=null;
     }
     
     public boolean isAssigned() {
-    		return !this.assignedTo.isEmpty();
+        return (assignedTo != null);
     }
     
     public String getAssignedResource() {

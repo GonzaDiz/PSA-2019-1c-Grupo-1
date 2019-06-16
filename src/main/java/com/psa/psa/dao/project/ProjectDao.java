@@ -1,6 +1,7 @@
 package com.psa.psa.dao.project;
 
 import com.psa.psa.model.project.Project;
+import com.psa.psa.model.resources.Resource;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
@@ -15,6 +16,10 @@ public class ProjectDao {
         projects = new HashMap<Integer,Project>();
         idByName = new HashMap<String, Integer>();
         Project testProject = new Project("Proyecto de prueba");
+        testProject.assignResource(new Resource("Flavio Perez Ondarts",new Long(23000000)));
+        testProject.assignResource(new Resource("Tito Lasanta",new Long(230000111)));
+        testProject.addTask("Tarea 1");
+        testProject.addTask("Tarea 2");
         projects.put(testProject.getId(),testProject);
         idByName.put(testProject.getName(),testProject.getId());
     }
