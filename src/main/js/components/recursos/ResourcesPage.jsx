@@ -5,6 +5,8 @@ import { Typography, withStyles, InputBase, Paper, IconButton, Button } from '@m
 import SearchIcon from '@material-ui/icons/Search';
 import AddIcon from '@material-ui/icons/Add';
 import ResourceNewModal from './ResourceNewModal';
+import response from './MockResourcesTableData';
+import config from '../../config';
 
 const styles = theme => ({
   main: {
@@ -42,11 +44,34 @@ class ResourcesPage extends React.Component {
     super(props);
 
     this.state = {
+      fetching: false,
       openModal: false,
 
     }
   }
   static contextType = AppContext;
+
+  componentDidMount = () => {
+    const { showAlert } = this.context;
+    const url = config.serverUrl;
+
+    fetch(`${url}/resources`)
+    .then(response => {
+      console.log('response', response);
+
+      if (response.status === 200) {
+        return response.json();
+      } else {
+        showAlert({ variant: 'error', message: 'No se pudo obtener los recursos del servidor '});
+      }
+    })
+    .then(result => {
+      console.log('result', result)
+    })
+    .catch(err => {
+      console.error('err', err);
+    })
+  }
 
   handleCreateResource = (resource) => {
     console.log('[handleCreateResource]', resource)
@@ -77,7 +102,7 @@ class ResourcesPage extends React.Component {
             Nuevo recurso
           </Button>
         </div>
-        <ResourcesTable />
+        <ResourcesTable data={response} />
         <ResourceNewModal
           open={this.state.openModal}
           onClose={() => this.setState({ openModal: false })}

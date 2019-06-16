@@ -13,7 +13,8 @@ import {
   Radio,
   FormLabel,
   Checkbox,
-  FormGroup} from '@material-ui/core';
+  FormGroup
+} from '@material-ui/core';
 import { withRouter } from 'react-router-dom';
 import _ from 'lodash'
 
