@@ -73,4 +73,8 @@ public class Resource {
     public Long getCost() {
         return this.salary*this.HoursWorkedPerMonth;
     }
+
+    public Integer getHoursWorked() {
+        return this.HoursWorkedPerMonth;
+    }
 }

@@ -14,6 +14,23 @@ public class ReporteSteps {
     Resource resource2;
     Long CostoEsperado;
 
+    @Given("Hay Recursos trabajando")
+    public void hay_Recursos_trabajando() {
+        resource1 = new Resource("Jose", Long.valueOf(39535335));
+    }
+
+    @When("quiero facturar")
+    public void quiero_facturar() {
+        resource1.setHoursWorked(30);
+    }
+
+    @Then("devo poder ver las horas que trabajaron los recursos")
+    public void devo_poder_ver_las_horas_que_trabajaron_los_recursos() {
+        Integer hours_worked = resource1.getHoursWorked();
+        Assert.assertEquals(hours_worked, java.util.Optional.of(30));
+    }
+
+
     @Given("hay recursos trabajando en un proyecto")
     public void hay_recursos_trabajando_en_un_proyecto() {
         aProyect = new Project("Proyecto 1");
