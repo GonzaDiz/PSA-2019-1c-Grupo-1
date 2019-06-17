@@ -91,6 +91,9 @@ public class Task {
     }
 
     public TaskEstimation getCurrentEstimation(){
+        if (estimations.empty()){
+            return null;
+        }
         return estimations.peek();
     }
 
