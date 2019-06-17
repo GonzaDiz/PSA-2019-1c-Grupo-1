@@ -29,8 +29,12 @@ class Client{
         this.products = new HashMap<String, ProductVersion>();
     }
 
-    public void asign_product(ProductVersion aProduct) {
+    public boolean asign_product(ProductVersion aProduct) {
+        if (products.containsKey(aProduct.get_name())){
+            return false;
+        }
         products.put(aProduct.get_name(),aProduct);
+        return true;
     }
 
     public boolean has_product(ProductVersion aProduct) {
