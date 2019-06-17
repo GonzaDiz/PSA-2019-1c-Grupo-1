@@ -1,5 +1,8 @@
 package com.psa.psa.model.project;
 
+import com.psa.psa.model.client.Client;
+import com.psa.psa.model.product.Product;
+import com.psa.psa.model.product.Version;
 import com.psa.psa.model.resources.Resource;
 import com.psa.psa.model.risk.Risk;
 import com.psa.psa.model.risk.RiskConfig;
@@ -26,9 +29,10 @@ public class Project {
     private RequirementManager requirements;
     private HashMap<Long,Resource> resources;
     private Stack<Phase> phases;
-    private String product;
-    private String client;
+    private Version version;
+    private Client client;
 
+    // Sin version, actualmente no tenemos de donde obtener los productos
     public Project(String name) {
         this.id = nextId;
         nextId+=1;
@@ -44,7 +48,24 @@ public class Project {
         this.phases.push(new Phase("Inicial"));
     }
 
-    public Project(String name, String client, String product) {
+    public Project(String name, Version version) {
+        this.id = nextId;
+        nextId+=1;
+        this.name = name;
+        this.startDate = LocalDateTime.now();
+        this.projectType = ProjectType.DESARROLLO;
+        this.projectState = ProjectState.INICIAL;
+        this.tasks = new TaskManager();
+        this.risks = new RiskManager();
+        this.requirements = new RequirementManager();
+        this.resources = new HashMap<Long,Resource>();
+        this.phases = new Stack<Phase>();
+        this.phases.push(new Phase("Inicial"));
+        this.version = version;
+    }
+
+
+    public Project(String name, Version version, Client client) {
         this.id = nextId;
         nextId+=1;
         this.name = name;
@@ -57,7 +78,7 @@ public class Project {
         this.resources = new HashMap<Long,Resource>();
         this.phases = new Stack<Phase>();
         this.phases.push(new Phase("Inicial"));
-        this.product = product;
+        this.version = version;
         this.client = client;
     }
 

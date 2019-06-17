@@ -57,7 +57,7 @@ class CreateTaskModal extends React.Component {
 
 
     handleChange = (event) => {
-        this.setState({ taskTitle: event.target.value });
+        this.setState({taskTitle: event.target.value});
     }
 
     render = () => {
