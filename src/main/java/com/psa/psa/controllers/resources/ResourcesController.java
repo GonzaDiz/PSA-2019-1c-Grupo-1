@@ -14,6 +14,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
 
+import javax.validation.Validation;
+import javax.validation.ValidationException;
 import javax.validation.constraints.Null;
 import java.util.*;
 
@@ -85,7 +87,12 @@ public class ResourcesController {
 
     @RequestMapping(value = "/resources/assign", method = RequestMethod.POST)
     @ResponseBody
-    public void assignResource(@RequestBody AssignResourceRequest request) {
-        return;
+    public ResponseEntity assignResource(@RequestBody AssignResourceRequest request) {
+        try {
+            this.resourcesService.assignResource(request);
+            return new ResponseEntity("Asignación realizada correctamente", HttpStatus.OK);
+        } catch (ValidationException e) {
+            return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
     }
 }

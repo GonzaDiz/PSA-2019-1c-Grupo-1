@@ -4,7 +4,7 @@ import com.psa.psa.model.project.Project;
 
 import java.time.LocalDateTime;
 
-public class Asignation {
+public class Assignation {
 
     private Project project;
     private Role role;

@@ -4,13 +4,13 @@ import java.util.List;
 
 public class ResourceHistory {
 
-    private List<Asignation> asignations;
+    private List<Assignation> assignations;
 
-    public List<Asignation> getAsignations() {
-        return asignations;
+    public List<Assignation> getAssignations() {
+        return assignations;
     }
 
-    public void setAsignations(List<Asignation> asignations) {
-        this.asignations = asignations;
+    public void setAssignations(List<Assignation> assignations) {
+        this.assignations = assignations;
     }
 }
