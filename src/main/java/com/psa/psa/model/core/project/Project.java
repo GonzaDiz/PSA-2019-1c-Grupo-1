@@ -102,4 +102,15 @@ public class Project {
         task.assign(resource.getName());
     }
 
+    public void assignResource(Resource resource) {
+        resources.put(resource.getCuit(),resource);
+    }
+
+    public Long getCost() {
+        Long cost = Long.valueOf(0);
+        for (Resource resource: resources.values()) {
+            cost += resource.getCost();
+        }
+        return cost;
+    }
 }

@@ -10,6 +10,7 @@ public class Resource {
     private Seniority seniority;
     private Duration weeklyHoursLimit;
     private Roles availableRoles;
+    private Integer HoursWorkedPerMonth;
 
     public Resource(){}
     public Resource(String name, Long cuit){
@@ -63,5 +64,13 @@ public class Resource {
 
     public void setAvailableRoles(Roles availableRoles) {
         this.availableRoles = availableRoles;
+    }
+
+    public void setHoursWorked(int hours) {
+        HoursWorkedPerMonth = hours;
+    }
+
+    public Long getCost() {
+        return this.salary*this.HoursWorkedPerMonth;
     }
 }
