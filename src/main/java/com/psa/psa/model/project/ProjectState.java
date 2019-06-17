@@ -1,9 +1,10 @@
 package com.psa.psa.model.project;
 
 public enum ProjectState {
-    INITIAL,
-    IN_PROGRESS,
-    PAUSED,
-    CANCELLED,
-    FINALIZED
+    INICIAL,
+    EN_DESARROLLO,
+    PAUSADO,
+    CANCELADO,
+    EN_MANTENIMIENTO,
+    FINALIZADO
 }

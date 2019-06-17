@@ -1,5 +1,7 @@
 package com.psa.psa.model.project;
 
+import org.springframework.web.bind.annotation.RequestMapping;
+
 public class Requirement{
 
     private String name;
@@ -17,6 +19,13 @@ public class Requirement{
             this.priority = RequirementPriority.UNDEFINED;
         }
         this.id = id;
+    }
+
+    public Requirement(Integer id, String aName){
+        this.name = aName;
+        this.id = id;
+        this.description = null;
+        this.priority = RequirementPriority.UNDEFINED;
     }
 
     public Integer getId(){

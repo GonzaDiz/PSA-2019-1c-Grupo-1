@@ -27,7 +27,7 @@ public class ProjectSteps {
 
     @Then("el estado del proyecto es inicial")
     public void elEstadoDelProyectoEsInicial(){
-        Assert.assertEquals(aState, ProjectState.INITIAL);
+        Assert.assertEquals(aState, ProjectState.INICIAL);
     }
 
     @Given("he creado un proyecto con un nombre")

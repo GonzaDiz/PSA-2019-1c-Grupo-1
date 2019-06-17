@@ -19,28 +19,46 @@ public class Project {
     private String name;
     private LocalDateTime startDate;
     private ProjectState projectState;
-    private String projectType;
+    private ProjectType projectType;
 
     private TaskManager tasks;
     private RiskManager risks;
     private RequirementManager requirements;
     private HashMap<Long,Resource> resources;
     private Stack<Phase> phases;
-
+    private String product;
+    private String client;
 
     public Project(String name) {
         this.id = nextId;
         nextId+=1;
         this.name = name;
         this.startDate = LocalDateTime.now();
-        this.projectType = "Desarrollo";
-        this.projectState = ProjectState.INITIAL;
+        this.projectType = ProjectType.DESARROLLO;
+        this.projectState = ProjectState.INICIAL;
         this.tasks = new TaskManager();
         this.risks = new RiskManager();
         this.requirements = new RequirementManager();
         this.resources = new HashMap<Long,Resource>();
         this.phases = new Stack<Phase>();
         this.phases.push(new Phase("Inicial"));
+    }
+
+    public Project(String name, String client, String product) {
+        this.id = nextId;
+        nextId+=1;
+        this.name = name;
+        this.startDate = LocalDateTime.now();
+        this.projectType = ProjectType.IMPLEMENTACION;
+        this.projectState = ProjectState.INICIAL;
+        this.tasks = new TaskManager();
+        this.risks = new RiskManager();
+        this.requirements = new RequirementManager();
+        this.resources = new HashMap<Long,Resource>();
+        this.phases = new Stack<Phase>();
+        this.phases.push(new Phase("Inicial"));
+        this.product = product;
+        this.client = client;
     }
 
     public Task addTask(String title){
@@ -89,7 +107,7 @@ public class Project {
         return startDate;
     }
 
-    public String getProjectType() {
+    public ProjectType getProjectType() {
         return projectType;
     }
 
