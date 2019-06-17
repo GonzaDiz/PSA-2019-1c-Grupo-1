@@ -10,9 +10,11 @@ import java.util.Map;
 
 @Repository
 public class ProjectDao {
-    private static Map<Integer,Project> projects;
-    private static Map<String,Integer> idByName;
-    static{
+    private Map<Integer,Project> projects;
+    private Map<String,Integer> idByName;
+
+    public ProjectDao(){
+        //Datos iniciales para la demo
         projects = new HashMap<Integer,Project>();
         idByName = new HashMap<String, Integer>();
         Project testProject = new Project("Proyecto de prueba");

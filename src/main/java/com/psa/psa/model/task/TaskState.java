@@ -1,9 +1,8 @@
 package com.psa.psa.model.task;
 
 public enum TaskState {
-    IN_PROGRESS,
+    BACKLOG,
     TO_DO,
-    IN_REVIEW,
-    TESTING,
+    DOING,
     FINISHED
 }

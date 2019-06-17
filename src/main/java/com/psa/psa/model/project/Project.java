@@ -10,6 +10,7 @@ import com.psa.psa.model.task.TaskManager;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Stack;
 
 public class Project {
 
@@ -24,6 +25,7 @@ public class Project {
     private RiskManager risks;
     private RequirementManager requirements;
     private HashMap<Long,Resource> resources;
+    private Stack<Phase> phases;
 
 
     public Project(String name) {
@@ -37,6 +39,8 @@ public class Project {
         this.risks = new RiskManager();
         this.requirements = new RequirementManager();
         this.resources = new HashMap<Long,Resource>();
+        this.phases = new Stack<Phase>();
+        this.phases.push(new Phase("Inicial"));
     }
 
     public Task addTask(String title){
@@ -147,5 +151,9 @@ public class Project {
         risks.setLowMediumLimit(lowMedium);
         risks.setMediumHighLimit(mediumHigh);
         return risks.getConfig();
+    }
+
+    public Phase getCurrentPhase(){
+        return phases.peek();
     }
 }

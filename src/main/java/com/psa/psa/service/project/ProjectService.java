@@ -17,6 +17,10 @@ public class ProjectService {
     @Autowired
     private ProjectDao projectDao;
 
+    public ProjectService(){
+        projectDao = new ProjectDao();
+    }
+
     public Collection<Project> getAllProjects(){
         return projectDao.getAllProjects();
     }
@@ -51,11 +55,11 @@ public class ProjectService {
         projectDao.getProjectById(projectId).unassignTask(taskId);
     }
 
-    public void addRisk(Integer projectId, String description, double prob, double impact){
+    public Risk addRisk(Integer projectId, String description, double prob, double impact){
         if (description == null || description.isEmpty()){
-            return;
+            return null;
         }
-        projectDao.getProjectById(projectId).addRisk(description,prob,impact);
+        return projectDao.getProjectById(projectId).addRisk(description,prob,impact);
     }
 
     public void updateRisk(Integer projectId,Integer riskId, String description, double prob, double impact){
@@ -76,5 +80,7 @@ public class ProjectService {
     public RiskConfig updateRiskConfig(Integer id,Double lowMedium, Double mediumHigh,Double exposureLimit){
         return projectDao.getProjectById(id).updateRiskConfig(lowMedium,mediumHigh,exposureLimit);
     }
+
+    
 
 }
