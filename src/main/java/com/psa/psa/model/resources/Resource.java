@@ -13,7 +13,7 @@ public class Resource {
     private Integer limWeekHours;
     private Integer workload;
     private List<Role> roles;
-    private List<ResourceHistory> resourceHistories = new ArrayList<>();
+    private List<ResourceHistory> resourceHistory = new ArrayList<>();
 
     public Resource(){}
     public Resource(String name, Long cuit){
@@ -92,11 +92,11 @@ public class Resource {
         this.roles = roles;
     }
 
-    public List<ResourceHistory> getResourceHistories() {
-        return resourceHistories;
+    public List<ResourceHistory> getResourceHistory() {
+        return resourceHistory;
     }
 
-    public void setResourceHistories(List<ResourceHistory> resourceHistories) {
-        this.resourceHistories = resourceHistories;
+    public void setResourceHistory(List<ResourceHistory> resourceHistory) {
+        this.resourceHistory = resourceHistory;
     }
 }

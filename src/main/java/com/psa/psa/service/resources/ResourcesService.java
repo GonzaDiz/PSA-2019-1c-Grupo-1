@@ -64,6 +64,12 @@ public class ResourcesService {
         assignation.setRole(Role.fromDescription(request.getRole()));
         history.getAssignations().add(assignation);
 
-        resource.getResourceHistories().add(history);
+        resource.getResourceHistory().add(history);
+    }
+
+    public List<ResourceHistory> getResourceHistory(Long cuit) {
+        return this.resourcesDAO.getByCuit(cuit)
+                .orElseThrow(() -> new ValidationException("Resource not found for cuit "+ cuit))
+                .getResourceHistory();
     }
 }

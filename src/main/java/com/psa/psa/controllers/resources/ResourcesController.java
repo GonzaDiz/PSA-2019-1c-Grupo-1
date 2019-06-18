@@ -4,6 +4,7 @@ import com.psa.psa.controllers.api.AssignResourceRequest;
 import com.psa.psa.controllers.api.CreateResourceRequest;
 import com.psa.psa.dao.resources.ResourcesDAO;
 import com.psa.psa.model.resources.Resource;
+import com.psa.psa.model.resources.ResourceHistory;
 import com.psa.psa.model.resources.Role;
 import com.psa.psa.model.resources.Seniority;
 import com.psa.psa.service.resources.ResourcesService;
@@ -77,6 +78,12 @@ public class ResourcesController {
     @ResponseBody
     public Resource getByCuit(@PathVariable Long cuit) {
         return resourcesService.getResourceByCuit(cuit);
+    }
+
+    @RequestMapping(value = "/resources/history/{cuit}", method = RequestMethod.GET)
+    @ResponseBody
+    public List<ResourceHistory> getResourceHistory(@PathVariable Long cuit) {
+        return resourcesService.getResourceHistory(cuit);
     }
 
     @RequestMapping(value = "/resources", method = RequestMethod.GET)
