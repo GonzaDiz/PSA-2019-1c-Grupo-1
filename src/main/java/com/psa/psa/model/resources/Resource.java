@@ -1,5 +1,8 @@
 package com.psa.psa.model.resources;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Resource {
 
     private Integer id;
@@ -9,7 +12,8 @@ public class Resource {
     private Seniority seniority;
     private Integer limWeekHours;
     private Integer workload;
-    private Roles roles;
+    private List<Role> roles;
+    private List<ResourceHistory> resourceHistories = new ArrayList<>();
 
     public Resource(){}
     public Resource(String name, Long cuit){
@@ -19,7 +23,9 @@ public class Resource {
         this.seniority = Seniority.TBD;
         this.limWeekHours = 40;
         this.workload = 0;
-        this.roles = Roles.TBD;
+        List<Role> roles = new ArrayList<>();
+        roles.add(Role.TBD);
+        this.roles = roles;
     }
 
     public Integer getId() {
@@ -78,11 +84,19 @@ public class Resource {
         this.workload = workload;
     }
 
-    public Roles getRoles() {
+    public List<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(Roles roles) {
+    public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+    public List<ResourceHistory> getResourceHistories() {
+        return resourceHistories;
+    }
+
+    public void setResourceHistories(List<ResourceHistory> resourceHistories) {
+        this.resourceHistories = resourceHistories;
     }
 }

@@ -7,7 +7,6 @@ public class Risk {
     private Double impact;
     private Double probability;
     private Double exposure;
-    private Integer priority;
     private RiskLevel qualitativeProbability;
     private RiskLevel qualitativeExposure;
     private RiskLevel qualitativeImpact;
@@ -48,6 +47,18 @@ public class Risk {
         this.qualitativeProbability = qualitativeProbability;
     }
 
+    public RiskLevel getQualitativeProbability(){
+        return qualitativeProbability;
+    }
+
+    public RiskLevel getQualitativeImpact(){
+        return qualitativeImpact;
+    }
+
+    public RiskLevel getQualitativeExposure(){
+        return qualitativeExposure;
+    }
+
     public void setUrgent(boolean urgent) {
         this.urgent = urgent;
     }
@@ -66,5 +77,15 @@ public class Risk {
         }
         this.impact = impact;
         this.exposure = this.impact*this.probability;
+    }
+
+    public void update(String description, double prob, double impact){
+        this.description = description;
+        this.setProbability(prob);
+        this.setImpact(impact);
+    }
+
+    public boolean isUrgent(){
+        return this.urgent;
     }
 }

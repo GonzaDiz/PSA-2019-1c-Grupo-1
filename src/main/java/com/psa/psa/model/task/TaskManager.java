@@ -1,5 +1,6 @@
 package com.psa.psa.model.task;
 
+import java.util.Collection;
 import java.util.HashMap;
 
 public class TaskManager {
@@ -23,5 +24,13 @@ public class TaskManager {
         taskByName.put(name,newTask);
         nextId+=1;
         return newTask;
+    }
+
+    public Collection<Task> getAllTasks(){
+        return taskById.values();
+    }
+
+    public Task getTaskById(Integer id){
+        return taskById.get(id);
     }
 }

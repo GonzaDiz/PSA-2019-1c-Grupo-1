@@ -1,6 +1,8 @@
 package com.psa.psa.dao.resources;
 
 import com.psa.psa.model.resources.Resource;
+import com.psa.psa.model.resources.Seniority;
+import com.psa.psa.model.resources.Role;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
@@ -22,11 +24,28 @@ public class ResourcesDAO {
         return this.resources.values();
     }
 
-    public Resource createNewResource(String name, Long cuit) {
+    public Resource createNewResource(String name, Long cuit, Integer salary, Seniority seniority, Integer limweekhours,
+                                      Integer workload, List<Role> roles) {
         Resource newResource = new Resource(name, cuit);
-        newResource.setId(resources.size());
+        newResource.setSalary(salary);
+        newResource.setSeniority(seniority);
+        newResource.setLimWeekHours(limweekhours);
+        newResource.setWorkload(workload);
+        newResource.setRoles(roles);
         resources.put(cuit, newResource);
 
         return newResource;
+    }
+
+    public Resource updateResource(String name, Long cuit, Integer salary, Seniority seniority, Integer limweekhours,
+                                      Integer workload, List<Role> roles) {
+        resources.get(cuit).setName(name);
+        resources.get(cuit).setSalary(salary);
+        resources.get(cuit).setSeniority(seniority);
+        resources.get(cuit).setLimWeekHours(limweekhours);
+        resources.get(cuit).setWorkload(workload);
+        resources.get(cuit).setRoles(roles);
+
+        return resources.get(cuit);
     }
 }

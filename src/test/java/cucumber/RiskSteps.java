@@ -2,9 +2,11 @@ package cucumber;
 
 import com.psa.psa.model.project.Project;
 import com.psa.psa.model.risk.Risk;
+import com.psa.psa.service.project.ProjectService;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import org.junit.Assert;
 
 import static org.junit.Assert.*;
 
@@ -12,16 +14,18 @@ public class RiskSteps {
 
     private Risk r;
     private Project aProject;
+    private ProjectService projectService;
 
     @Given("tengo un proyecto creado")
     public void tengoUnProyectoCreado(){
-        aProject = new Project("Mi Proyecto");
-        r = null;
+        projectService = new ProjectService();
+        aProject = projectService.createNewProject("Mi primer proyecto");
+        Assert.assertNotNull(aProject);
     }
 
     @When("creo un riesgo nuevo con una {string}, una {double} y un {double}")
     public void creoUnRiesgoConDescripcionProbabilidadYExposicion(String descripcion, Double prob, Double impact){
-        r = aProject.addRisk(descripcion,prob,impact);
+        r = projectService.addRisk(aProject.getId(),descripcion,prob,impact);
     }
 
     @When("la probabilidad va entre {double} y {double}")
@@ -46,8 +50,8 @@ public class RiskSteps {
 
     @Given("tengo un proyecto con un riesgo creado")
     public void tengoUnProyectoConUnRiesgoCreado(){
-        aProject = new Project("MiProyecto");
-        r = aProject.addRisk("Mi Riesgo",0.4,0.4);
+        tengoUnProyectoCreado();
+        r = projectService.addRisk(aProject.getId(),"Mi Riesgo",0.4,0.4);
     }
 
     @Then("su exposicion debe ser el producto de la {double} con el {double}")
@@ -124,7 +128,7 @@ public class RiskSteps {
     @When ("intento crear un riesgo con una probabilidad {double}")
     public void intentoCrearUnRiesgoConUnaProbabilidad(Double d1){
        try{
-           r = aProject.addRisk("R1",d1,0.1);
+           r = projectService.addRisk(aProject.getId(),"R1",d1,0.1);
        } catch (Exception e){
 
        }
@@ -133,7 +137,7 @@ public class RiskSteps {
     @When("intento crear un riesgo con un impacto {double}")
     public void intentoCrearUnRiesgoConUnImpactoInvalido(Double d1){
         try{
-            r = aProject.addRisk("R1",0.1,d1);
+            r = projectService.addRisk(aProject.getId(),"R1",0.1,d1);
         } catch(Exception e){
 
         }
