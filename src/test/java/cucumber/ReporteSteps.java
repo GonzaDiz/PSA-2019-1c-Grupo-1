@@ -4,8 +4,8 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.junit.Assert;
-import com.psa.psa.model.core.project.Project;
-import com.psa.psa.model.core.resources.Resource;
+import com.psa.psa.model.resources.Resource
+import com.psa.psa.model.project.Project
 
 
 public class ReporteSteps {
