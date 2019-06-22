@@ -136,9 +136,12 @@ class ProjectRisks extends React.Component {
                                 <TableRow key={r.id}>
                                     <TableCell align="left">{r.id}</TableCell>
                                     <TableCell align="left">{r.description}</TableCell>
-                                    <TableCell align="left">{r.qualitativeProbability}</TableCell>
-                                    <TableCell align="left">{r.qualitativeImpact}</TableCell>
-                                    <TableCell align="left">{r.qualitativeExposure}</TableCell>
+                                    <TableCell align="left">{r.qualitativeProbability === "HIGH" ? "ALTA" :
+                                        (r.qualitativeProbability === "MEDIUM" ? "MEDIA":"BAJA")}</TableCell>
+                                    <TableCell align="left">{r.qualitativeImpact === "HIGH" ? "ALTO" :
+                                        (r.qualitativeImpact === "MEDIUM" ? "MEDIO":"BAJO")}</TableCell>
+                                    <TableCell align="left">{r.qualitativeExposure === "HIGH" ? "ALTA" :
+                                        (r.qualitativeExposure === "MEDIUM" ? "MEDIA":"BAJA")}</TableCell>
                                     <TableCell align="left">{r.urgent===true ? "Sí" : "No"}</TableCell>
                                     <TableCell align="left">
                                         <Button
