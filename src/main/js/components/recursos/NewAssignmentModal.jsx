@@ -55,19 +55,11 @@ class NewAssignmentModal extends React.Component {
 
   saveAssignment = () => {
     const newAssignment = {
-      project: {
-        title: this.state.project,
-        projectId: "P01"
-      },
-      assignments: [
-        {
-          id: 0,
-          role: this.state.role,
-          initialDate: this.state.initialDate,
-          endDate: this.state.endDate,
-          hoursPerWeek: this.state.hoursPerWeek
-        }
-      ]
+      projectName: this.state.project,
+      role: this.state.role,
+      resourceName: this.state.firstName + " " + this.state.lastName,
+      startDate: this.state.initialDate,
+      endDate: this.state.endDate
     }
     this.props.onUpdate(newAssignment);
   }

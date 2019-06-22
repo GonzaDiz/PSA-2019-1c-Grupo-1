@@ -4,7 +4,6 @@ import { Typography, withStyles, Paper, IconButton, Button } from '@material-ui/
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { withRouter } from 'react-router-dom';
 import _ from 'lodash'
-import response from './MockResourcesTableData';
 import ResourceUpdateModal from './ResourceUpdateModal';
 
 const IMG_SIZE = 500;
@@ -67,9 +66,11 @@ class ResourceProfile extends React.Component {
       this.setState({ fetching: false });
     }, 1000);
 
-    const resource = _.find(response.data, r => r.cuit === Number(this.props.cuit));
-
-    this.setState({ resource });
+    fetch("/resources/" + this.props.cuit)
+      .then(response => response.json())
+      .then(resource => {
+        this.setState({ resource: resource })
+      })
   }
 
   onResourceUpdate = () => {
@@ -112,7 +113,7 @@ class ResourceProfile extends React.Component {
                 variant="h5"
 
               >
-                <b>{`${resource.firstName} ${resource.lastName}`}</b>
+                <b>{`${resource.name}`}</b>
               </Typography>
               <IconButton onClick={() => this.props.history.goBack()}>
                 <ArrowBackIcon />

@@ -53,21 +53,52 @@ class ResourceHistory extends React.Component {
     setTimeout(() => {
       this.setState({ fetching: false, modalOpen: false });
     }, 1000);
-
-    // TODO: obtener tasks del cuit en cuestion
     const { cuit } = this.props;
 
-    const resourceHistory = response.data;
-    const resource = _.find(resourcesResponse.data, r => r.cuit === Number(this.props.cuit));
+    //const resourceHistory = response.data;
+    //const resource = _.find(resourcesResponse.data, r => r.cuit === Number(this.props.cuit));
 
-    this.setState({ resource, resourceHistory });
+    fetch("/resources/history/" + cuit)
+      .then(response => response.json())
+      .then(history => {
+        this.setState({ resourceHistory: history })
+      })
+
+    //this.setState({ resource, resourceHistory });
   }
 
   closeModal = () => this.setState({ modalOpen: false });
   openModal = () => this.setState({ modalOpen: true });
   onUpdate = (assignment) => {
-    this.state.resourceHistory.push(assignment)
-    this.closeModal()
+    fetch("/resources/assign", {
+      method: "POST",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(assignment)
+    })
+      .then(response => {
+        console.log('response', response);
+
+        if (response.status === 200) {
+          return response.json();
+        } else {
+          showAlert({ variant: 'error', message: 'No se pudo asignar el recurso al proyecto.' });
+        }
+      })
+      .then(result => {
+        console.log('result', result)
+        this.setState({
+          resources: result,
+          fetching: false
+        })
+      })
+      .catch(err => {
+        console.error('err', err);
+      })
+    
+      this.closeModal()
   }
   
   render = () => {
@@ -128,7 +159,7 @@ const ProjectHistory = (props) => {
         className={classes.title}
         variant="h6"
       >
-        Historial en {history.project.title}
+        Historial en {history.project.name}
       </Typography>
       <Table className={classes.table}>
         <TableHead>

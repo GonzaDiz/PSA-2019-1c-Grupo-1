@@ -15,7 +15,7 @@ public class Resource {
     private List<Role> roles;
     private List<ResourceHistory> resourceHistory = new ArrayList<>();
     private Integer HoursWorkedPerMonth = 180;
-    private String image;
+    private String image = "https://intendentealvear.gob.ar/wp-content/uploads/2016/11/Fundador-Torcuato-de-Alvear-1-1-500x500.jpg";
 
     public Resource(){}
     public Resource(String name, Long cuit){
