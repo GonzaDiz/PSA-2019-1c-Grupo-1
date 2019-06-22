@@ -15,6 +15,7 @@ public class Resource {
     private List<Role> roles;
     private List<ResourceHistory> resourceHistory = new ArrayList<>();
     private Integer HoursWorkedPerMonth = 180;
+    private String image;
 
     public Resource(){}
     public Resource(String name, Long cuit){
@@ -111,5 +112,21 @@ public class Resource {
 
     public Integer getHoursWorked() {
         return this.HoursWorkedPerMonth;
+    }
+
+    public Integer getHoursWorkedPerMonth() {
+        return HoursWorkedPerMonth;
+    }
+
+    public void setHoursWorkedPerMonth(Integer hoursWorkedPerMonth) {
+        HoursWorkedPerMonth = hoursWorkedPerMonth;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }
