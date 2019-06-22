@@ -13,7 +13,7 @@ public class Resource {
     private Integer limWeekHours;
     private Integer workload;
     private List<Role> roles;
-    private ResourceHistory resourceHistory;
+    private ResourceHistory resourceHistory = new ResourceHistory();
     private Integer HoursWorkedPerMonth = 180;
     private String image = "https://intendentealvear.gob.ar/wp-content/uploads/2016/11/Fundador-Torcuato-de-Alvear-1-1-500x500.jpg";
 

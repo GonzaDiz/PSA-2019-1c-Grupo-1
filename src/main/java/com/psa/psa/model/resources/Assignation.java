@@ -2,14 +2,14 @@ package com.psa.psa.model.resources;
 
 import com.psa.psa.model.project.Project;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class Assignation {
 
     private Project project;
     private Role role;
-    private LocalDateTime startDate;
-    private LocalDateTime endDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
     private Integer dedication;
 
     public Project getProject() {
@@ -28,19 +28,19 @@ public class Assignation {
         this.role = role;
     }
 
-    public LocalDateTime getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(LocalDateTime startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public LocalDateTime getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(LocalDateTime endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 

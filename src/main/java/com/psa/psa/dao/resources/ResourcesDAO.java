@@ -58,8 +58,8 @@ public class ResourcesDAO {
         Project project = new Project("Test");
         Assignation assignation = new Assignation();
         assignation.setRole(Role.DEVELOPER);
-        assignation.setStartDate(LocalDateTime.now().minusMonths(2));
-        assignation.setEndDate(LocalDateTime.now().plusMonths(2));
+        assignation.setStartDate(LocalDateTime.now().minusMonths(2).toLocalDate());
+        assignation.setEndDate(LocalDateTime.now().plusMonths(2).toLocalDate());
         assignation.setDedication(20);
         assignation.setProject(project);
 
