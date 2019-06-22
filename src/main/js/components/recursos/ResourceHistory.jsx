@@ -11,9 +11,7 @@ import { Typography, withStyles,
 } from '@material-ui/core';
 import { withRouter } from 'react-router-dom';
 import _ from 'lodash'
-import response from './MockResourceHistoryData';
 import NewAssignmentModal from './NewAssignmentModal';
-import resourcesResponse from './MockResourcesTableData';
 
 const styles = theme => ({
   main: {
@@ -55,21 +53,25 @@ class ResourceHistory extends React.Component {
     }, 1000);
     const { cuit } = this.props;
 
-    //const resourceHistory = response.data;
-    //const resource = _.find(resourcesResponse.data, r => r.cuit === Number(this.props.cuit));
-
     fetch("/resources/history/" + cuit)
       .then(response => response.json())
       .then(history => {
-        this.setState({ resourceHistory: history })
+        this.setState({ resourceHistory: history.assignations })
       })
 
-    //this.setState({ resource, resourceHistory });
+      fetch("/resources/" + cuit)
+      .then(response => response.json())
+      .then(resource => {
+        this.setState({ resource: resource })
+      })
+
+      console.log(this.state.resource)
   }
 
   closeModal = () => this.setState({ modalOpen: false });
   openModal = () => this.setState({ modalOpen: true });
   onUpdate = (assignment) => {
+    console.log(assignment)
     fetch("/resources/assign", {
       method: "POST",
       headers: {
@@ -127,6 +129,7 @@ class ResourceHistory extends React.Component {
           </Button>
         </div>
         <div>
+          {console.log(resourceHistory)}
           {
             resourceHistory.map(history => (
               <ProjectHistory
@@ -139,7 +142,7 @@ class ResourceHistory extends React.Component {
         </div>
         <NewAssignmentModal
           open={modalOpen}
-          resource={resource}
+          resource={this.state.resource}
           onUpdate={this.onUpdate}
           onClose={this.closeModal}
         />
@@ -159,6 +162,7 @@ const ProjectHistory = (props) => {
         className={classes.title}
         variant="h6"
       >
+        {console.log(history)}
         Historial en {history.project.name}
       </Typography>
       <Table className={classes.table}>
@@ -171,14 +175,12 @@ const ProjectHistory = (props) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {history.assignments.map(a => (
-            <TableRow key={a.id}>
-              <TableCell align="left">{a.role}</TableCell>
-              <TableCell align="left">{a.initialDate}</TableCell>
-              <TableCell align="left">{a.endDate}</TableCell>
-              <TableCell align="left">{a.hoursPerWeek}</TableCell>
+            <TableRow key={0}>
+              <TableCell align="left">{history.role}</TableCell>
+              <TableCell align="left">{history.startDate}</TableCell>
+              <TableCell align="left">{history.endDate}</TableCell>
+              <TableCell align="left">{history.dedication}</TableCell>
             </TableRow>
-          ))}
         </TableBody>
       </Table>
     </Paper>

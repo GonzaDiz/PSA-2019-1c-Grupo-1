@@ -99,7 +99,7 @@ public class ResourcesController {
             this.resourcesService.assignResource(request);
             return new ResponseEntity<>("Asignación realizada correctamente", HttpStatus.OK);
         } catch (ValidationException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 }

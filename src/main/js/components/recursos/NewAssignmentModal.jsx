@@ -57,7 +57,7 @@ class NewAssignmentModal extends React.Component {
     const newAssignment = {
       projectName: this.state.project,
       role: this.state.role,
-      resourceName: this.state.firstName + " " + this.state.lastName,
+      resourceName: this.state.name,
       startDate: this.state.initialDate,
       endDate: this.state.endDate
     }
@@ -87,15 +87,7 @@ class NewAssignmentModal extends React.Component {
             margin="dense"
             label="Nombre"
             variant="outlined"
-            value={this.state.firstName}
-            disabled
-            fullWidth
-          />
-          <TextField
-            margin="dense"
-            label="Apellido"
-            variant="outlined"
-            value={this.state.lastName}
+            value={this.state.name}
             disabled
             fullWidth
           />
