@@ -4,8 +4,8 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.junit.Assert;
-import com.psa.psa.model.resources.Resource
-import com.psa.psa.model.project.Project
+import com.psa.psa.model.resources.Resource;
+import com.psa.psa.model.project.Project;
 
 
 public class ReporteSteps {
@@ -38,8 +38,8 @@ public class ReporteSteps {
         resource2 = new Resource("Edit", Long.valueOf(17361422));
         aProyect.assignResource(resource1);
         aProyect.assignResource(resource2);
-        resource1.setSalary((long) 30);
-        resource2.setSalary((long) 30);
+        resource1.setSalary(30);
+        resource2.setSalary(30);
     }
 
     @When("es fin de mes")

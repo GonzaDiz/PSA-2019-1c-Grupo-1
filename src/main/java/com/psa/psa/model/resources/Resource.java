@@ -105,7 +105,7 @@ public class Resource {
         HoursWorkedPerMonth = hours;
     }
 
-    public Long getCost() {
+    public Integer getCost() {
         return this.salary*this.HoursWorkedPerMonth;
     }
 
