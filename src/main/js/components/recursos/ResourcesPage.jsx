@@ -4,6 +4,9 @@ import AppContext from '../../root/AppContext';
 import { Typography, withStyles, InputBase, Paper, IconButton, Button } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import AddIcon from '@material-ui/icons/Add';
+import ResourceNewModal from './ResourceNewModal';
+import response from './MockResourcesTableData';
+import config from '../../config';
 
 const styles = theme => ({
   main: {
@@ -37,7 +40,42 @@ const styles = theme => ({
 })
 
 class ResourcesPage extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      fetching: false,
+      openModal: false,
+
+    }
+  }
   static contextType = AppContext;
+
+  componentDidMount = () => {
+    const { showAlert } = this.context;
+    const url = config.serverUrl;
+
+    fetch(`${url}/resources`)
+    .then(response => {
+      console.log('response', response);
+
+      if (response.status === 200) {
+        return response.json();
+      } else {
+        showAlert({ variant: 'error', message: 'No se pudo obtener los recursos del servidor '});
+      }
+    })
+    .then(result => {
+      console.log('result', result)
+    })
+    .catch(err => {
+      console.error('err', err);
+    })
+  }
+
+  handleCreateResource = (resource) => {
+    console.log('[handleCreateResource]', resource)
+  }
 
   render = () => {
     const { classes } = this.props;
@@ -57,14 +95,19 @@ class ResourcesPage extends React.Component {
           </Paper>
           <Button
             variant="contained"
-            onClick={() => {}}
+            onClick={() => this.setState({ openModal: true })}
             color="primary"
           >
             <AddIcon className={classes.buttonIcon} />
             Nuevo recurso
           </Button>
         </div>
-        <ResourcesTable />
+        <ResourcesTable data={response} />
+        <ResourceNewModal
+          open={this.state.openModal}
+          onClose={() => this.setState({ openModal: false })}
+          onCreate={this.handleCreateResource}
+        />
       </main>
     )
   }
