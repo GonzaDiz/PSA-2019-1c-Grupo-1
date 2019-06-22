@@ -38,12 +38,12 @@ const ResourcesTable = (props) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.data.map(r => (
+          {data.map(r => (
             <TableRow key={r.cuit}>
               <TableCell component="th" scope="row">
                 <Link to={`/recursos/${r.cuit}`} >{r.cuit}</Link>
               </TableCell>
-              <TableCell align="left">{`${r.firstName} ${r.lastName}`}</TableCell>
+              <TableCell align="left">{`${r.name}`}</TableCell>
               <TableCell align="left">{r.seniority}</TableCell>
               <TableCell align="left">{`$ ${r.salary}`}</TableCell>
               <TableCell align="left">{r.limWeekHours}</TableCell>
