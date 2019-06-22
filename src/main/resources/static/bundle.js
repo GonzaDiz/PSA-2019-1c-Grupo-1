@@ -94764,17 +94764,11 @@ function (_React$Component) {
 
     _defineProperty(_assertThisInitialized(_this), "saveAssignment", function () {
       var newAssignment = {
-        project: {
-          title: _this.state.project,
-          projectId: "P01"
-        },
-        assignments: [{
-          id: 0,
-          role: _this.state.role,
-          initialDate: _this.state.initialDate,
-          endDate: _this.state.endDate,
-          hoursPerWeek: _this.state.hoursPerWeek
-        }]
+        projectName: _this.state.project,
+        role: _this.state.role,
+        resourceName: _this.state.firstName + " " + _this.state.lastName,
+        startDate: _this.state.initialDate,
+        endDate: _this.state.endDate
       };
 
       _this.props.onUpdate(newAssignment);
@@ -95119,19 +95113,17 @@ function (_React$Component) {
           fetching: false,
           modalOpen: false
         });
-      }, 1000); // TODO: obtener tasks del cuit en cuestion
+      }, 1000);
+      var cuit = _this.props.cuit; //const resourceHistory = response.data;
+      //const resource = _.find(resourcesResponse.data, r => r.cuit === Number(this.props.cuit));
 
-      var cuit = _this.props.cuit;
-      var resourceHistory = _MockResourceHistoryData__WEBPACK_IMPORTED_MODULE_5__["default"].data;
-
-      var resource = lodash__WEBPACK_IMPORTED_MODULE_4___default.a.find(_MockResourcesTableData__WEBPACK_IMPORTED_MODULE_7__["default"].data, function (r) {
-        return r.cuit === Number(_this.props.cuit);
-      });
-
-      _this.setState({
-        resource: resource,
-        resourceHistory: resourceHistory
-      });
+      fetch("/resources/history/" + cuit).then(function (response) {
+        return response.json();
+      }).then(function (history) {
+        _this.setState({
+          resourceHistory: history
+        });
+      }); //this.setState({ resource, resourceHistory });
     });
 
     _defineProperty(_assertThisInitialized(_this), "closeModal", function () {
@@ -95147,7 +95139,34 @@ function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "onUpdate", function (assignment) {
-      _this.state.resourceHistory.push(assignment);
+      fetch("/resources/assign", {
+        method: "POST",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(assignment)
+      }).then(function (response) {
+        console.log('response', response);
+
+        if (response.status === 200) {
+          return response.json();
+        } else {
+          showAlert({
+            variant: 'error',
+            message: 'No se pudo asignar el recurso al proyecto.'
+          });
+        }
+      }).then(function (result) {
+        console.log('result', result);
+
+        _this.setState({
+          resources: result,
+          fetching: false
+        });
+      })["catch"](function (err) {
+        console.error('err', err);
+      });
 
       _this.closeModal();
     });
@@ -95213,7 +95232,7 @@ var ProjectHistory = function ProjectHistory(props) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["Typography"], {
     className: classes.title,
     variant: "h6"
-  }, "Historial en ", history.project.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["Table"], {
+  }, "Historial en ", history.project.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["Table"], {
     className: classes.table
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["TableHead"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["TableRow"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["TableCell"], {
     align: "left"
@@ -95600,8 +95619,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _MockResourcesTableData__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./MockResourcesTableData */ "./src/main/js/components/recursos/MockResourcesTableData.js");
-/* harmony import */ var _ResourceUpdateModal__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./ResourceUpdateModal */ "./src/main/js/components/recursos/ResourceUpdateModal.jsx");
+/* harmony import */ var _ResourceUpdateModal__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./ResourceUpdateModal */ "./src/main/js/components/recursos/ResourceUpdateModal.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -95617,7 +95635,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 
@@ -95687,13 +95704,12 @@ function (_React$Component) {
           fetching: false
         });
       }, 1000);
-
-      var resource = lodash__WEBPACK_IMPORTED_MODULE_5___default.a.find(_MockResourcesTableData__WEBPACK_IMPORTED_MODULE_6__["default"].data, function (r) {
-        return r.cuit === Number(_this.props.cuit);
-      });
-
-      _this.setState({
-        resource: resource
+      fetch("/resources/" + _this.props.cuit).then(function (response) {
+        return response.json();
+      }).then(function (resource) {
+        _this.setState({
+          resource: resource
+        });
       });
     });
 
@@ -95743,7 +95759,7 @@ function (_React$Component) {
         className: classes.profileHeader
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["Typography"], {
         variant: "h5"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "".concat(resource.firstName, " ").concat(resource.lastName))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["IconButton"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "".concat(resource.name))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["IconButton"], {
         onClick: function onClick() {
           return _this.props.history.goBack();
         }
@@ -95774,7 +95790,7 @@ function (_React$Component) {
         className: classes.button,
         color: "secondary",
         variant: "contained"
-      }, "Eliminar recurso")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ResourceUpdateModal__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      }, "Eliminar recurso")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ResourceUpdateModal__WEBPACK_IMPORTED_MODULE_6__["default"], {
         open: modalOpen,
         resource: resource,
         onUpdate: _this.onResourceUpdate,

@@ -55,13 +55,6 @@ public class ResourcesDAO {
         resources.put(resource3.getCuit(), resource3);
 
 
-        Resource resource4 = new Resource("Gonzalo Diz", new Long(203964378));
-        resource4.setSalary(90000);
-        resource4.setSeniority(Seniority.JUNIOR);
-        resource4.setLimWeekHours(45);
-        resource4.setRoles(roles);
-        resources.put(resource4.getCuit(), resource4);
-
         Project project = new Project("Test");
         Assignation assignation = new Assignation();
         assignation.setRole(Role.DEVELOPER);
@@ -71,9 +64,17 @@ public class ResourcesDAO {
         assignation.setProject(project);
 
         List<Assignation> assignations = new ArrayList<>();
+        assignations.add(assignation);
         ResourceHistory history = new ResourceHistory();
         history.setAssignations(assignations);
+
+        Resource resource4 = new Resource("Gonzalo Diz", new Long(203964378));
+        resource4.setSalary(90000);
+        resource4.setSeniority(Seniority.JUNIOR);
+        resource4.setLimWeekHours(45);
+        resource4.setRoles(roles);
         resource4.getResourceHistory().add(history);
+        resources.put(resource4.getCuit(), resource4);
     }
 
     public Resource createNewResource(String name, Long cuit, Integer salary, Seniority seniority, Integer limweekhours,
