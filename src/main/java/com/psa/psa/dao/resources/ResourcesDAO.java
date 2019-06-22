@@ -1,11 +1,12 @@
 package com.psa.psa.dao.resources;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.psa.psa.model.resources.Resource;
-import com.psa.psa.model.resources.Seniority;
-import com.psa.psa.model.resources.Role;
+import com.psa.psa.model.project.Project;
+import com.psa.psa.model.resources.*;
 import org.springframework.stereotype.Repository;
 
+import javax.validation.ReportAsSingleViolation;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Repository
@@ -60,6 +61,19 @@ public class ResourcesDAO {
         resource4.setLimWeekHours(45);
         resource4.setRoles(roles);
         resources.put(resource4.getCuit(), resource4);
+
+        Project project = new Project("Test");
+        Assignation assignation = new Assignation();
+        assignation.setRole(Role.DEVELOPER);
+        assignation.setStartDate(LocalDateTime.now().minusMonths(2));
+        assignation.setEndDate(LocalDateTime.now().plusMonths(2));
+        assignation.setDedication(20);
+        assignation.setProject(project);
+
+        List<Assignation> assignations = new ArrayList<>();
+        ResourceHistory history = new ResourceHistory();
+        history.setAssignations(assignations);
+        resource4.getResourceHistory().add(history);
     }
 
     public Resource createNewResource(String name, Long cuit, Integer salary, Seniority seniority, Integer limweekhours,
