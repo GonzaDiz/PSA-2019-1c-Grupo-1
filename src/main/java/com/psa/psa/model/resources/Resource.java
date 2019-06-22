@@ -14,6 +14,7 @@ public class Resource {
     private Integer workload;
     private List<Role> roles;
     private List<ResourceHistory> resourceHistories = new ArrayList<>();
+    private Integer HoursWorkedPerMonth;
 
     public Resource(){}
     public Resource(String name, Long cuit){
@@ -98,5 +99,17 @@ public class Resource {
 
     public void setResourceHistories(List<ResourceHistory> resourceHistories) {
         this.resourceHistories = resourceHistories;
+    }
+
+    public void setHoursWorked(int hours) {
+        HoursWorkedPerMonth = hours;
+    }
+
+    public Long getCost() {
+        return this.salary*this.HoursWorkedPerMonth;
+    }
+
+    public Integer getHoursWorked() {
+        return this.HoursWorkedPerMonth;
     }
 }
