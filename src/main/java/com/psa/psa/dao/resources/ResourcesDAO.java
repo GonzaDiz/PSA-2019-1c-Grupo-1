@@ -73,7 +73,7 @@ public class ResourcesDAO {
         resource4.setSeniority(Seniority.JUNIOR);
         resource4.setLimWeekHours(45);
         resource4.setRoles(roles);
-        resource4.getResourceHistory().add(history);
+        resource4.setResourceHistory(history);
         resources.put(resource4.getCuit(), resource4);
     }
 

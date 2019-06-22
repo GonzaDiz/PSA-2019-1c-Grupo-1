@@ -13,7 +13,7 @@ public class Resource {
     private Integer limWeekHours;
     private Integer workload;
     private List<Role> roles;
-    private List<ResourceHistory> resourceHistory = new ArrayList<>();
+    private ResourceHistory resourceHistory;
     private Integer HoursWorkedPerMonth = 180;
     private String image = "https://intendentealvear.gob.ar/wp-content/uploads/2016/11/Fundador-Torcuato-de-Alvear-1-1-500x500.jpg";
 
@@ -94,11 +94,11 @@ public class Resource {
         this.roles = roles;
     }
 
-    public List<ResourceHistory> getResourceHistory() {
+    public ResourceHistory getResourceHistory() {
         return resourceHistory;
     }
 
-    public void setResourceHistory(List<ResourceHistory> resourceHistory) {
+    public void setResourceHistory(ResourceHistory resourceHistory) {
         this.resourceHistory = resourceHistory;
     }
 

@@ -14,6 +14,7 @@ import org.springframework.web.client.HttpClientErrorException;
 import javax.validation.ValidationException;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ResourcesService {
@@ -55,7 +56,7 @@ public class ResourcesService {
                 .findFirst()
                 .orElseThrow(() -> new ValidationException("Resource not found for name "+ request.getResourceName()));
 
-        ResourceHistory history = new ResourceHistory();
+        ResourceHistory history = Optional.ofNullable(resource.getResourceHistory()).orElse(new ResourceHistory());
         Assignation assignation = new Assignation();
         assignation.setProject(project);
         assignation.setDedication(request.getWeekHours());
@@ -64,10 +65,10 @@ public class ResourcesService {
         assignation.setRole(Role.fromDescription(request.getRole()));
         history.getAssignations().add(assignation);
 
-        resource.getResourceHistory().add(history);
+        resource.setResourceHistory(history);
     }
 
-    public List<ResourceHistory> getResourceHistory(Long cuit) {
+    public ResourceHistory getResourceHistory(Long cuit) {
         return this.resourcesDAO.getByCuit(cuit)
                 .orElseThrow(() -> new ValidationException("Resource not found for cuit "+ cuit))
                 .getResourceHistory();

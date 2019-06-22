@@ -82,7 +82,7 @@ public class ResourcesController {
 
     @RequestMapping(value = "/resources/history/{cuit}", method = RequestMethod.GET)
     @ResponseBody
-    public List<ResourceHistory> getResourceHistory(@PathVariable Long cuit) {
+    public ResourceHistory getResourceHistory(@PathVariable Long cuit) {
         return resourcesService.getResourceHistory(cuit);
     }
 
