@@ -59,7 +59,8 @@ class NewAssignmentModal extends React.Component {
       role: this.state.role,
       resourceName: this.state.name,
       startDate: this.state.initialDate,
-      endDate: this.state.endDate
+      endDate: this.state.endDate,
+      weekHours: this.state.hoursPerWeek
     }
     this.props.onUpdate(newAssignment);
   }
