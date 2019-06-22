@@ -9,7 +9,7 @@ import { Typography, withStyles,
   TableCell,
   Button
 } from '@material-ui/core';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import _ from 'lodash'
 import response from './MockResourceHistoryData';
 import NewAssignmentModal from './NewAssignmentModal';
@@ -19,15 +19,20 @@ const styles = theme => ({
   main: {
     padding: theme.spacing.unit * 2,
   },
-  title: {
+  header: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     marginBottom: theme.spacing.unit * 4,
   },
   paper: {
     width: '100%',
-    overflowX: 'auto',
+    padding: theme.spacing.unit * 2,
+    marginBottom: theme.spacing.unit * 2
   },
   table: {
     minWidth: 650,
+    padding: theme.spacing.unit * 2,
   },
 })
 
@@ -74,53 +79,33 @@ class ResourceHistory extends React.Component {
 
     return (
       <main className={classes.main}>
-        <Typography 
-          className={classes.title}
-          variant="h4"
-        >
-          Historial del recurso
-        </Typography>
-        <Button
-                className={classes.button}
-                color="primary"
-                variant="contained"
-                onClick={this.openModal}
-              >
-                Nueva asignación
-              </Button>
-        <Paper className={classes.paper}>
-          {resourceHistory.map(history => (
-            
-          <>
+        <div className={classes.header}>
           <Typography 
-          className={classes.title}
-          variant="h6"
-        >
-          Historial en {history.project.title}
-        </Typography>
-          <Table className={classes.table}>
-            <TableHead>
-              <TableRow>
-                <TableCell align="left">Rol a cumplir</TableCell>
-                <TableCell align="left">Fecha de inicio</TableCell>
-                <TableCell align="left">Fecha de fin</TableCell>
-                <TableCell align="left">Dedicación semanal</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {history.assignments.map(a => (
-                <TableRow key={a.id}>
-                  <TableCell align="left">{a.role}</TableCell>
-                  <TableCell align="left">{a.initialDate}</TableCell>
-                  <TableCell align="left">{a.endDate}</TableCell>
-                  <TableCell align="left">{a.hoursPerWeek}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table></>))
-           }
-        </Paper>
+            className={classes.title}
+            variant="h4"
+          >
+            Historial del recurso
+          </Typography>
 
+          <Button
+            color="primary"
+            variant="contained"
+            onClick={this.openModal}
+          >
+            Nueva asignación
+          </Button>
+        </div>
+        <div>
+          {
+            resourceHistory.map(history => (
+              <ProjectHistory
+                className={classes.projectHistory}
+                classes={classes}
+                history={history}
+              />
+            ))
+          }
+        </div>
         <NewAssignmentModal
           open={modalOpen}
           resource={resource}
@@ -132,5 +117,39 @@ class ResourceHistory extends React.Component {
   }
 }
 
-const withStyle = withStyles(styles, { withTheme: true })(ResourceHistory); 
+const withStyle = withStyles(styles, { withTheme: true })(ResourceHistory);
 export default withRouter(withStyle);
+
+const ProjectHistory = (props) => {
+  const { classes, history } = props;
+  return (
+    <Paper className={classes.paper}>
+      <Typography 
+        className={classes.title}
+        variant="h6"
+      >
+        Historial en {history.project.title}
+      </Typography>
+      <Table className={classes.table}>
+        <TableHead>
+          <TableRow>
+            <TableCell align="left">Rol a cumplir</TableCell>
+            <TableCell align="left">Fecha de inicio</TableCell>
+            <TableCell align="left">Fecha de fin</TableCell>
+            <TableCell align="left">Dedicación semanal</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {history.assignments.map(a => (
+            <TableRow key={a.id}>
+              <TableCell align="left">{a.role}</TableCell>
+              <TableCell align="left">{a.initialDate}</TableCell>
+              <TableCell align="left">{a.endDate}</TableCell>
+              <TableCell align="left">{a.hoursPerWeek}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </Paper>
+  );
+}
