@@ -195,4 +195,12 @@ public class Project {
     public Phase getCurrentPhase(){
         return phases.peek();
     }
+
+    public Long getCost() {
+        Long cost = Long.valueOf(0);
+        for (Resource resource: resources.values()) {
+            cost += resource.getCost();
+        }
+        return cost;
+    }
 }

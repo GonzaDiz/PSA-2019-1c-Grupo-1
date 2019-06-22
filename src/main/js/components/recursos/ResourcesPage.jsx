@@ -4,6 +4,8 @@ import AppContext from '../../root/AppContext';
 import { Typography, withStyles, InputBase, Paper, IconButton, Button } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import AddIcon from '@material-ui/icons/Add';
+import ResourceNewModal from './ResourceNewModal';
+import config from '../../config';
 
 const styles = theme => ({
   main: {
@@ -37,10 +39,81 @@ const styles = theme => ({
 })
 
 class ResourcesPage extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      fetching: true,
+      openModal: false,
+      resources: []
+    }
+  }
   static contextType = AppContext;
+
+  componentDidMount = () => {
+    const { showAlert } = this.context;
+
+    fetch("/resources")
+      .then(response => {
+        console.log('response', response);
+
+        if (response.status === 200) {
+          return response.json();
+        } else {
+          showAlert({ variant: 'error', message: 'No se pudo obtener los recursos del servidor ' });
+        }
+      })
+      .then(result => {
+        console.log('result', result)
+        this.setState({
+          resources: result,
+          fetching: false
+        })
+      })
+      .catch(err => {
+        console.error('err', err);
+      })
+  }
+
+  handleCreateResource = (resource) => {
+    console.log('[handleCreateResource]', resource)
+    const { showAlert } = this.context;
+    resource.name = resource.firstName + " " + resource.lastName;
+
+    
+    fetch("/resources", {
+      method: "POST",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(resource)
+    })
+      .then(response => {
+        console.log('response', response);
+
+        if (response.status === 200) {
+          return response.json();
+        } else {
+          showAlert({ variant: 'error', message: 'No se pudo crear el recurso.' });
+        }
+      })
+      .then(result => {
+        console.log('result', result)
+        this.setState({
+          resources: result,
+          fetching: false
+        })
+      })
+      .catch(err => {
+        console.error('err', err);
+      })
+  }
 
   render = () => {
     const { classes } = this.props;
+    if (this.state.fetching) return this.context.renderLoading();
+
     return (
       <main className={classes.main}>
         <Typography className={classes.title} variant="h4">Recursos</Typography>
@@ -57,14 +130,19 @@ class ResourcesPage extends React.Component {
           </Paper>
           <Button
             variant="contained"
-            onClick={() => {}}
+            onClick={() => this.setState({ openModal: true })}
             color="primary"
           >
             <AddIcon className={classes.buttonIcon} />
             Nuevo recurso
           </Button>
         </div>
-        <ResourcesTable />
+        <ResourcesTable data={this.state.resources} />
+        <ResourceNewModal
+          open={this.state.openModal}
+          onClose={() => this.setState({ openModal: false })}
+          onCreate={this.handleCreateResource}
+        />
       </main>
     )
   }

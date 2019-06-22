@@ -2,10 +2,14 @@ package cucumber;
 
 import com.psa.psa.model.project.Project;
 import com.psa.psa.model.risk.Risk;
+import com.psa.psa.model.risk.RiskConfig;
+import com.psa.psa.model.risk.RiskLevel;
 import com.psa.psa.service.project.ProjectService;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import cucumber.api.java.eo.Do;
 import org.junit.Assert;
 
 import static org.junit.Assert.*;
@@ -146,5 +150,110 @@ public class RiskSteps {
     @Then("el riesgo no es creado")
     public void elRiesgoNoEsCreado(){
         assertNull(r);
+    }
+
+    @And("creo un riesgo con probabilidad 0.1")
+    public void creoUnRiesgoConProbaCeroComaUno(){
+        r = projectService.addRisk(aProject.getId(),"Riesgo 1",0.1,0.3);
+    }
+
+    @When("defino el limite bajo_medio con {double}")
+    public void definoElLimiteBajoMedioCon(Double d1){
+        RiskConfig rc = projectService.getRiskConfig(aProject.getId());
+        projectService.updateRiskConfig(aProject.getId(),d1,rc.mediumHighLimit,rc.exposureLimit);
+    }
+
+    @And("defino el limite medio_alto con {double}")
+    public void definoElLimiteMedioAltoCon(Double d1){
+        RiskConfig rc = projectService.getRiskConfig(aProject.getId());
+        projectService.updateRiskConfig(aProject.getId(),rc.lowMediumLimit,d1,rc.exposureLimit);
+    }
+
+
+    @Then("la probabilidad cualitativa es baja")
+    public void laProbabilidadCualitativaEsBaja() {
+        Assert.assertEquals(r.getQualitativeProbability(), RiskLevel.LOW);
+    }
+
+    @Then("la probabilidad cualitativa es media")
+    public void laProbabilidadCualitativaEsMedia() {
+        Assert.assertEquals(r.getQualitativeProbability(), RiskLevel.MEDIUM);
+    }
+
+
+    @Then("la probabilidad cualitativa es alta")
+    public void laProbabilidadCualitativaEsAlta() {
+        Assert.assertEquals(r.getQualitativeProbability(), RiskLevel.HIGH);
+    }
+
+    @When("defino el umbral de exposicion con {double}")
+    public void definoElUmbralDeExposicionConUmbral(Double d1) {
+        RiskConfig rc = projectService.getRiskConfig(aProject.getId());
+        projectService.updateRiskConfig(aProject.getId(),rc.lowMediumLimit,rc.mediumHighLimit,d1);
+    }
+
+    @And("creo un riesgo con probabilidad {double} e impacto {double}")
+    public void creoUnRiesgoConProbabilidadProbEImpactoImpacto(Double d1, Double d2) {
+        r = projectService.addRisk(aProject.getId(),"Riesgo 1",d1,d2);
+    }
+
+    @Then("el riesgo es urgente")
+    public void elRiesgoEsUrgente(){
+        Assert.assertTrue(r.isUrgent());
+    }
+
+
+    @Then("el riesgo no es urgente")
+    public void elRiesgoNoEsUrgente(){
+        Assert.assertFalse(r.isUrgent());
+    }
+
+    @And("creo un riesgo con impacto 0.1")
+    public void creoUnRiesgoConImpactoCeroComaUno() {
+        r = projectService.addRisk(aProject.getId(),"Riesgo 1",0.5,0.1);
+    }
+
+    @Then("el impacto cualitativo es alto")
+    public void elImpactoCualitativoEsAlto() {
+        Assert.assertEquals(r.getQualitativeImpact(),RiskLevel.HIGH);
+    }
+
+
+    @Then("el impacto cualitativo es medio")
+    public void elImpactoCualitativoEsMedio() {
+        Assert.assertEquals(r.getQualitativeImpact(),RiskLevel.MEDIUM);
+    }
+
+    @Then("el impacto cualitativo es bajo")
+    public void elImpactoCualitativoEsBajo() {
+        Assert.assertEquals(r.getQualitativeImpact(),RiskLevel.LOW);
+    }
+
+
+    @When("intento darle probabilidad invalida {double}")
+    public void intentoDarleProbabilidadInvalidaProb(Double d1) {
+        try {
+            projectService.updateRisk(aProject.getId(), r.getId(), r.getDescription(), d1, r.getImpact());
+        } catch (Exception e) {
+
+        }
+    }
+
+    @Then("la probabilidad no se actualizó a {double}")
+    public void laProbabilidadNoSeActualizóAProb(Double d1) {
+        Assert.assertNotEquals(r.getProbability(),d1);
+    }
+
+    @When("intento darle un impacto invalido {double}")
+    public void intentoDarleUnImpactoInvalidoImpacto(Double d1) {
+        try {
+            projectService.updateRisk(aProject.getId(), r.getId(), r.getDescription(), r.getProbability(), d1);
+        } catch (Exception e){
+
+        }
+    }
+    @Then("el impacto no se actualizó a {double}")
+    public void elImpactoNoSeActualizóAImpacto(Double d1) {
+        Assert.assertNotEquals(r.getImpact(),d1);
     }
 }

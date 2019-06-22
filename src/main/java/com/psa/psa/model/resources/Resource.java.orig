@@ -13,8 +13,12 @@ public class Resource {
     private Integer limWeekHours;
     private Integer workload;
     private List<Role> roles;
+<<<<<<< HEAD
     private List<ResourceHistory> resourceHistory = new ArrayList<>();
+=======
+    private List<ResourceHistory> resourceHistories = new ArrayList<>();
     private Integer HoursWorkedPerMonth = 180;
+>>>>>>> crear-recurso
 
     public Resource(){}
     public Resource(String name, Long cuit){
