@@ -80,9 +80,14 @@ class ResourcesPage extends React.Component {
     const { showAlert } = this.context;
     resource.name = resource.firstName + " " + resource.lastName;
 
+    
     fetch("/resources", {
       method: "POST",
-      body: resource
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(resource)
     })
       .then(response => {
         console.log('response', response);
