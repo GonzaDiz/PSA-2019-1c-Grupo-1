@@ -8,13 +8,13 @@ public class Resource {
     private Integer id;
     private Long cuit;
     private String name;
-    private Integer salary;
+    private Integer salary = 120000;
     private Seniority seniority;
     private Integer limWeekHours;
     private Integer workload;
     private List<Role> roles;
     private List<ResourceHistory> resourceHistories = new ArrayList<>();
-    private Integer HoursWorkedPerMonth;
+    private Integer HoursWorkedPerMonth = 180;
 
     public Resource(){}
     public Resource(String name, Long cuit){
