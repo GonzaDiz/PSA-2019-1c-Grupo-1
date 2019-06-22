@@ -51,15 +51,9 @@ class CreateProjectModal extends React.Component {
         }
     }
 
-    handleChange = () =>{
-
-    }
 
     onCreate = () => {
-        var data = {
-            name:this.state.product+' '+this.state.version,
-            version:this.state.version,
-            product:this.state.product}
+        var data = {name:this.state.projectName}
 
         fetch(`/proyectos/`, {
             method: 'POST',
@@ -92,8 +86,7 @@ class CreateProjectModal extends React.Component {
                         margin="dense"
                         label="Nombre del proyecto"
                         variant="outlined"
-                        value={this.state.product+''+this.state.version}
-                        disabled
+                        value={this.state.projectName}
                         fullWidth
                         onChange={this.handleChange}
                     />
@@ -112,39 +105,7 @@ class CreateProjectModal extends React.Component {
                         <FormHelperText>Disabled</FormHelperText>
                     </FormControl>
 
-                    <FormControl className={classes.formControl}>
-                        <InputLabel htmlFor="name-disabled">Producto</InputLabel>
-                        <Select
-                            value="CRM"
-                            onChange={(e)=>{
-                                this.setState({product:e.target.value})}
-                            }
-                            input={<Input name={this.state.product} id="name-disabled" />}
-                        >
-                            <MenuItem value="CRM">CRM</MenuItem>
-                            <MenuItem value="ERP">ERP</MenuItem>
-                            <MenuItem value="SCM">SCM</MenuItem>
-
-                        </Select>
-                    </FormControl>
-
-                    <FormControl className={classes.formControl}>
-                        <InputLabel htmlFor="name-disabled">Version</InputLabel>
-                        <Select
-                            value={this.state.version}
-                            onChange={(e)=>{
-                                this.setState({version:e.target.value})
-                            }
-                            }
-                            input={<Input name={this.state.version} id="name-disabled" />}
-                        >
-                            <MenuItem value="1.3">1.3</MenuItem>
-                            <MenuItem value="1.4">1.4</MenuItem>
-                            <MenuItem value="2.5">2.5</MenuItem>
-                        </Select>
-                    </FormControl>
-
-                </DialogActions>
+                   </DialogActions>
                 <DialogActions>
                     <Button onClick={onClose} color="secondary">
                         Cancel

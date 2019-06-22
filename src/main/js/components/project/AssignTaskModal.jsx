@@ -56,7 +56,6 @@ class AssignTaskModal extends React.Component {
 
     render = () => {
         const { classes, open, onClose} = this.props;
-
         return (
             <Dialog open={open} onClose={onClose} aria-labelledby="form-dialog-update-resource">
                 <DialogTitle id="form-dialog-title">Asignar tarea</DialogTitle>
@@ -73,7 +72,7 @@ class AssignTaskModal extends React.Component {
                             this.props.resources.map(r => (
                                 <FormControlLabel
                                     value={r.cuit}
-                                    control={<Radio color="primary" />}
+                                    control={<Radio color="primary" checked={r.cuit.toString() === this.state.cuit}/>}
                                     label={r.name}
                                 />))
                         }

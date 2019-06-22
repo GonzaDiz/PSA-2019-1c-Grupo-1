@@ -62,7 +62,7 @@ export class ProjectsBriefCase extends React.Component{
                                 <TableCell align="right">{row.name}</TableCell>
                                 <TableCell align="right">{row.projectType}</TableCell>
                                 <TableCell align="right">{row.projectState}</TableCell>
-                                <TableCell align="right">{row.startDate}</TableCell>
+                                <TableCell align="right">{row.startDate.substring(0,10)}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
@@ -79,6 +79,8 @@ export class ProjectsBriefCase extends React.Component{
             })
 
     }
+
+
 
     openCreateModal = () => {
         this.setState({ createModalOpen: true })
