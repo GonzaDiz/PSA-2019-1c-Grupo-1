@@ -2,6 +2,7 @@ package com.psa.psa.service.resources;
 
 import com.psa.psa.controllers.api.AssignResourceRequest;
 import com.psa.psa.controllers.api.CreateResourceRequest;
+import com.psa.psa.controllers.project.ProjectController;
 import com.psa.psa.dao.resources.ResourcesDAO;
 import com.psa.psa.model.project.Project;
 import com.psa.psa.model.resources.*;
@@ -47,7 +48,9 @@ public class ResourcesService {
     }
 
     public void assignResource(AssignResourceRequest request) {
-        Project project = this.projectService.getAllProjects().stream()
+        try{
+
+            Project project = ProjectController.getService().getAllProjects().stream()
                 .filter(p -> p.getName().equals(request.getProjectName()))
                 .findFirst().orElseThrow(() -> new ValidationException("Project not found for name "+ request.getProjectName()));
 
@@ -64,8 +67,11 @@ public class ResourcesService {
         assignation.setEndDate(request.getEndDate());
         assignation.setRole(Role.fromDescription(request.getRole()));
         history.getAssignations().add(assignation);
-
+        project.assignResource(resource,assignation);
         resource.setResourceHistory(history);
+        } catch (Exception e){
+            throw new ValidationException(e.getMessage());
+        }
     }
 
     public ResourceHistory getResourceHistory(Long cuit) {

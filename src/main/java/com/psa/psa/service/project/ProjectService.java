@@ -2,6 +2,9 @@ package com.psa.psa.service.project;
 
 import com.psa.psa.dao.project.ProjectDao;
 import com.psa.psa.model.project.Project;
+import com.psa.psa.model.project.Requirement;
+import com.psa.psa.model.project.RequirementPriority;
+import com.psa.psa.model.resources.Assignation;
 import com.psa.psa.model.resources.Resource;
 import com.psa.psa.model.risk.Risk;
 import com.psa.psa.model.risk.RiskConfig;
@@ -10,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.Map;
 
 @Service
 public class ProjectService {
@@ -81,6 +85,48 @@ public class ProjectService {
         return projectDao.getProjectById(id).updateRiskConfig(lowMedium,mediumHigh,exposureLimit);
     }
 
-    
+    public Collection<Assignation> getResourceHistory(Integer projectId,Long cuit){
+       return projectDao.getProjectById(projectId).getResourceHistory(cuit);
+    }
+
+    public Map<Long,Assignation> getCurrentAssignations(Integer projectId){
+        return projectDao.getProjectById(projectId).getCurrentAssignations();
+    }
+
+    public Requirement addRequirement(Integer id, String name, String descrpition, String priority){
+        RequirementPriority reqPriority = RequirementPriority.UNDEFINED;
+        if (priority.equals("HIGH")){
+            reqPriority = RequirementPriority.HIGH;
+        } else if (priority.equals("MEDIUM")){
+            reqPriority = RequirementPriority.MEDIUM;
+        } else if (priority.equals("LOW")){
+            reqPriority = RequirementPriority.LOW;
+        }
+        return projectDao.getProjectById(id).addRequirement(name,descrpition,reqPriority);
+    }
+
+    public Collection<Requirement> getAllProjectRequirements(Integer id){
+        return projectDao.getProjectById(id).getAllRequirements();
+    }
+
+    public Requirement getTaskRequirement(Integer projectId, Integer taskId){
+        return projectDao.getProjectById(projectId).getTaskById(taskId).getRequirement();
+    }
+
+    public Requirement setTaskRequirement(Integer projectId,Integer taskId, Integer reqId){
+        Project project = projectDao.getProjectById(projectId);
+        Requirement requirement = project.getRequirementById(reqId);
+        project.getTaskById(taskId).setRequirement(requirement);
+        return requirement;
+    }
+
+    public void unsetTaskRequirement(Integer projectId,Integer taskId){
+        projectDao.getProjectById(projectId).getTaskById(taskId).setRequirement(null);
+    }
+
+    public Collection<Task> getRequirementTasks(Integer projectId, Integer reqId){
+        Requirement req = projectDao.getProjectById(projectId).getRequirementById(reqId);
+        return projectDao.getProjectById(projectId).getTasksByRequirement(req);
+    }
 
 }

@@ -1,18 +1,22 @@
 package com.psa.psa.model.project;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.psa.psa.model.client.Client;
 import com.psa.psa.model.product.Product;
 import com.psa.psa.model.product.Version;
+import com.psa.psa.model.resources.Assignation;
 import com.psa.psa.model.resources.Resource;
 import com.psa.psa.model.risk.Risk;
 import com.psa.psa.model.risk.RiskConfig;
 import com.psa.psa.model.risk.RiskManager;
 import com.psa.psa.model.task.Task;
 import com.psa.psa.model.task.TaskManager;
+import org.springframework.expression.spel.ast.Assign;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Stack;
 
 public class Project {
@@ -31,6 +35,7 @@ public class Project {
     private Stack<Phase> phases;
     private Version version;
     private Client client;
+    private HashMap<Long,Stack<Assignation>> resourceHistory = new HashMap<Long, Stack<Assignation>>();
 
     // Sin version, actualmente no tenemos de donde obtener los productos
     public Project(String name) {
@@ -164,13 +169,47 @@ public class Project {
         return tasks.getAllTasks();
     }
 
+    @JsonIgnore
     public Collection<Resource> getResources(){
         return this.resources.values();
     }
 
     public Resource assignResource(Resource resource){
+        if (resources.containsKey(resource.getCuit())){
+            throw new RuntimeException("Resource already asigned");
+        }
+
         this.resources.put(resource.getCuit(),resource);
         return resource;
+    }
+
+    public Resource assignResource(Resource resource, Assignation assignation){
+        if (resources.containsKey(resource.getCuit())){
+            throw new RuntimeException("Resource already asigned");
+        }
+        this.resources.put(resource.getCuit(),resource);
+        if (this.resourceHistory.containsKey(resource.getCuit())){
+            resourceHistory.get(resource.getCuit()).push(assignation);
+        } else {
+            Stack<Assignation> history = new Stack<Assignation>();
+            history.push(assignation);
+            resourceHistory.put(resource.getCuit(),history);
+        }
+        return resource;
+    }
+
+    public Collection<Assignation> getResourceHistory(Long cuit){
+        return resourceHistory.get(cuit);
+    }
+
+    @JsonIgnore
+    public Map<Long,Assignation> getCurrentAssignations(){
+        HashMap<Long,Assignation> ans = new HashMap<Long,Assignation>();
+        for(Resource resource: resources.values()){
+            Assignation assignation = resourceHistory.get(resource.getCuit()).peek();
+            ans.put(resource.getCuit(),assignation);
+        }
+        return ans;
     }
 
     public void updateRisk(Integer riskId, String description,double prob, double impact){
@@ -202,5 +241,18 @@ public class Project {
             cost += resource.getCost();
         }
         return cost;
+    }
+
+    @JsonIgnore
+    public Collection<Requirement> getAllRequirements(){
+        return this.requirements.getAll();
+    }
+
+    public Task getTaskById(Integer taskId){
+        return tasks.getTaskById(taskId);
+    }
+
+    public Collection<Task> getTasksByRequirement(Requirement req){
+        return tasks.getTasksByRequirement(req);
     }
 }

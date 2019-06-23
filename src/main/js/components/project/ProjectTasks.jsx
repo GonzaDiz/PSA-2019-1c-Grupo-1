@@ -13,6 +13,7 @@ import { withRouter, Link } from 'react-router-dom';
 import _ from 'lodash'
 import AssignTaskModal from './AssignTaskModal'
 import CreateTaskModal from './CreateTaskModal'
+import AssignRequirementModal from './AssignRequirementModal'
 const styles = theme => ({
     main: {
         padding: theme.spacing.unit * 2,
@@ -40,6 +41,7 @@ class ProjectTasks extends React.Component {
             resources:[],
             assignModalOpen:false,
             createModalOpen:false,
+            requirementsModalOpen:false,
             projectId: _.get(this.props, 'match.params.projectId')}
         this.loadTasks()
         this.loadResources()
@@ -76,6 +78,14 @@ class ProjectTasks extends React.Component {
     }
     openCreateModal = () => this.setState({ createModalOpen: true });
 
+    closeRequirementsModal = () => {
+        this.setState({requirementsModalOpen: false});
+        this.loadTasks();
+    }
+    openRequirementsModal = () => this.setState({ requirementsModalOpen: true });
+
+
+
     deassignTask = () => {
         fetch(`/proyectos/${this.props.projectId}/tareas/${this.state.selectedTask}/asignacion`, {
             method: 'DELETE',
@@ -85,6 +95,16 @@ class ProjectTasks extends React.Component {
                 this.loadTasks();
             })
 
+    }
+
+    deassignRequirement = () => {
+        fetch(`/proyectos/${this.props.projectId}/tareas/${this.state.selectedTask}/requisito`, {
+            method: 'DELETE',
+        }).then(res => res.json())
+            .catch(error => console.error('Error:', error))
+            .then(response => {
+                this.loadTasks();
+            })
     }
 
 
@@ -116,6 +136,7 @@ class ProjectTasks extends React.Component {
                                 <TableCell align="left">Título</TableCell>
                                 <TableCell align="left">Total horas dedicadas</TableCell>
                                 <TableCell align="left">Estado</TableCell>
+                                <TableCell align="left">Requisito</TableCell>
                                 <TableCell align="left">Asignada a</TableCell>
                                 <TableCell align="left">Acción</TableCell>
                             </TableRow>
@@ -127,18 +148,19 @@ class ProjectTasks extends React.Component {
                                     <TableCell align="left">{t.name}</TableCell>
                                     <TableCell align="left">{t.totalDedicatedHours}</TableCell>
                                     <TableCell align="left">{t.currentState}</TableCell>
+                                    <TableCell align="left">{t.requirement===null ? "-":(t.requirement.id+" - "+t.requirement.name)}</TableCell>
                                     <TableCell align="left">{t.assignedResource===null ? "-":t.assignedResource}</TableCell>
                                     <TableCell align="left">
                                         {t.assigned===false ?( <Button
-                                            variant="text"
-                                            color="primary"
-                                            onClick={() => {
-                                                this.state.selectedTask = t.id
-                                                this.openAssignModal()}}
-                                        >
-                                            Asignar
-                                        </Button> ):
-                                           ( <Button
+                                                variant="text"
+                                                color="primary"
+                                                onClick={() => {
+                                                    this.state.selectedTask = t.id
+                                                    this.openAssignModal()}}
+                                            >
+                                                Asignar
+                                            </Button> ):
+                                            ( <Button
                                                 variant="text"
                                                 color="primary"
                                                 onClick={() => {
@@ -146,6 +168,22 @@ class ProjectTasks extends React.Component {
                                                     this.deassignTask()}}
                                             >
                                                 Desasignar
+                                            </Button>)}
+                                        {t.requirement===null ?(
+                                            <Button variant="text"
+                                             color="primary"
+                                             onClick={()=> {
+                                                 this.state.selectedTask = t.id
+                                                 this.openRequirementsModal()
+                                             }}> Vincular requisito </Button>):
+                                            ( <Button
+                                                variant="text"
+                                                color="primary"
+                                                onClick={() => {
+                                                    this.state.selectedTask = t.id
+                                                    this.deassignRequirement()}}
+                                            >
+                                                Desvincular requisito
                                             </Button>)}
                                         </TableCell>
                                 </TableRow>
@@ -167,6 +205,13 @@ class ProjectTasks extends React.Component {
                     open={this.state.createModalOpen}
                     resources={this.state.resources}
                     onClose={this.closeCreateModal}
+                />) : (<div></div>)}
+
+                {this.state.requirementsModalOpen===true ? (<AssignRequirementModal
+                    projectId={this.state.projectId}
+                    taskId={this.state.selectedTask}
+                    open={this.state.requirementsModalOpen}
+                    onClose={this.closeRequirementsModal}
                 />) : (<div></div>)}
             </main>
         )
