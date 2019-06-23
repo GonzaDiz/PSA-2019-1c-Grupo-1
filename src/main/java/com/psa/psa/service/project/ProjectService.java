@@ -2,6 +2,7 @@ package com.psa.psa.service.project;
 
 import com.psa.psa.dao.project.ProjectDao;
 import com.psa.psa.model.project.Project;
+import com.psa.psa.model.resources.Assignation;
 import com.psa.psa.model.resources.Resource;
 import com.psa.psa.model.risk.Risk;
 import com.psa.psa.model.risk.RiskConfig;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.Map;
 
 @Service
 public class ProjectService {
@@ -81,6 +83,13 @@ public class ProjectService {
         return projectDao.getProjectById(id).updateRiskConfig(lowMedium,mediumHigh,exposureLimit);
     }
 
-    
+    public Collection<Assignation> getResourceHistory(Integer projectId,Long cuit){
+       return projectDao.getProjectById(projectId).getResourceHistory(cuit);
+    }
+
+    public Map<Long,Assignation> getCurrentAssignations(Integer projectId){
+        return projectDao.getProjectById(projectId).getCurrentAssignations();
+    }
+
 
 }

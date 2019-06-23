@@ -14,16 +14,8 @@ public class ProjectDao {
     private Map<String,Integer> idByName;
 
     public ProjectDao(){
-        //Datos iniciales para la demo
         projects = new HashMap<Integer,Project>();
         idByName = new HashMap<String, Integer>();
-        Project testProject = new Project("Proyecto de prueba");
-        testProject.assignResource(new Resource("Flavio Perez Ondarts",new Long(23000000)));
-        testProject.assignResource(new Resource("Tito Lasanta",new Long(230000111)));
-        testProject.addTask("Tarea 1");
-        testProject.addTask("Tarea 2");
-        projects.put(testProject.getId(),testProject);
-        idByName.put(testProject.getName(),testProject.getId());
     }
 
     public Collection<Project> getAllProjects(){

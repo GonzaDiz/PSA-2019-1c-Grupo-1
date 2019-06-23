@@ -10,6 +10,7 @@ import UpdateIcon from '@material-ui/icons/Update';
 import Typography from '@material-ui/core/Typography';
 import ProjectTasks from './ProjectTasks'
 import ProjectRisks from './ProjectRisks'
+import ProjectResources from './ProjectResources'
 let rememberTab = 0;
 
 const styles = theme => ({
@@ -21,6 +22,9 @@ const styles = theme => ({
 
 const TAB_TASKS = 0;
 const TAB_RISKS = 1;
+const TAB_REQUIREMENTS = 2;
+const TAB_RESOURCES = 3;
+const TAB_PHASES = 4;
 
 class ProjectTabs extends React.Component {
     constructor(props) {
@@ -64,6 +68,7 @@ class ProjectTabs extends React.Component {
                 <h1> Proyecto {projectId} </h1>
                 {value === TAB_TASKS && <ProjectTasks projectId={projectId}/>}
                 {value === TAB_RISKS && <ProjectRisks projectId={projectId}/>}
+                {value === TAB_RESOURCES && <ProjectResources projectId={projectId}/>}
             </div>
         );
     }

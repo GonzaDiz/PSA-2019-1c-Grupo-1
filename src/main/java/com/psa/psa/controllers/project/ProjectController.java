@@ -2,6 +2,7 @@ package com.psa.psa.controllers.project;
 
 
 import com.psa.psa.model.project.Project;
+import com.psa.psa.model.resources.Assignation;
 import com.psa.psa.model.resources.Resource;
 import com.psa.psa.model.risk.Risk;
 import com.psa.psa.model.risk.RiskConfig;
@@ -20,16 +21,24 @@ import java.util.Map;
 public class ProjectController {
 
     @Autowired
-    private ProjectService projectService;
+    static private ProjectService projectService;
+
+    static {
+        projectService = new ProjectService();
+    }
+
+    public static ProjectService getService(){
+        return projectService;
+    }
 
     @RequestMapping(method= RequestMethod.GET)
     public Collection<Project> getAllProjects(){
-        return this.projectService.getAllProjects();
+        return projectService.getAllProjects();
     }
 
     @RequestMapping(method=RequestMethod.POST)
     public Project createNewProject(@RequestBody Map<String,String> payload){
-        return this.projectService.createNewProject(payload.get("name"));
+        return projectService.createNewProject(payload.get("name"));
     }
 
     @RequestMapping(value="/{id}/tareas", method=RequestMethod.GET)
@@ -100,5 +109,12 @@ public class ProjectController {
             return null;
         }
     }
+
+    @RequestMapping(value="{id}/recursos/asignaciones",method=RequestMethod.GET)
+    public Map<Long, Assignation> getCurrentAssignation(@PathVariable String id){
+        return projectService.getCurrentAssignations(Integer.parseInt(id));
+    }
+
+
 }
 
