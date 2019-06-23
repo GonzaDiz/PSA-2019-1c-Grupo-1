@@ -86,11 +86,11 @@ class ResourceTasks extends React.Component {
               {resourceTasks.map(t => (
                 <TableRow key={t.taskId}>
                   <TableCell component="th" scope="row">
-                    <Link to={`/proyectos/${t.proyect.proyectId}/tareas/${t.taskId}`}>{t.taskId}</Link>
+                    {t.taskId}
                   </TableCell>
                   <TableCell align="left">{t.title}</TableCell>
                   <TableCell align="left">
-                    <Link to={`/proyectos/${t.proyect.proyectId}`}>{t.proyect.title}</Link>
+                    {t.proyect.title}
                   </TableCell>
                   <TableCell align="left">{t.estimateHours}</TableCell>
                   <TableCell align="left">{t.dedicateHours}</TableCell>
