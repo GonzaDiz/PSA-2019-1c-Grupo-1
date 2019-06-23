@@ -77,6 +77,7 @@ public class ResourcesDAO {
         resource4.setLimWeekHours(45);
         resource4.setRoles(roles);
         resource4.setResourceHistory(history);
+        project.assignResource(resource4,assignation);
         resources.put(resource4.getCuit(), resource4);
     }
 

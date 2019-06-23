@@ -69,7 +69,7 @@ class CreateRequirementModal extends React.Component {
 
         return (
             <Dialog open={open} onClose={onClose} aria-labelledby="form-dialog-update-resource">
-                <DialogTitle id="form-dialog-title">Asignar tarea</DialogTitle>
+                <DialogTitle id="form-dialog-title">Crear Requisito</DialogTitle>
                 <DialogContent>
 
                     <FormLabel className={classes.legend} component="legend">Título</FormLabel>
