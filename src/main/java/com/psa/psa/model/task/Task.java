@@ -1,5 +1,6 @@
 package com.psa.psa.model.task;
 
+import com.psa.psa.model.project.Requirement;
 import com.psa.psa.model.resources.Resource;
 
 import java.time.LocalDateTime;
@@ -17,7 +18,7 @@ public class Task {
     private LocalDateTime startDate;
     private LocalDateTime endDate;
     private String assignedTo;
-    
+    private Requirement requirement;
     
     
     public Task(Integer id, String name) {
@@ -110,6 +111,14 @@ public class Task {
             taskStates.push(new TaskStateChange(resource,newState));
         }
         return newState;
+    }
+
+    public void setRequirement(Requirement requirement){
+        this.requirement=requirement;
+    }
+
+    public Requirement getRequirement(){
+        return this.requirement;
     }
 
 }

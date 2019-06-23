@@ -242,4 +242,17 @@ public class Project {
         }
         return cost;
     }
+
+    @JsonIgnore
+    public Collection<Requirement> getAllRequirements(){
+        return this.requirements.getAll();
+    }
+
+    public Task getTaskById(Integer taskId){
+        return tasks.getTaskById(taskId);
+    }
+
+    public Collection<Task> getTasksByRequirement(Requirement req){
+        return tasks.getTasksByRequirement(req);
+    }
 }

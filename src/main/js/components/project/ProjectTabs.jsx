@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import ProjectTasks from './ProjectTasks'
 import ProjectRisks from './ProjectRisks'
 import ProjectResources from './ProjectResources'
+import ProjectRequirements from './ProjectRequirements'
 let rememberTab = 0;
 
 const styles = theme => ({
@@ -69,6 +70,7 @@ class ProjectTabs extends React.Component {
                 {value === TAB_TASKS && <ProjectTasks projectId={projectId}/>}
                 {value === TAB_RISKS && <ProjectRisks projectId={projectId}/>}
                 {value === TAB_RESOURCES && <ProjectResources projectId={projectId}/>}
+                {value === TAB_REQUIREMENTS && <ProjectRequirements projectId={projectId}/>}
             </div>
         );
     }

@@ -2,6 +2,7 @@ package com.psa.psa.controllers.project;
 
 
 import com.psa.psa.model.project.Project;
+import com.psa.psa.model.project.Requirement;
 import com.psa.psa.model.resources.Assignation;
 import com.psa.psa.model.resources.Resource;
 import com.psa.psa.model.risk.Risk;
@@ -115,6 +116,35 @@ public class ProjectController {
         return projectService.getCurrentAssignations(Integer.parseInt(id));
     }
 
+    @RequestMapping(value="{id}/requisitos",method=RequestMethod.POST)
+    public Requirement getCurrentAssignation(@PathVariable String id, @RequestBody HashMap<String,String> payload){
+        return projectService.addRequirement(Integer.parseInt(id),payload.get("name"),payload.get("description"),payload.get("priority"));
+    }
+
+    @RequestMapping(value="/{id}/requisitos", method=RequestMethod.GET)
+    public Collection<Requirement> getAllProjectRequirements(@PathVariable String id){
+        return projectService.getAllProjectRequirements(Integer.parseInt(id));
+    }
+
+    @RequestMapping(value="/{id}/tareas/{taskId}/requisito", method=RequestMethod.GET)
+    public Requirement getTaskRequirement(@PathVariable String id,@PathVariable String taskId){
+        return projectService.getTaskRequirement(Integer.parseInt(id),Integer.parseInt(taskId));
+    }
+
+    @RequestMapping(value="/{id}/tareas/{taskId}/requisito/{reqId}",method = RequestMethod.POST)
+    public Requirement setTaskRequirement(@PathVariable String id,@PathVariable String taskId,@PathVariable String reqId){
+        return projectService.setTaskRequirement(Integer.parseInt(id),Integer.parseInt(taskId),Integer.parseInt(reqId));
+    }
+
+    @RequestMapping(value ="/{id}/tareas/{taskId}/requisito",method = RequestMethod.DELETE)
+    public void unsetTaskRequirement(@PathVariable String id, @PathVariable String taskId){
+        projectService.unsetTaskRequirement(Integer.parseInt(id),Integer.parseInt(taskId));
+    }
+
+    @RequestMapping(value="/{id}/requisitos/{reqId}/tareas",method = RequestMethod.GET)
+    public Collection<Task> getRequirementTasks(@PathVariable String id, @PathVariable String reqId){
+       return projectService.getRequirementTasks(Integer.parseInt(id),Integer.parseInt(reqId));
+    }
 
 }
 

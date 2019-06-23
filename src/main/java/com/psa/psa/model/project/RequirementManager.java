@@ -44,4 +44,8 @@ public class RequirementManager {
         }
         return result;
     }
+
+    public Collection<Requirement> getAll(){
+        return this.byId.values();
+    }
 }

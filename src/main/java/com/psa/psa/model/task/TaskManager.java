@@ -1,7 +1,12 @@
 package com.psa.psa.model.task;
 
+import com.psa.psa.model.project.Requirement;
+import org.springframework.web.bind.annotation.RequestBody;
+
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Stack;
 
 public class TaskManager {
     private Integer nextId;
@@ -32,5 +37,17 @@ public class TaskManager {
 
     public Task getTaskById(Integer id){
         return taskById.get(id);
+    }
+
+    public Collection<Task> getTasksByRequirement(Requirement requirement){
+        Stack<Task> ans = new Stack<Task>();
+        for (Task task: taskById.values()){
+            if (task.getRequirement()!=null){
+                if (task.getRequirement().getId() == requirement.getId()){
+                    ans.push(task);
+                }
+            }
+        }
+        return ans;
     }
 }
