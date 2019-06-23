@@ -35,9 +35,7 @@ class ProjectResources extends React.Component {
         super(props);
 
         this.state = { resources:[],
-            updateModalOpen:false,
-            createModalOpen:false,
-            configModalOpen:false,
+            assignations:[],
             projectId: _.get(this.props, 'match.params.projectId')}
         this.loadAssignations();
         this.loadResources();
