@@ -5,6 +5,7 @@ import ResourceDetails from '../components/recursos/ResourceDetails';
 import {ProjectsBriefCase} from "../components/project/ProjectsBriefCase";
 import ResourceTaskLoads from '../components/recursos/ResourceTaskLoads';
 import {ClientsView} from '../components/clients/ClientsView';
+import ProjectDetails from '../components/project/ProjectDetails';
 
 const Routes = ({ loading }) => {
   if (loading) return null;
@@ -12,6 +13,7 @@ const Routes = ({ loading }) => {
     <Switch>
       <Route exact path='/' component={() => <h1>PSA Flex</h1>} />
       <Route exact path='/proyectos' component={() => <ProjectsBriefCase />} />
+      <Route exact path='/proyectos/:projectId' component={() => <ProjectDetails />} />
       <Route exact path='/productos' component={() => <h1>Productos</h1>} />
       <Route exact path='/soporte' component={() => <h1>Soporte</h1>} />
       <Route exact path='/recursos' component={() => <ResourcesPage />} />

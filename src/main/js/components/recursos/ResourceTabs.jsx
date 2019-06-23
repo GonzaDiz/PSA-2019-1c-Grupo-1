@@ -10,6 +10,7 @@ import UpdateIcon from '@material-ui/icons/Update';
 import Typography from '@material-ui/core/Typography';
 import ResourceProfile from './ResourceProfile';
 import ResourceTasks from './ResourceTasks';
+import ResourceHistory from './ResourceHistory';
 
 let rememberTab = 0;
 
@@ -62,6 +63,7 @@ class ResourceTabs extends React.Component {
         </AppBar>
         {value === TAB_PROFILE && <ResourceProfile cuit={cuit} />}
         {value === TAB_TASKS && <ResourceTasks cuit={cuit} />}
+        {value === TAB_HISTORY && <ResourceHistory cuit= {cuit} />}
       </div>
     );
   }
