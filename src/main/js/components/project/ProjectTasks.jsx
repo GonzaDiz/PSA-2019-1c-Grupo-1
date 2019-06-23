@@ -114,6 +114,8 @@ class ProjectTasks extends React.Component {
                             <TableRow>
                                 <TableCell align="left">Id</TableCell>
                                 <TableCell align="left">Título</TableCell>
+                                <TableCell align="left">Total horas dedicadas</TableCell>
+                                <TableCell align="left">Estado</TableCell>
                                 <TableCell align="left">Asignada a</TableCell>
                                 <TableCell align="left">Acción</TableCell>
                             </TableRow>
@@ -123,6 +125,8 @@ class ProjectTasks extends React.Component {
                                 <TableRow key={t.taskId}>
                                     <TableCell align="left">{t.id}</TableCell>
                                     <TableCell align="left">{t.name}</TableCell>
+                                    <TableCell align="left">{t.totalDedicatedHours}</TableCell>
+                                    <TableCell align="left">{t.currentState}</TableCell>
                                     <TableCell align="left">{t.assignedResource===null ? "-":t.assignedResource}</TableCell>
                                     <TableCell align="left">
                                         {t.assigned===false ?( <Button

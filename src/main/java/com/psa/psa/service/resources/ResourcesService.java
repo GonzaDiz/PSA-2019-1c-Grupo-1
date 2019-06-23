@@ -1,23 +1,28 @@
 package com.psa.psa.service.resources;
 
+import com.psa.psa.controllers.api.AssignResourceRequest;
 import com.psa.psa.controllers.api.CreateResourceRequest;
 import com.psa.psa.dao.resources.ResourcesDAO;
-import com.psa.psa.model.resources.Resource;
-import com.psa.psa.model.resources.Role;
-import com.psa.psa.model.resources.Seniority;
+import com.psa.psa.model.project.Project;
+import com.psa.psa.model.resources.*;
+import com.psa.psa.service.project.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 
+import javax.validation.ValidationException;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ResourcesService {
 
     @Autowired
     private ResourcesDAO resourcesDAO;
+    @Autowired
+    private ProjectService projectService;
 
     public void createResource(CreateResourceRequest request) {
 
@@ -39,5 +44,33 @@ public class ResourcesService {
 
     public Collection<Resource> getAllResources() {
         return this.resourcesDAO.getAll();
+    }
+
+    public void assignResource(AssignResourceRequest request) {
+        Project project = this.projectService.getAllProjects().stream()
+                .filter(p -> p.getName().equals(request.getProjectName()))
+                .findFirst().orElseThrow(() -> new ValidationException("Project not found for name "+ request.getProjectName()));
+
+        Resource resource = this.resourcesDAO.getAll().stream()
+                .filter(r -> r.getName().equals(request.getResourceName()))
+                .findFirst()
+                .orElseThrow(() -> new ValidationException("Resource not found for name "+ request.getResourceName()));
+
+        ResourceHistory history = Optional.ofNullable(resource.getResourceHistory()).orElse(new ResourceHistory());
+        Assignation assignation = new Assignation();
+        assignation.setProject(project);
+        assignation.setDedication(request.getWeekHours());
+        assignation.setStartDate(request.getStartDate());
+        assignation.setEndDate(request.getEndDate());
+        assignation.setRole(Role.fromDescription(request.getRole()));
+        history.getAssignations().add(assignation);
+
+        resource.setResourceHistory(history);
+    }
+
+    public ResourceHistory getResourceHistory(Long cuit) {
+        return this.resourcesDAO.getByCuit(cuit)
+                .orElseThrow(() -> new ValidationException("Resource not found for cuit "+ cuit))
+                .getResourceHistory();
     }
 }

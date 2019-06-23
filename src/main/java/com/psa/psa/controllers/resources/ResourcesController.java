@@ -4,6 +4,7 @@ import com.psa.psa.controllers.api.AssignResourceRequest;
 import com.psa.psa.controllers.api.CreateResourceRequest;
 import com.psa.psa.dao.resources.ResourcesDAO;
 import com.psa.psa.model.resources.Resource;
+import com.psa.psa.model.resources.ResourceHistory;
 import com.psa.psa.model.resources.Role;
 import com.psa.psa.model.resources.Seniority;
 import com.psa.psa.service.resources.ResourcesService;
@@ -14,6 +15,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
 
+import javax.validation.Validation;
+import javax.validation.ValidationException;
 import javax.validation.constraints.Null;
 import java.util.*;
 
@@ -77,6 +80,12 @@ public class ResourcesController {
         return resourcesService.getResourceByCuit(cuit);
     }
 
+    @RequestMapping(value = "/resources/history/{cuit}", method = RequestMethod.GET)
+    @ResponseBody
+    public ResourceHistory getResourceHistory(@PathVariable Long cuit) {
+        return resourcesService.getResourceHistory(cuit);
+    }
+
     @RequestMapping(value = "/resources", method = RequestMethod.GET)
     @ResponseBody
     public Collection<Resource> getAllResources() {
@@ -85,7 +94,12 @@ public class ResourcesController {
 
     @RequestMapping(value = "/resources/assign", method = RequestMethod.POST)
     @ResponseBody
-    public void assignResource(@RequestBody AssignResourceRequest request) {
-        return;
+    public ResponseEntity assignResource(@RequestBody AssignResourceRequest request) {
+        try {
+            this.resourcesService.assignResource(request);
+            return new ResponseEntity<>("Asignación realizada correctamente", HttpStatus.OK);
+        } catch (ValidationException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 }

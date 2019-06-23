@@ -7,7 +7,6 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import response from './MockResourcesTableData';
 
 const styles = theme => ({
   root: {
@@ -23,7 +22,7 @@ const styles = theme => ({
 
 
 const ResourcesTable = (props) => {
-  const { classes } = props;
+  const { classes, data } = props;
 
   return (
     <Paper className={classes.root}>
@@ -39,12 +38,12 @@ const ResourcesTable = (props) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {response.data.map(r => (
+          {data.map(r => (
             <TableRow key={r.cuit}>
               <TableCell component="th" scope="row">
                 <Link to={`/recursos/${r.cuit}`} >{r.cuit}</Link>
               </TableCell>
-              <TableCell align="left">{`${r.firstName} ${r.lastName}`}</TableCell>
+              <TableCell align="left">{`${r.name}`}</TableCell>
               <TableCell align="left">{r.seniority}</TableCell>
               <TableCell align="left">{`$ ${r.salary}`}</TableCell>
               <TableCell align="left">{r.limWeekHours}</TableCell>

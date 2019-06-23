@@ -1,16 +1,17 @@
 package com.psa.psa.model.resources;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ResourceHistory {
 
-    private List<Asignation> asignations;
+    private List<Assignation> assignations = new ArrayList<>();
 
-    public List<Asignation> getAsignations() {
-        return asignations;
+    public List<Assignation> getAssignations() {
+        return assignations;
     }
 
-    public void setAsignations(List<Asignation> asignations) {
-        this.asignations = asignations;
+    public void setAssignations(List<Assignation> assignations) {
+        this.assignations = assignations;
     }
 }

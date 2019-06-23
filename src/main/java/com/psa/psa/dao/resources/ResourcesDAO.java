@@ -1,10 +1,12 @@
 package com.psa.psa.dao.resources;
 
-import com.psa.psa.model.resources.Resource;
-import com.psa.psa.model.resources.Seniority;
-import com.psa.psa.model.resources.Role;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.psa.psa.model.project.Project;
+import com.psa.psa.model.resources.*;
 import org.springframework.stereotype.Repository;
 
+import javax.validation.ReportAsSingleViolation;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Repository
@@ -22,6 +24,57 @@ public class ResourcesDAO {
 
     public Collection<Resource> getAll() {
         return this.resources.values();
+    }
+
+    public ResourcesDAO() {
+        // RESOURCES MOCKS
+        ArrayList roles = new ArrayList();
+        roles.add(Role.AUTOMATION);
+        roles.add(Role.DEVELOPER);
+
+        Resource resource = new Resource("Jorge Okalandia", new Long(2038495749));
+        resource.setSalary(120000);
+        resource.setSeniority(Seniority.SEMI_SENIOR);
+        resource.setLimWeekHours(45);
+        resource.setRoles(roles);
+        resources.put(resource.getCuit(), resource);
+
+        Resource resource2 = new Resource("Ariel Alvarez Windey", new Long(2039574638));
+        resource2.setSalary(90000);
+        resource2.setSeniority(Seniority.JUNIOR);
+        resource2.setLimWeekHours(30);
+        resource2.setRoles(roles);
+        resources.put(resource2.getCuit(), resource2);
+
+
+        Resource resource3 = new Resource("Jorge Orsi", new Long(2048739276));
+        resource3.setSalary(30000);
+        resource3.setSeniority(Seniority.JUNIOR);
+        resource3.setLimWeekHours(20);
+        resource3.setRoles(roles);
+        resources.put(resource3.getCuit(), resource3);
+
+
+        Project project = new Project("Test");
+        Assignation assignation = new Assignation();
+        assignation.setRole(Role.DEVELOPER);
+        assignation.setStartDate(LocalDateTime.now().minusMonths(2).toLocalDate());
+        assignation.setEndDate(LocalDateTime.now().plusMonths(2).toLocalDate());
+        assignation.setDedication(20);
+        assignation.setProject(project);
+
+        List<Assignation> assignations = new ArrayList<>();
+        assignations.add(assignation);
+        ResourceHistory history = new ResourceHistory();
+        history.setAssignations(assignations);
+
+        Resource resource4 = new Resource("Gonzalo Diz", new Long(203964378));
+        resource4.setSalary(90000);
+        resource4.setSeniority(Seniority.JUNIOR);
+        resource4.setLimWeekHours(45);
+        resource4.setRoles(roles);
+        resource4.setResourceHistory(history);
+        resources.put(resource4.getCuit(), resource4);
     }
 
     public Resource createNewResource(String name, Long cuit, Integer salary, Seniority seniority, Integer limweekhours,

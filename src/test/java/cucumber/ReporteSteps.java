@@ -38,8 +38,8 @@ public class ReporteSteps {
         resource2 = new Resource("Edit", Long.valueOf(17361422));
         aProyect.assignResource(resource1);
         aProyect.assignResource(resource2);
-        resource1.setSalary((long) 30);
-        resource2.setSalary((long) 30);
+        resource1.setSalary(30);
+        resource2.setSalary(30);
     }
 
     @When("es fin de mes")
