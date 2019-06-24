@@ -12,57 +12,67 @@ import GroupIcon from '@material-ui/icons/Group';
 
 class ModuleOptions extends React.Component {
   render = () => {
-    const { onModuleSelection } = this.props;
-    
-    return (
-      <div>
-        <ListItem 
-          button 
-          onClick={onModuleSelection('/proyectos', 'Gestión de proyectos')}
-        >
-          <ListItemIcon>
-            <BusinessIcon />
-          </ListItemIcon>
-          <ListItemText primary="Gestión de Proyectos" />
-        </ListItem>
-        <ListItem 
-          button 
-          onClick={onModuleSelection('/productos', 'Gestión de productos')}
-        >
-          <ListItemIcon>
-            <BusinessCenterIcon />
-          </ListItemIcon>
-          <ListItemText primary="Gestión de Productos" />
-        </ListItem>
-        <ListItem 
-          button 
-          onClick={onModuleSelection('/soporte', 'Soporte')}
-        >
-          <ListItemIcon>
-            <HeadsetMicIcon />
-          </ListItemIcon>
-          <ListItemText primary="Soporte" />
-        </ListItem>
-        <ListItem 
-          button 
-          onClick={onModuleSelection('/recursos', 'Gestión de Recursos')}
-        >
-          <ListItemIcon>
-            <AccountBoxIcon />
-          </ListItemIcon>
-          <ListItemText primary="Gestión de Recursos" />
-        </ListItem>
-        <ListItem 
-          button 
-          onClick={onModuleSelection('/ventas_y_finanzas', 'Ventas y Finanzas')}
-        >
-          <ListItemIcon>
-            <MonetizationOnIcon />
-          </ListItemIcon>
-          <ListItemText primary="Ventas y Finanzas" />
-        </ListItem>
-      </div>
-    );
+      const {onModuleSelection} = this.props;
+
+      return (
+          <div>
+              <ListItem
+                  button
+                  onClick={onModuleSelection('/proyectos', 'Gestión de proyectos')}
+              >
+                  <ListItemIcon>
+                      <BusinessIcon/>
+                  </ListItemIcon>
+                  <ListItem
+                      Text primary="Gestión de Proyectos"/>
+              </ListItem>
+              <ListItem
+                  button
+                  onClick={onModuleSelection('/productos', 'Gestión de productos')}
+              >
+                  <ListItemIcon>
+                      <BusinessCenterIcon/>
+                  </ListItemIcon>
+                  <ListItemText primary="Gestión de Productos"/>
+              </ListItem>
+              <ListItem
+                  button
+                  onClick={onModuleSelection('/soporte', 'Soporte')}
+              >
+                  <ListItemIcon>
+                      <HeadsetMicIcon/>
+                  </ListItemIcon>
+                  <ListItemText primary="Soporte"/>
+              </ListItem>
+              <ListItem
+                  button
+                  onClick={onModuleSelection('/recursos', 'Gestión de Recursos')}
+              >
+                  <ListItemIcon>
+                      <AccountBoxIcon/>
+                  </ListItemIcon>
+                  <ListItemText primary="Gestión de Recursos"/>
+              </ListItem>
+              <ListItem
+                  button
+                  onClick={onModuleSelection('/clientes', 'Gestión de Clientes')}
+              >
+                  <ListItemIcon>
+                      <AccountBoxIcon/>
+                  </ListItemIcon>
+                  <ListItemText primary="Gestión de Clientes"/>
+              </ListItem>
+              <ListItem
+                  button
+                  onClick={onModuleSelection('/ventas_y_finanzas', 'Ventas y Finanzas')}
+              >
+                  <ListItemIcon>
+                      <MonetizationOnIcon/>
+                  </ListItemIcon>
+                  <ListItemText primary="Ventas y Finanzas"/>
+              </ListItem>
+          </div>
+      );
   }
 }
 

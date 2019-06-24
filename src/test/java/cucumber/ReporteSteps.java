@@ -27,7 +27,7 @@ public class ReporteSteps {
     @Then("devo poder ver las horas que trabajaron los recursos")
     public void devo_poder_ver_las_horas_que_trabajaron_los_recursos() {
         Integer hours_worked = resource1.getHoursWorked();
-        Assert.assertEquals(hours_worked,(Integer) 30);
+        Assert.assertEquals(hours_worked, (Integer)30);
     }
 
 
